@@ -3,12 +3,50 @@
 import 'package:delifast/core/remote/service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../core/utils/app_export.dart';
 import 'login_states.dart';
 
 class LoginCubit extends Cubit<LoginStates> {
   LoginCubit(this.api) : super(LoginInitialState());
   ServiceApi api;
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
+  TextEditingController EmailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  bool isHidden = true;
+  Future<void> login() async {
+    // if (formKey.currentState!.validate()) {
+    //   // Perform login with API
+    //   final result = await api.login(phoneNumberController.text, passwordController.text);
+    //
+    //   if (result.isSuccess) {
+    //     emit(LoginSuccessState());
+    //     clearControllers(); // Clear the controllers after successful login
+    //   } else {
+    //     emit(LoginFailureState(result.error));
+    //   }
+    // }
+  }
+  void closeControllers() {
+    EmailController.dispose();
+    passwordController.dispose();
+  }
+  void signupValidate( BuildContext context) {
+    if (formKey.currentState!.validate()) {
+    //  login();
+      Navigator.pushNamedAndRemoveUntil(context,
+          Routes.verificationCodeScreenRoute, (route) => false);
+    }
+  }
+  void clearControllers() {
+    EmailController.clear();
+    passwordController.clear();
+  }
+  @override
+  Future<void> close() {
+    closeControllers();
+    return super.close();
+  }
   // addMember({
   //   required BuildContext context,
   //   String? position,

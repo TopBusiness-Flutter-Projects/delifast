@@ -1,6 +1,8 @@
 import '../../../core/utils/app_export.dart';
 import 'package:delifast/features/login/cubit/login_cubit.dart';
 import 'package:delifast/features/login/cubit/login_states.dart';
+import 'package:delifast/injector.dart' as injector;
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
   @override
@@ -8,11 +10,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  TextEditingController phoneNumberController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  bool isHidden = true;
   @override
   void initState() {
     super.initState();
@@ -20,7 +18,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return BlocProvider(
+        create: (_) => injector.serviceLocator<LoginCubit>(),
+    child: SafeArea(
       child: BlocBuilder<LoginCubit,LoginStates>(
         
         builder: (context, state) {
@@ -33,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 Expanded(
                   child: Form(
-                    key: formKey,
+                    key:cubit.formKey,
                     child: SingleChildScrollView(
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,18 +42,29 @@ class _LoginScreenState extends State<LoginScreen> {
                             Padding(
                               padding: EdgeInsets.all(18.h),
                               child: Text(
-                                AppLanguages.logIn,
+                                AppLanguages.sign_in,
                                 style: getBoldStyle(fontSize: 20.sp),
                               ),
                             ),
                             SizedBox(
                               height: 15.h,
                             ),
-                            CustomText(text: AppLanguages.phone),
                             CustomTextField(
-                              labelText: AppLanguages.enterPhone,
+                              labelText: AppLanguages.email,
+                               hintText: "email@yourdomain.com",
+                              suffixIcon: IconButton(
+                                  onPressed: () {
+
+                                  },
+                                  icon: Icon(
+                                         Icons.check,
+                                    color: AppColors.red,
+                                    size: 20.h,
+                                  )),
+                              borderRadius: 20,
+
                               keyboardType: TextInputType.phone,
-                              controller: phoneNumberController,
+                              controller: cubit.EmailController,
                               validator: (value) => value!.isEmpty ? '' : null,
                             ),
                             SizedBox(
@@ -77,48 +88,70 @@ class _LoginScreenState extends State<LoginScreen> {
                             //   ],
                             // ),
                             CustomTextField(
-                              isPassword: isHidden,
+                              isPassword:cubit. isHidden,
                               suffixIcon: IconButton(
                                   onPressed: () {
                                     setState(() {
-                                      print(isHidden);
-                                      isHidden = !isHidden;
+                                      print(cubit.isHidden);
+                                     cubit. isHidden = cubit!.isHidden;
                                     });
                                   },
+
                                   icon: Icon(
-                                    !isHidden
+                                   cubit!.isHidden
                                         ? Icons.visibility_outlined
                                         : Icons.visibility_off_outlined,
                                     color: AppColors.red,
                                     size: 20.h,
                                   )),
+                              hintText: "*********",
                               labelText: AppLanguages.enterPassword,
-                              controller: passwordController,
+                              controller:cubit. passwordController,
                               keyboardType: TextInputType.text,
+                              borderRadius: 20,
                               validator: (value) => value!.isEmpty ? '' : null,
                             ),
                             SizedBox(
-                              height: 30.h,
+                              height: 10.h,
+                            ),
+                            Row(
+                              children: [
+                                Flexible(
+                                  child: Row(
+                                    children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Image.asset(AppIcons.checkIcon),
+                                  )  ,
+                                      Text(AppLanguages.remember_me,style: TextStyle(color:AppColors.gray,fontSize: 16.sp),),
+                                    ],
+                                  ),
+                                ),
+                                Text(AppLanguages.forgetPassword,style: TextStyle(color:AppColors.red,fontSize: 16.sp))
+                              ],
+                            ),
+                            SizedBox(
+                              height: 20.h,
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: CustomButton(
-                                text: AppLanguages.logIn,
+
+                                text: AppLanguages.sign_in,
+                                buttonColor: AppColors.primaryButton,
                                 onPressed: () {
-                                  // Navigator.pushNamedAndRemoveUntil(context,
-                                  //     Routes.mainRoute, (route) => false);
-                                  // if (formKey.currentState!.validate()) {
-                                  // } else {
-                                  //   errorGetBar("من فضلك املأ الحقول");
-                                  //   print('Form is Not valid');
-                                  // }
+                                  cubit.signupValidate(context);
+
+//                                   if (cubit.formKey.currentState!.validate()) {
+// cubit.login();
+//                                   }
                                 },
                               ),
                             ),
                             SizedBox(
                               height: 35.h,
                             ),
-                            // Row(
+                                            // Row(
                             //   mainAxisAlignment: MainAxisAlignment.center,
                             //   children: [
                             //     Flexible(
@@ -144,15 +177,16 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                Image.asset(
-                  width: double.infinity,
-                  AppImages.login,
-                )
+                // Image.asset(
+                //   width: double.infinity,
+                //   AppImages.login,
+                // )
               ],
             ),
           ),
         );
       }),
+    )
     );
   }
 }

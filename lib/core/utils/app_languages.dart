@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 class AppLanguages {
+
   static String skip = 'skip'.tr();
   static String onBoard1title = 'onBoard1title'.tr();
   static String onBoard1body = 'onBoard1body'.tr();
@@ -65,4 +66,12 @@ class AppLanguages {
   static String selectImage = 'selectImage'.tr();
   static String camera = 'camera'.tr();
   static String gallery = 'gallery'.tr();
+  static String sign_in = 'sign_in'.tr();
+  static String email = 'email'.tr();
+  static String enter_email = 'enter_email'.tr();
+
+  static String remember_me = 'remember_me'.tr();
+  static String verify = 'verify'.tr();
+
+
 }

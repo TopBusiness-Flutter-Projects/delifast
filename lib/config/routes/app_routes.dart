@@ -4,7 +4,9 @@ import 'package:delifast/features/main_screen/screens/main_screen.dart';
 import 'package:delifast/features/splash/screens/splash_screen.dart';
 import '../../core/utils/app_strings.dart';
 import 'package:page_transition/page_transition.dart';
+import '../../features/Home/screens/home_screen.dart';
 import '../../features/login/screens/login_screen.dart';
+import '../../features/verfication_otp/screens/verfiy_otp.dart';
 
 class Routes {
   static const String initialRoute = '/';
@@ -13,6 +15,10 @@ class Routes {
   static const String loginRoute = '/login';
   static const String mainRoute = '/main';
   static const String onboardingPageScreenRoute = '/onboardingPageScreenRoute';
+
+  static const String verificationCodeScreenRoute = '/VerificationCodeScreenRoute';
+  static const String homeScreenRoutes = '/HomeScreenRoutes';
+
 }
 
 class AppRoutes {
@@ -36,6 +42,21 @@ class AppRoutes {
       case Routes.loginRoute:
         return PageTransition(
           child: LoginScreen(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 800),
+        );
+
+      case Routes.homeScreenRoutes:
+        return PageTransition(
+          child: HomeScreen(),
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 800),
+        );
+      case Routes.verificationCodeScreenRoute:
+        return PageTransition(
+          child: VerificationCodeScreen(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 800),

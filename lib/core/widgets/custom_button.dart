@@ -56,7 +56,7 @@ class CustomButton extends StatelessWidget {
                     : BoxDecoration(
                         color: isDisabled
                             ? Colors.grey
-                            : buttonColor ?? AppColors.secondPrimary,
+                            : buttonColor ?? AppColors.red,
                         border: Border.all(
                             color: isGoogle
                                 ? AppColors.white
