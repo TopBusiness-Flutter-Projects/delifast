@@ -4,6 +4,8 @@ import '../utils/app_export.dart';
 
 class CustomTextField extends StatefulWidget {
   final String? labelText;
+  final String? hintText;
+
   final Function()? onTap;
   final Function(String)? onChanged;
   final Function(String)? onSubmitted;
@@ -34,6 +36,7 @@ class CustomTextField extends StatefulWidget {
     this.isPassword = false,
     this.onSubmitted,
     this.borderRadius,
+    this.hintText,
   });
 
   @override
@@ -72,6 +75,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             onTapOutside: (event) {
               FocusManager.instance.primaryFocus?.unfocus();
             },
+
             focusNode: myFocusNode,
             style: getBoldStyle(),
             onChanged: widget.onChanged,
@@ -83,31 +87,33 @@ class _CustomTextFieldState extends State<CustomTextField> {
             minLines: widget.isMessage ? 5 : 1,
             onFieldSubmitted: widget.onSubmitted,
             decoration: InputDecoration(
+              hintText: widget.hintText,
+
                 filled: true,
                 fillColor: AppColors.white,
                 labelText: widget.labelText,
                 labelStyle: getRegularStyle(
                     fontHeight: 1.5,
                     color: myFocusNode.hasFocus
-                        ? AppColors.primary
-                        : AppColors.primaryHint),
+                        ? AppColors.gray
+                        : AppColors.gray),
                 prefixIcon: widget.prefixIcon,
                 // prefixIconColor: myFocusNode.hasFocus ? ColorManager.primary : ColorManager.primaryGrey,
                 suffixIcon: widget.suffixIcon,
                 contentPadding:
                     EdgeInsets.symmetric(horizontal: 8, vertical: 10.h),
                 hintStyle:
-                    getRegularStyle(color: AppColors.primaryHint, fontSize: 14),
+                    getRegularStyle(color: AppColors.black, fontSize: 16),
                 errorStyle: getRegularStyle(color: AppColors.red),
                 enabledBorder: OutlineInputBorder(
                     borderSide:
-                        BorderSide(color: AppColors.primaryHint, width: 1),
+                        BorderSide(color: AppColors.gray, width: 1),
                     borderRadius: BorderRadius.all(
                         Radius.circular(widget.borderRadius ?? 8))),
 
                 // focused border style
                 focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: AppColors.primary, width: 1),
+                    borderSide: BorderSide(color: AppColors.gray, width: 1),
                     borderRadius: BorderRadius.all(
                         Radius.circular(widget.borderRadius ?? 8))),
 

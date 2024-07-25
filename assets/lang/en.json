@@ -12,7 +12,7 @@
     "phone": "mobile number",
     "enterPhone": "Enter mobile number",
     "password": "password",
-    "forgetPassword": "Forgot your password",
+    "forgetPassword": "Forgot your password?",
     "enterPassword": "Enter password",
     "doNotHaveAccount": "You don't have an account with us?",
     "createAccount": "Create an account",
@@ -64,6 +64,12 @@
     "select_image": "Select image",
     "camera": "Camera",
     "gallery": "Gallery",
+    "sign_in": "Sign in",
+    "email": "Email",
+    "enter_email": "Enter your email",
+    "remember_me": "Remember me",
     "": "",
+    "verify": "Verify",
+
     "last": ""
 }

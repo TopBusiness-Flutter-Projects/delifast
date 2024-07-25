@@ -4,12 +4,16 @@ import 'hex_color.dart';
 
 class AppColors {
   static Color primary = HexColor('#002850');
+
+  static Color blackblue = HexColor('#002040');
+
   static Color primaryText = HexColor('#292929');
   static Color secondPrimary = HexColor('#A5B4BE');
   static Color secondText = HexColor('#80869A');
   static Color dotsColor = HexColor('#F4E07D');
   static Color red = HexColor('#CE0001');
   static Color primaryHint = HexColor('#E2E2E2');
+  static Color primaryButton = HexColor('#002850');
   static Color hint = Colors.grey;
   static Color blackLite = Colors.black54;
   static Color error = Colors.red;
@@ -22,6 +26,8 @@ class AppColors {
   static Color gray2 = HexColor('#BABABB');
   // static Color gray6 = HexColor('#A7A7A7');
   // static Color gray7 = HexColor('#A0A1A0');
+
+  static Color greenLight = HexColor('#35B82A');
 
   static Color blue3 = Color(0xff3646ff);
   static Color bink = HexColor('#FF9F9F');

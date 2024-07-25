@@ -6,6 +6,7 @@ class AppImages {
   //images
   static const String logoImage = '$imagePath/logo.png';
   static const String logo2Image = '$imagePath/logo2.png';
+
   static const String topBusinessLogo = '$imagePath/topBusiness.png';
   static const String splashDetails = '$imagePath/splashDetails.png';
   static const String onboarding1 = '$imagePath/onBoarding1.png';
@@ -71,6 +72,6 @@ class AppIcons {
   static const String billShare = '$iconsPath/billShare.png';
   static const String callContactUs = '$iconsPath/callContactUs.png';
   static const String messageContactUs = '$iconsPath/messageContactUs.png';
-
+  static const String checkIcon = '$iconsPath/check.png';
 
 }
