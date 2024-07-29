@@ -14,6 +14,7 @@ class AppImages {
   static const String onboarding3 = '$imagePath/onBoarding3.png';
   static const String onboardingTop = '$imagePath/onBoardingTop.png';
   static const String onboardingBottom = '$imagePath/onBoardingBottom.png';
+  static const String walletPhoto = '$imagePath/wallet.png';
   static const String code = '$imagePath/code.png';
   static const String login = '$imagePath/login.png';
   static const String home = '$imagePath/home.png';
@@ -73,5 +74,11 @@ class AppIcons {
   static const String callContactUs = '$iconsPath/callContactUs.png';
   static const String messageContactUs = '$iconsPath/messageContactUs.png';
   static const String checkIcon = '$iconsPath/check.png';
-
+  static const String Truck = '$iconsPath/Truck.png';
+  static const String Drops = '$iconsPath/Drop.png';
+  static const String History = '$iconsPath/History.png';
+  static const String Box = '$iconsPath/Icon_Box.png';
+  static const String location = '$iconsPath/locationnn.png';
+  static const String whatsapp = '$iconsPath/whatsapp.png';
+  static const String callIcon = '$iconsPath/callicon.png';
 }

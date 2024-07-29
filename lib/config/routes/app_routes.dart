@@ -5,6 +5,9 @@ import 'package:delifast/features/splash/screens/splash_screen.dart';
 import '../../core/utils/app_strings.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../features/Home/screens/home_screen.dart';
+import '../../features/Home/screens/order_details.dart';
+import '../../features/Home/screens/order_screen.dart';
+import '../../features/Home/screens/pick_up.dart';
 import '../../features/login/screens/login_screen.dart';
 import '../../features/verfication_otp/screens/verfiy_otp.dart';
 
@@ -18,6 +21,9 @@ class Routes {
 
   static const String verificationCodeScreenRoute = '/VerificationCodeScreenRoute';
   static const String homeScreenRoutes = '/HomeScreenRoutes';
+  static const String ordersRoutes = '/ordersRoutes';
+  static const String pickUpRoutes = '/pickUpRoutes';
+  static const String OrdersDetailsRoutes = '/pickUpRoutes';
 
 }
 
@@ -26,6 +32,22 @@ class AppRoutes {
 
   static Route onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case Routes.initialRoute:
+        return MaterialPageRoute(
+          builder: (context) => const SplashScreen(),
+        );
+      case Routes.OrdersDetailsRoutes:
+        return MaterialPageRoute(
+          builder: (context) => const orderDetails(),
+        );
+      case Routes.pickUpRoutes:
+        return MaterialPageRoute(
+          builder: (context) => const PickUpScreen(),
+        );
+      case Routes.ordersRoutes:
+        return MaterialPageRoute(
+          builder: (context) =>  const OrderScreen(),
+        );
       case Routes.initialRoute:
         return MaterialPageRoute(
           builder: (context) => const SplashScreen(),

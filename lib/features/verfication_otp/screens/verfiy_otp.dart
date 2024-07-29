@@ -99,7 +99,7 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                 buttonColor: AppColors.primaryButton,
                 onPressed: () {
                   Navigator.pushNamedAndRemoveUntil(context,
-                      Routes.homeScreenRoutes, (route) => false);
+                      Routes.mainRoute, (route) => false);
               //    cubit.signupValidate(context);
 
 //                                   if (cubit.formKey.currentState!.validate()) {

@@ -68,7 +68,10 @@
     "email": "Email",
     "enter_email": "Enter your email",
     "remember_me": "Remember me",
-    "": "",
+    "detailsOrder": "Details order",
+    "dropOff": "Drop off",
+    "pickUp": "Pick Up",
+    "orders": "Orders",
     "verify": "Verify",
 
     "last": ""

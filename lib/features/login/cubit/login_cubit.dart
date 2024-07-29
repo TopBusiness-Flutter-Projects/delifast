@@ -35,7 +35,7 @@ class LoginCubit extends Cubit<LoginStates> {
     if (formKey.currentState!.validate()) {
     //  login();
       Navigator.pushNamedAndRemoveUntil(context,
-          Routes.verificationCodeScreenRoute, (route) => false);
+          Routes.mainRoute, (route) => false);
     }
   }
   void clearControllers() {

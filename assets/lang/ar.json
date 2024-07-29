@@ -69,7 +69,9 @@
   "enter_email": "ادخل ايميلك",
   "remember_me": "تذكرني",
   "verify": "يؤكد",
-
-
+  "Orders": "الطلبات",
+  "pickUp": "التقط",
+  "dropOff": "إنزال",
+  "detailsOrder": "تفاصيل الاوردر",
   "last": ""
 }
