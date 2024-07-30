@@ -4,7 +4,9 @@ import 'package:delifast/core/utils/app_colors.dart';
 import 'package:delifast/features/main_screen/cubit/cubit.dart';
 import 'package:delifast/features/main_screen/cubit/state.dart';
 
+import '../../Home/screens/account/screens/menu.dart';
 import '../../Home/screens/home_screen.dart';
+import '../../Home/screens/notificationi.dart';
 import '../../Home/screens/order_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -22,7 +24,6 @@ class _MainScreenState extends State<MainScreen> {
       _selectedIndex = index;
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MainCubit, MainState>(
@@ -33,7 +34,7 @@ class _MainScreenState extends State<MainScreen> {
             index: _selectedIndex,
             children: [
               HomeScreen(),
-              OrderScreen(),Container(child:Text("hello")),Container(child:Text("hello")),Container(child:Text("hello")),
+              OrderScreen(),Container(child:Text("hello")),NotificaionScreen(),AccountScreen(),
 
             ],
           ),

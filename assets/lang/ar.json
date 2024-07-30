@@ -73,5 +73,15 @@
   "pickUp": "التقط",
   "dropOff": "إنزال",
   "detailsOrder": "تفاصيل الاوردر",
-  "last": ""
+  "notification": "اشعارات",
+  "account": "الحساب",
+  "profile": "حسابك الشخصي",
+  "rate": "تقيم التطبيق",
+  "share": "مشاركة التطبيق",
+  "info": "عن التطبيق",
+  "privacy": "سياسة الخصوصية",
+  "logout": "تسجيل الخروج",
+  "lang":"AR",
+  "newPassword": "كلمة مرور جديدة",
+  "confirm_password": "تاكيد كلمة المرور"
 }

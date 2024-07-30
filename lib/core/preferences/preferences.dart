@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/login_model.dart';
+import '../utils/app_strings.dart';
 
 class Preferences {
   static final Preferences instance = Preferences._internal();
@@ -18,7 +19,15 @@ class Preferences {
   //   prefs.setString('onBoarding', 'Done');
   // }
 
+  Future<String> getSavedLang() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.getString(AppStrings.locale) ?? 'ar';
+  }
 
+  Future<void> savedLang(String local) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString(AppStrings.locale, local);
+  }
   Future<bool?> getIsFirstTime({required String key}) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     return preferences.getBool(key);

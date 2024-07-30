@@ -87,7 +87,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             minLines: widget.isMessage ? 5 : 1,
             onFieldSubmitted: widget.onSubmitted,
             decoration: InputDecoration(
-              hintText: widget.hintText,
+                hintText: widget.hintText,
 
                 filled: true,
                 fillColor: AppColors.white,
@@ -101,32 +101,32 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 // prefixIconColor: myFocusNode.hasFocus ? ColorManager.primary : ColorManager.primaryGrey,
                 suffixIcon: widget.suffixIcon,
                 contentPadding:
-                    EdgeInsets.symmetric(horizontal: 8, vertical: 10.h),
+                EdgeInsets.symmetric(horizontal: 8, vertical: 10.h),
                 hintStyle:
-                    getRegularStyle(color: AppColors.black, fontSize: 16),
+                getRegularStyle(color: AppColors.black, fontSize: 16),
                 errorStyle: getRegularStyle(color: AppColors.red),
                 enabledBorder: OutlineInputBorder(
                     borderSide:
-                        BorderSide(color: AppColors.gray, width: 1),
+                    BorderSide(color: AppColors.gray, width: 1),
                     borderRadius: BorderRadius.all(
-                        Radius.circular(widget.borderRadius ?? 8))),
+                        Radius.circular(widget.borderRadius ?? 20))),
 
                 // focused border style
                 focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: AppColors.gray, width: 1),
                     borderRadius: BorderRadius.all(
-                        Radius.circular(widget.borderRadius ?? 8))),
+                        Radius.circular(widget.borderRadius ?? 20))),
 
                 // error border style
                 errorBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: AppColors.red, width: 1),
                     borderRadius: BorderRadius.all(
-                        Radius.circular(widget.borderRadius ?? 8))),
+                        Radius.circular(widget.borderRadius ?? 20))),
                 focusedErrorBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: AppColors.red, width: 1),
                     borderRadius: BorderRadius.all(
-                        Radius.circular(widget.borderRadius ?? 8))))),
+                        Radius.circular(widget.borderRadius ?? 20)))),
       ),
-    );
+    ));
   }
 }

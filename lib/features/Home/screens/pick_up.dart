@@ -64,7 +64,7 @@ class _PickUpScreenState extends State<PickUpScreen> {
             Expanded(
               child: ListView.builder(
                 itemBuilder: (context,index){
-                  return PackageTrackingCard();
+                  return PackageTrackingCard2();
                 },
                 itemCount: 3,
               ),

@@ -60,7 +60,7 @@ class _orderDetailsState extends State<orderDetails> {
                   ],
                 ),
               ),
-              PackageTrackingCard(),
+              PackageTrackingCard2(),
               ShippingStatusWidget(),
               Padding(
                 padding: const EdgeInsets.all(20.0),
@@ -98,8 +98,6 @@ class _orderDetailsState extends State<orderDetails> {
                                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                                     child: Text("Riyadh, Jeddah, The Holy City of Makkah"),
                                   ),
-
-
                                 ],
                               ),
                             ),
@@ -114,7 +112,7 @@ class _orderDetailsState extends State<orderDetails> {
                                      child: CircleAvatar(child: Icon(Icons.account_circle_sharp),),
                                    ),
                                    Text("Clientt1"),
-                                 //  Spacer(),
+                                   Spacer(),
                                    Padding(
                                      padding: const EdgeInsets.all(10.0),
                                      child: Image.asset(AppIcons.whatsapp),
@@ -190,20 +188,17 @@ class _orderDetailsState extends State<orderDetails> {
 
                      // SizedBox(width: 10.w,),
                     Flexible(
-                      child: Padding(
-                        padding:  EdgeInsets.symmetric(horizontal: 8.0.w,),
-                        child: Row(
+                      child: Row(
 
-                          children: [
-                            Icon(Icons.camera_alt, color: AppColors.red),
-                            SizedBox(width: 2.w,),
-                            Text("Add Photo",style:TextStyle(color:AppColors.red,fontSize: 12.sp)),
-
-                          ],
-                        ),
+                        children: [
+                         Icon(Icons.note_alt, color: AppColors.red),
+                      //    Flexible(child: Image.asset(AppImages.location)),
+                         SizedBox(width: 2.w,),
+                          Flexible(child: Text("Add notes",style:TextStyle(color:AppColors.red,fontSize: 12.sp))),
+                        ],
                       ),
                     ),
-
+//
 // ///
                   ],
                 ),
@@ -214,29 +209,32 @@ class _orderDetailsState extends State<orderDetails> {
 shrinkWrap: true,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2, // Number of items in each row
-                  crossAxisSpacing: .0, // Spacing between each item horizontally
-                  mainAxisSpacing: 8.0, // Spacing between each item vertically
+                  crossAxisSpacing:10, // Spacing between each item horizontally
+                  mainAxisSpacing:10, // Spacing between each item vertically
                 ),
                 itemCount: 3,
                 itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(8.0),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 2,
-                          blurRadius: 5,
-                          offset: Offset(0, 3),
+                  return Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(8.0),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 2,
+                            blurRadius: 5,
+                            offset: Offset(0, 3),
+                          ),
+                        ],
+                      ),
+                      child: Center(
+                        child: Text(
+                          // items[index],
+                          "text",
+                          style: TextStyle(fontSize: 20.0),
                         ),
-                      ],
-                    ),
-                    child: Center(
-                      child: Text(
-                        // items[index],
-                        "text",
-                        style: TextStyle(fontSize: 20.0),
                       ),
                     ),
                   );
@@ -292,170 +290,3 @@ shrinkWrap: true,
   }
 
 }
-// class ClientsCard extends StatefulWidget {
-//   @override
-//   _ClientsCardState createState() => _ClientsCardState();
-// }
-//
-// class _ClientsCardState extends State<ClientsCard> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.all(16.0),
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           Row(
-//             children: [
-//               Icon(Icons.location_on_rounded,color:AppColors.red),
-//               SizedBox(width: 8.0),
-//               Text(
-//                 'Riyadh, Jeddah, The Holy City Of Makkah',
-//                 style: TextStyle(
-//                   fontSize: 16.0,
-//                 ),
-//               ),
-//             ],
-//           ),
-//           SizedBox(height: 16.0),
-//           _buildClientCard('Client 1'),
-//           SizedBox(height: 16.0),
-//           _buildClientCard('Client 2'),
-//           SizedBox(height: 32.0),
-//           Text(
-//             'Notes',
-//             style: TextStyle(
-//               fontSize: 18.0,
-//               fontWeight: FontWeight.bold,
-//             ),
-//           ),
-//           SizedBox(height: 16.0),
-//           Text(
-//             'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.',
-//             style: TextStyle(
-//               fontSize: 16.0,
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-//
-//   Widget _buildClientCard(String clientName) {
-//     return Row(
-//       children: [
-//         CircleAvatar(
-//           radius: 30.0,
-//           backgroundImage: AssetImage('assets/client.jpg'), // Replace with actual image asset
-//         ),
-//         SizedBox(width: 16.0),
-//         Expanded(
-//           child: Text(
-//             clientName,
-//             style: TextStyle(
-//               fontSize: 18.0,
-//               fontWeight: FontWeight.bold,
-//             ),
-//           ),
-//         ),
-//         SizedBox(width: 16.0),
-//         IconButton(
-//           onPressed: () {},
-//           icon: Icon(Icons.message),
-//           color: Colors.green,
-//         ),
-//         IconButton(
-//           onPressed: () {},
-//           icon: Icon(Icons.call),
-//         ),
-//       ],
-//     );
-//   }
-// }
-//
-//
-//
-// ///
-// ///
-// ///
-// ///
-// ///
-// ///
-// class ClientsPage extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return  Padding(
-//       padding: const EdgeInsets.all(16.0),
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           Row(
-//             children: [
-//               Icon(Icons.location_on),
-//               SizedBox(width: 8.0),
-//               Text(
-//                 'Riyadh, Jeddah, The Holy City Of Makkah',
-//                 style: TextStyle(fontSize: 16.0),
-//               ),
-//             ],
-//           ),
-//           SizedBox(height: 20.0),
-//           _buildClientCard('Client 1'),
-//           SizedBox(height: 10.0),
-//           _buildClientCard('Client 2'),
-//           SizedBox(height: 20.0),
-//           Text(
-//             'Notes',
-//             style: TextStyle(
-//               fontSize: 18.0,
-//               fontWeight: FontWeight.bold,
-//             ),
-//           ),
-//           SizedBox(height: 10.0),
-//           Text(
-//             'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.',
-//             style: TextStyle(fontSize: 14.0),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-//   Widget _buildClientCard(String clientName) {
-//     return Container(
-//       padding: EdgeInsets.all(16.0),
-//       decoration: BoxDecoration(
-//         border: Border.all(color: Colors.grey),
-//         borderRadius: BorderRadius.circular(8.0),
-//       ),
-//       child: Row(
-//         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//         children: [
-//           CircleAvatar(
-//             backgroundImage: AssetImage('assets/client.jpg'), // Replace with your client image
-//           ),
-//           SizedBox(width: 16.0),
-//           Text(
-//             clientName,
-//             style: TextStyle(fontSize: 16.0),
-//           ),
-//           Row(
-//             children: [
-//               IconButton(
-//                 icon: Icon(Icons.social_distance),
-//                 onPressed: () {
-//                   // Handle WhatsApp action
-//                 },
-//               ),
-//               IconButton(
-//                 icon: Icon(Icons.phone),
-//                 onPressed: () {
-//                   // Handle phone call action
-//                 },
-//               ),
-//             ],
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }

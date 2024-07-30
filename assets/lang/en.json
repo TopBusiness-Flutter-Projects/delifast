@@ -73,6 +73,15 @@
     "pickUp": "Pick Up",
     "orders": "Orders",
     "verify": "Verify",
-
-    "last": ""
+"notification": "Notification",
+    "account": "Account",
+    "profile": "Profile",
+    "rate": "Rate App",
+    "share": "Share App",
+    "info": "About",
+    "privacy": "Privacy Policy",
+    "logout": "Logout",
+    "lang":"EN",
+    "newPassword": "new password",
+    "confirm_password": "Confirm Password"
 }

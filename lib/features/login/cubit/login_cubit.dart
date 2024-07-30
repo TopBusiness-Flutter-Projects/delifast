@@ -14,6 +14,21 @@ class LoginCubit extends Cubit<LoginStates> {
   TextEditingController EmailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool isHidden = true;
+  bool isHiddenNewPass = true;
+  bool isHiddenConfirm = true;
+  void togglePasswordVisibility() {
+    isHidden = !isHidden;
+    emit(changePasswordState()); // Trigger a rebuild by emitting a new state
+  }
+  void togglePasswordVisibility2() {
+    isHiddenNewPass = !isHiddenNewPass;
+    emit(changePasswordState()); // Trigger a rebuild by emitting a new state
+  }
+  void togglePasswordVisibility3() {
+    isHiddenConfirm = !isHiddenConfirm;
+    emit(changePasswordState()); // Trigger a rebuild by emitting a new state
+  }
+
   Future<void> login() async {
     // if (formKey.currentState!.validate()) {
     //   // Perform login with API

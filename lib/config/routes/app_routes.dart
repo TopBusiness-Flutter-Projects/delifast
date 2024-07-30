@@ -4,7 +4,10 @@ import 'package:delifast/features/main_screen/screens/main_screen.dart';
 import 'package:delifast/features/splash/screens/splash_screen.dart';
 import '../../core/utils/app_strings.dart';
 import 'package:page_transition/page_transition.dart';
+import '../../features/Home/screens/account/screens/contact_us/screens/contact_us.dart';
+import '../../features/Home/screens/account/screens/profile/profile.dart';
 import '../../features/Home/screens/home_screen.dart';
+import '../../features/Home/screens/notificationi.dart';
 import '../../features/Home/screens/order_details.dart';
 import '../../features/Home/screens/order_screen.dart';
 import '../../features/Home/screens/pick_up.dart';
@@ -24,8 +27,10 @@ class Routes {
   static const String ordersRoutes = '/ordersRoutes';
   static const String pickUpRoutes = '/pickUpRoutes';
   static const String OrdersDetailsRoutes = '/pickUpRoutes';
-
-}
+  static const String notificationRoutes = '/notificationRoute';
+  static const String profileRoutes = '/profileRoutes';
+  static const String contactRoutes = '/profileRoutes';
+  }
 
 class AppRoutes {
   static String route = '';
@@ -36,6 +41,19 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (context) => const SplashScreen(),
         );
+      case Routes.contactRoutes:
+        return MaterialPageRoute(
+          builder: (context) => const ContactUsScreen(),
+        );
+      case Routes.profileRoutes:
+        return MaterialPageRoute(
+          builder: (context) => const ProfileScreen(),
+        );
+      case Routes.notificationRoutes:
+        return MaterialPageRoute(
+          builder: (context) =>  NotificaionScreen(),
+        );
+
       case Routes.OrdersDetailsRoutes:
         return MaterialPageRoute(
           builder: (context) => const orderDetails(),
