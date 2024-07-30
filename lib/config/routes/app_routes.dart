@@ -34,7 +34,7 @@ class Routes {
 
 class AppRoutes {
   static String route = '';
-
+//
   static Route onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.initialRoute:
