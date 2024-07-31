@@ -101,7 +101,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         cubit.togglePasswordVisibility2();
 
                       },
-//
+////
                       icon: Icon(
                         cubit!.isHiddenNewPass
                             ? Icons.visibility_off_outlined
