@@ -83,5 +83,12 @@
   "logout": "تسجيل الخروج",
   "lang":"AR",
   "newPassword": "كلمة مرور جديدة",
-  "confirm_password": "تاكيد كلمة المرور"
+  "confirm_password": "تاكيد كلمة المرور",
+  "wallet": "محفظتي",
+  "subject": "موضوع",
+  "enterSubject": "ادخل موضوعك",
+  "messgae": "رسالتك",
+"history": "التاريخ",
+  "shipment_status": "حالة الشحن"
+
 }

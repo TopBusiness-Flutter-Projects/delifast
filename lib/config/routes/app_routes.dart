@@ -4,6 +4,7 @@ import 'package:delifast/features/main_screen/screens/main_screen.dart';
 import 'package:delifast/features/splash/screens/splash_screen.dart';
 import '../../core/utils/app_strings.dart';
 import 'package:page_transition/page_transition.dart';
+import '../../features/Home/screens/account/screens/about/screens/about_screen.dart';
 import '../../features/Home/screens/account/screens/contact_us/screens/contact_us.dart';
 import '../../features/Home/screens/account/screens/profile/profile.dart';
 import '../../features/Home/screens/home_screen.dart';
@@ -11,6 +12,8 @@ import '../../features/Home/screens/notificationi.dart';
 import '../../features/Home/screens/order_details.dart';
 import '../../features/Home/screens/order_screen.dart';
 import '../../features/Home/screens/pick_up.dart';
+import '../../features/Home/screens/shipment _status/screens/shipment _status_screen.dart';
+import '../../features/Home/wallet/screens/wallet_screen.dart';
 import '../../features/login/screens/login_screen.dart';
 import '../../features/verfication_otp/screens/verfiy_otp.dart';
 
@@ -29,7 +32,10 @@ class Routes {
   static const String OrdersDetailsRoutes = '/pickUpRoutes';
   static const String notificationRoutes = '/notificationRoute';
   static const String profileRoutes = '/profileRoutes';
-  static const String contactRoutes = '/profileRoutes';
+  static const String contactRoutes = '/contactRoutes';
+  static const String aboutRoutes = '/aboutRoutes';
+  static const String shipmentRoutes = '/shipmentRoutes';
+  static const String walletRoutes = '/walletRoutes';
   }
 
 class AppRoutes {
@@ -40,6 +46,18 @@ class AppRoutes {
       case Routes.initialRoute:
         return MaterialPageRoute(
           builder: (context) => const SplashScreen(),
+        );
+        case Routes.shipmentRoutes:
+        return MaterialPageRoute(
+          builder: (context) => Shipment_Status (),
+        );
+        case Routes.aboutRoutes:
+        return MaterialPageRoute(
+          builder: (context) => const AboutScreen(),
+        );
+        case Routes.walletRoutes:
+        return MaterialPageRoute(
+          builder: (context) =>  WalletScreen(),
         );
       case Routes.contactRoutes:
         return MaterialPageRoute(

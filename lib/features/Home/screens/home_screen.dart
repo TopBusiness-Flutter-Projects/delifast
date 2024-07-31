@@ -10,6 +10,7 @@ import '../../../core/utils/app_export.dart';
 
 import 'package:flutter/material.dart';
 
+import '../wallet/screens/wallet_screen.dart';
 import 'drop_off.dart';
 import 'order_screen.dart';
 
@@ -19,7 +20,7 @@ class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
   final List<Map<String, dynamic>> _options = [
-    {'icon': AppImages.walletPhoto, 'label': 'Wallet', 'screen': Container(child: Text("wallet"),)},
+    {'icon': AppImages.walletPhoto, 'label': 'Wallet', 'screen':WalletScreen()},
     {'icon': AppIcons.Truck, 'label': 'Pick Up', 'screen':PickUpScreen()},
     {'icon': AppIcons.Drops, 'label': 'Drop Off', 'screen': DropOffScreen()},
     {'icon': AppIcons.History, 'label': 'History', 'screen': OrderScreen()},
@@ -55,7 +56,7 @@ class HomeScreen extends StatelessWidget {
                             Center(
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Icon(Icons.location_on_rounded, color: AppColors.redLight),
+                                child: Icon(Icons.location_on_rounded, color: AppColors.red),
                               ),
                             ),
                             Center(

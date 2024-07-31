@@ -16,7 +16,7 @@
     "enterPassword": "Enter password",
     "doNotHaveAccount": "You don't have an account with us?",
     "createAccount": "Create an account",
-    "name": "name",
+    "name": "Name",
     "enterName": "Enter Name",
     "address": "address",
     "enterAddress": "Enter your address",
@@ -26,6 +26,8 @@
     "theCodeWasSent": "A confirmation code has been sent to your mobile number. Enter it to recover your password.",
     "newPassword": "new password",
     "confirm": "confirm",
+    "subject": "Subject",
+    "enterSubject": "Enter Subject",
     "send": "Send",
     "hello": "Hello, ",
     "all": "all",   
@@ -39,7 +41,7 @@
     "settings": "Settings",
     "language": "Language",
     "contactUs": "Contact us",
-    "aboutApp": "About the app",
+    "aboutApp": "About",
     "policy": "Terms and Conditions",
     "shareApp": "Share App",
     "rateApp": "Rate App",
@@ -83,5 +85,10 @@
     "logout": "Logout",
     "lang":"EN",
     "newPassword": "new password",
-    "confirm_password": "Confirm Password"
+    "confirm_password": "Confirm Password",
+    "wallet": "Wallet",
+    "messgae": "Messgae",
+    "enterMessgae": "Enter Messgae",
+    "history": "History",
+    "shipment_status": "Shipment Status"
 }

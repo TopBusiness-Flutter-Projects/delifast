@@ -30,7 +30,7 @@ class _ShippingStatusWidgetState extends State<ShippingStatusWidget> {
               ),
               TextButton(
                 onPressed: () {
-                  // Handle 'See all' action
+                  Navigator.pushNamed(context, Routes.shipmentRoutes);
                 },
                 child: Text(
                   'See all >',

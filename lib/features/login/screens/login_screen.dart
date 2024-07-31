@@ -1,4 +1,5 @@
 import 'package:delifast/core/utils/custom_text_field.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../../../core/utils/app_export.dart';
 import 'package:delifast/features/login/cubit/login_cubit.dart';
@@ -50,12 +51,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             SizedBox(
                               height: 15.h,
                             ),
-                            CustomTextField(
+                            CustomTextField2(
                               labelText: AppLanguages.email,
                                hintText: "email@yourdomain.com",
                               suffixIcon: IconButton(
                                   onPressed: () {
-
                                   },
                                   icon: Icon(
                                          Icons.check,
@@ -63,10 +63,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                     size: 20.h,
                                   )),
                               borderRadius: 20,
-
                               keyboardType: TextInputType.phone,
                               controller: cubit.EmailController,
-                              validator: (value) => value!.isEmpty ? '' : null,
+                              validator: (value) => value!.isEmpty ? 'enter_email'.tr() : null,
                             ),
                             SizedBox(
                               height: 15.h,
@@ -88,20 +87,17 @@ class _LoginScreenState extends State<LoginScreen> {
                             //         ))
                             //   ],
                             // ),
-                            CustomTextField(
+                            CustomTextField2(
                               isPassword:cubit. isHidden,
                               suffixIcon: IconButton(
                                   onPressed: () {
-                                    setState(() {
-                                      print(cubit.isHidden);
-                                     cubit. isHidden = cubit!.isHidden;
-                                    });
+                                 cubit.togglePasswordVisibility();
                                   },
 
                                   icon: Icon(
                                    cubit!.isHidden
-                                        ? Icons.visibility_outlined
-                                        : Icons.visibility_off_outlined,
+                                        ? Icons.visibility_off_outlined
+                                        : Icons.visibility,
                                     color: AppColors.red,
                                     size: 20.h,
                                   )),
@@ -110,7 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               controller:cubit. passwordController,
                               keyboardType: TextInputType.text,
                               borderRadius: 20,
-                              validator: (value) => value!.isEmpty ? '' : null,
+                              validator: (value) => value!.isEmpty ? 'enterPassword' : null,
                             ),
                             SizedBox(
                               height: 10.h,

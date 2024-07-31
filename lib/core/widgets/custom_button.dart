@@ -9,6 +9,7 @@ class CustomButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final Color? textColor;
   final Color? buttonColor;
+  final double? heightt;
 
   final bool isDisabled;
   final bool isGoogle;
@@ -19,6 +20,7 @@ class CustomButton extends StatelessWidget {
 
   const CustomButton(
       {super.key,
+        this.heightt,
       required this.text,
       required this.onPressed,
       this.isDisabled = false,
@@ -38,6 +40,7 @@ class CustomButton extends StatelessWidget {
           child: SizedBox(
               //  height: 46,
               width: width,
+              height: heightt,
               child: Container(
                 decoration: isGoogle
                     ? BoxDecoration(

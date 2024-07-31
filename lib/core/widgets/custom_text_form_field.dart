@@ -2,7 +2,7 @@
 
 import '../utils/app_export.dart';
 
-class CustomTextField extends StatefulWidget {
+class CustomTextField2 extends StatefulWidget {
   final String? labelText;
   final String? hintText;
 
@@ -21,7 +21,7 @@ class CustomTextField extends StatefulWidget {
   final TextInputType? keyboardType;
 
   //FocusNode myFocusNode = FocusNode();
-  const CustomTextField({
+  const CustomTextField2({
     super.key,
     required this.labelText,
     this.prefixIcon,
@@ -40,10 +40,10 @@ class CustomTextField extends StatefulWidget {
   });
 
   @override
-  State<CustomTextField> createState() => _CustomTextFieldState();
+  State<CustomTextField2> createState() => _CustomTextField2State();
 }
 
-class _CustomTextFieldState extends State<CustomTextField> {
+class _CustomTextField2State extends State<CustomTextField2> {
   FocusNode myFocusNode = FocusNode();
 
   void initState() {

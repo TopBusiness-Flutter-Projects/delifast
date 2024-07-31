@@ -27,7 +27,7 @@ class NotificaionScreen extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
-                    height: 40.h,
+                    height: 50.h,
                     child:Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
@@ -52,7 +52,6 @@ class NotificaionScreen extends StatelessWidget {
                                 ),
                               ),
                               Text("A new order has been addd"),
-                          
                             ],
                           ),
                         )
@@ -60,7 +59,7 @@ class NotificaionScreen extends StatelessWidget {
                     ),
                   ),
                     decoration: BoxDecoration(
-                      color:AppColors.white.withOpacity(.5),
+                      color:AppColors.white,
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: [
                         BoxShadow(

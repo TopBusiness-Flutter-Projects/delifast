@@ -54,7 +54,7 @@ class _OrderScreenState extends State<OrderScreen> {
                   itemBuilder: (context,index){
                 return InkWell(
                   onTap: (){
-                    Navigator.pushReplacementNamed(context, Routes.OrdersDetailsRoutes);
+                    Navigator.pushNamed(context, Routes.OrdersDetailsRoutes);
 
                   },
                     child: PackageTrackingCard());

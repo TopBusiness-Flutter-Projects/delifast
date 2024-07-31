@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:delifast/features/Home/screens/account/screens/widgets/custom_setting_row.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../../../core/preferences/preferences.dart';
 import '../../../../../core/utils/app_export.dart';
@@ -29,7 +33,7 @@ class AccountScreen extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: InkWell(
                 onTap: (){
-                  Navigator.pushReplacementNamed(context, Routes.profileRoutes);
+                  Navigator.pushNamed(context, Routes.profileRoutes);
 
                 },
                 child: CustomSettingsRow(
@@ -42,6 +46,9 @@ class AccountScreen extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: CustomSettingsRow(
                 text: "contactUs",
+                onTap: (){
+                  Navigator.pushNamed(context, Routes.contactRoutes);
+                },
                 icon: AppIcons.contact,
               ),
             ),
@@ -69,6 +76,9 @@ class AccountScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: CustomSettingsRow(
+                onTap: (){
+                  Navigator.pushNamed(context, Routes.aboutRoutes);
+                },
                 text: "info",
                 icon: AppIcons.info,
               ),
@@ -76,6 +86,25 @@ class AccountScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: CustomSettingsRow(
+                onTap: ()async{
+                  PackageInfo packageInfo =
+                      await PackageInfo.fromPlatform();
+                  String url = '';
+                  String packageName = packageInfo.packageName;
+
+                  if (Platform.isAndroid) {
+                    url =
+                    "https://play.google.com/store/apps/details?id=$packageName";
+                  } else if (Platform.isIOS) {
+                    url =
+                    'https://apps.apple.com/us/app/$packageName';
+                  }
+                  if (await canLaunch(url)) {
+                  await launch(url);
+                  } else {
+                  throw 'Could not launch $url';
+                  }
+                },
                 text: "rate",
                 icon: AppIcons.rate,
               ),
@@ -83,6 +112,20 @@ class AccountScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: CustomSettingsRow(
+                onTap: ()async{
+                  PackageInfo packageInfo =
+                      await PackageInfo.fromPlatform();
+                  String url = '';
+                  String packageName = packageInfo.packageName;
+                  if (Platform.isAndroid) {
+                    url =
+                    "https://play.google.com/store/apps/details?id=$packageName";
+                  } else if (Platform.isIOS) {
+                    url =
+                    'https://apps.apple.com/us/app/$packageName';
+                  }
+                  await Share.share(url);
+                },
                 text: "share",
                 icon: AppIcons.share,
               ),
@@ -101,9 +144,9 @@ class AccountScreen extends StatelessWidget {
                 icon: AppIcons.logout,
               ),
             ),
-
           ],
         ),
+
       ),
     );
   }

@@ -57,21 +57,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: CustomTextField(labelText: 'name'.tr()),
+                child: CustomTextField2(labelText: 'name'.tr()),
               ),
               Padding(
                 padding: EdgeInsets.all(8.0),
-                child: CustomTextField(labelText: 'phone'.tr(),),
+                child: CustomTextField2(labelText: 'phone'.tr(),),
               ), Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: CustomTextField(labelText: 'email'.tr(),),
+                child: CustomTextField2(labelText: 'email'.tr(),),
               ), Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: CustomTextField(labelText: 'address'.tr(),),
+                child: CustomTextField2(labelText: 'address'.tr(),),
               ),
               Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: CustomTextField(
+                  child: CustomTextField2(
                     isPassword: cubit.isHidden,
                     suffixIcon: IconButton(
                         onPressed: () {
@@ -94,7 +94,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: CustomTextField(
+                child: CustomTextField2(
                   isPassword: cubit.isHiddenNewPass,
                   suffixIcon: IconButton(
                       onPressed: () {
@@ -118,7 +118,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: CustomTextField(
+                child: CustomTextField2(
                   isPassword: cubit.isHiddenConfirm,
                   suffixIcon: IconButton(
                       onPressed: () {
