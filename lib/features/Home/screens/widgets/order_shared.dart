@@ -23,7 +23,7 @@ class Ordersdashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 170.h, // Set a fixed height
+      height: 260.h, // Set a fixed height
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: orderData.length,

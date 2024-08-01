@@ -29,21 +29,25 @@ class CustomOnboardItem extends StatelessWidget {
         const SizedBox(
           height: 20,
         ),
-        Text(
-          title.tr(),
-          textAlign: TextAlign.center,
-          style: getBoldStyle(fontSize: 22.sp, color: AppColors.red),
+        Flexible(
+          child: Text(
+            title.tr(),
+            textAlign: TextAlign.center,
+            style: getBoldStyle(fontSize: 22.sp, color: AppColors.red),
+          ),
         ),
-        const SizedBox(
-          height: 20,
+         SizedBox(
+          height: 5.h,
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
-          child: Text(
-            textAlign: TextAlign.center,
-            body.tr(),
-            style: getRegularStyle(
-                fontSize: 16.sp, fontHeight: 1.2, color: AppColors.secondText),
+          child: Flexible(
+            child: Text(
+              textAlign: TextAlign.center,
+              body.tr(),
+              style: getRegularStyle(
+                  fontSize: 16.sp, fontHeight: 1.2, color: AppColors.secondText),
+            ),
           ),
         ),
       ],

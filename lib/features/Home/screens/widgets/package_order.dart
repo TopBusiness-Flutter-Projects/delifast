@@ -116,16 +116,17 @@ class PackageTrackingCard2 extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  padding: EdgeInsets.all(8),
+                //  padding: EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     color: Colors.orange[100],
                     shape: BoxShape.circle,
                   ),
-                  child: Icon(Icons.card_giftcard, color: Colors.orange),
+                  child: Image.asset(AppIcons.boxOrange),
                 ),
-                SizedBox(width: 12),
+                SizedBox(width: 12.w),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -138,6 +139,17 @@ class PackageTrackingCard2 extends StatelessWidget {
                       style: TextStyle(color: Colors.grey),
                     ),
                   ],
+                ),
+                Container(
+                  width: 100.w,
+                  height: 25.h,
+                  // padding: EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: Colors.orange[100],
+                borderRadius: BorderRadius.circular(30)
+                //    shape: BoxShape.circle,
+                  ),
+                  child: Center(child: Text("Glass Product",style: TextStyle(color:AppColors.orange,fontSize: 14.sp),)),
                 ),
               ],
             ),

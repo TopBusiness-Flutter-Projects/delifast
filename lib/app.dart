@@ -10,6 +10,7 @@ import 'config/themes/app_theme.dart';
 import 'core/utils/app_strings.dart';
 import 'package:delifast/injector.dart' as injector;
 
+import 'features/Home/screens/order_details/cubit/order_details_cubit.dart';
 import 'features/login/cubit/login_cubit.dart';
 import 'features/splash/cubit/cubit.dart';
 
@@ -50,6 +51,9 @@ class _DelifastAppState extends State<DelifastApp> {
                 // ),
                 BlocProvider(
                   create: (_) => injector.serviceLocator<MainCubit>(),
+                ),
+                BlocProvider(
+                  create: (_) => injector.serviceLocator<OrderDetailsCubit>(),
                 ),
               ],
               child: GetMaterialApp(

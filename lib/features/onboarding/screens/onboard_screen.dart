@@ -38,7 +38,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         .setIsFirstTime(key: 'onBoarding', value: true)
         .then((value) {
       print('first timee');
-      //  Navigator.pushNamed(context, Routes.welcomeScreen);
+        Navigator.pushNamed(context, Routes.loginRoute);
     }).catchError((error) {
       print('error${error.toString()}');
     });

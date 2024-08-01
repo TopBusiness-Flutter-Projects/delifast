@@ -95,5 +95,6 @@ class AppIcons {
   static const String wallet = '$iconsPath/walleticon.png';
   static const String forwadicon = '$iconsPath/forward-arrow.png';
   static const String scanicon = '$iconsPath/IconScan.png';
+  static const String boxOrange = '$iconsPath/Icon_Box_orange.png';
 
 }

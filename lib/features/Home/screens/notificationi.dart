@@ -44,9 +44,12 @@ class NotificaionScreen extends StatelessWidget {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text("New Order"),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text("New Order",style:TextStyle(fontSize: 16.sp,fontWeight: FontWeight.w500,color:AppColors.primary)),
+                                    ),
                                   //  Spacer(),
-                                    Text("just now"),
+                                    Text("just now",style: TextStyle(color:AppColors.primary),),
 
                                   ],
                                 ),

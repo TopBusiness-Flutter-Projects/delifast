@@ -15,8 +15,8 @@ class OptionButton extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-           width: 80,
-           height: 80,
+           width: 75.w,
+           height: 80.h,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(
@@ -30,12 +30,14 @@ class OptionButton extends StatelessWidget {
            // size: 32,
           ),
         ),
-        SizedBox(height: 10),
-        Text(
-          label,
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
+       SizedBox(height: 2.h),
+        Flexible(
+          child: Text(
+            label,
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ],

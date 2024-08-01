@@ -24,7 +24,6 @@ class _LoginScreenState extends State<LoginScreen> {
         create: (_) => injector.serviceLocator<LoginCubit>(),
     child: SafeArea(
       child: BlocBuilder<LoginCubit,LoginStates>(
-
         builder: (context, state) {
         LoginCubit cubit = context.read<LoginCubit>();
 
@@ -63,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     size: 20.h,
                                   )),
                               borderRadius: 20,
-                              keyboardType: TextInputType.phone,
+                              keyboardType: TextInputType.emailAddress,
                               controller: cubit.EmailController,
                               validator: (value) => value!.isEmpty ? 'enter_email'.tr() : null,
                             ),
@@ -124,7 +123,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ],
                                   ),
                                 ),
-                                Text(AppLanguages.forgetPassword,style: TextStyle(color:AppColors.red,fontSize: 16.sp))
+                                InkWell(
+                                  onTap: (){
+                                    Navigator.pushNamed(context, Routes.verificationCodeScreenRoute);
+                                  },
+                                    child: Text(AppLanguages.forgetPassword,style: TextStyle(color:AppColors.red,fontSize: 16.sp)))
                               ],
                             ),
                             SizedBox(

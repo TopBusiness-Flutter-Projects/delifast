@@ -13,6 +13,9 @@ class LoginCubit extends Cubit<LoginStates> {
 
   TextEditingController EmailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController ConfirmPasswordController = TextEditingController();
+  TextEditingController newPasswordController = TextEditingController();
+
   bool isHidden = true;
   bool isHiddenNewPass = true;
   bool isHiddenConfirm = true;

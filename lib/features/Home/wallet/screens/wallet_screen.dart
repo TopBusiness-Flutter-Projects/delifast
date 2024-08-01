@@ -67,7 +67,7 @@ class _WalletScreenState extends State<WalletScreen> {
                     color: AppColors.primary,
                   ),
                   // width: double.infinity,
-                  height: 100.h,
+             //     height: 100.h,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,27 +1,22 @@
+import 'package:delifast/core/utils/app_export.dart';
+import 'package:flutter/material.dart';
 import 'package:delifast/core/utils/app_colors.dart';
 import 'package:delifast/features/Home/screens/pick_up.dart';
 import 'package:delifast/features/Home/screens/widgets/buttons_container.dart';
 import 'package:delifast/features/Home/screens/widgets/order_shared.dart';
 import 'package:delifast/features/Home/screens/widgets/package_order.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
-
-import '../../../core/utils/app_export.dart';
-
-
-import 'package:flutter/material.dart';
-
+import '../../../core/utils/assets_manager.dart';
 import '../wallet/screens/wallet_screen.dart';
 import 'drop_off.dart';
 import 'order_screen.dart';
-
-
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
   final List<Map<String, dynamic>> _options = [
-    {'icon': AppImages.walletPhoto, 'label': 'Wallet', 'screen':WalletScreen()},
-    {'icon': AppIcons.Truck, 'label': 'Pick Up', 'screen':PickUpScreen()},
+    {'icon': AppImages.walletPhoto, 'label': 'Wallet', 'screen': WalletScreen()},
+    {'icon': AppIcons.Truck, 'label': 'Pick Up', 'screen': PickUpScreen()},
     {'icon': AppIcons.Drops, 'label': 'Drop Off', 'screen': DropOffScreen()},
     {'icon': AppIcons.History, 'label': 'History', 'screen': OrderScreen()},
   ];
@@ -44,7 +39,7 @@ class HomeScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      width: 120.w,
+                      width: double.infinity,
                       height: 30.h,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30.0),
@@ -53,13 +48,11 @@ class HomeScreen extends StatelessWidget {
                       child: Center(
                         child: Row(
                           children: [
-                            Center(
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Icon(Icons.location_on_rounded, color: AppColors.red),
-                              ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Icon(Icons.location_on_rounded, color: AppColors.red),
                             ),
-                            Center(
+                            Expanded(
                               child: Text(
                                 'Abu Dhabi, UAE',
                                 style: TextStyle(color: Colors.white),
@@ -114,38 +107,39 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      height: 90.h, // Set a fixed height for the ListView
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: _options.length,
-                        itemBuilder: (context, index) {
-                          final option = _options[index];
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => option['screen']),
-                                );
-                              },
-                              child: OptionButton(
-                                icon: option['icon'],
-                                label: option['label'],
-                              ),
+              SizedBox(height: 1.h,),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    height: 100.h,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: _options.length,
+                      itemBuilder: (context, index) {
+                        final option = _options[index];
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => option['screen']),
+                              );
+                            },
+                            child: OptionButton(
+                              icon: option['icon'],
+                              label: option['label'],
                             ),
-                          );
-                        },
-                      ),
+                          ),
+                        );
+                      },
                     ),
-                    SizedBox(height: 24),
-                    Row(
+                  ),
+                  SizedBox(height: 20.h),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
@@ -169,39 +163,45 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: 8),
-                    Container(
-                      height: 120.0.h, // Adjust height as needed for the ListView
-                      child: ListView.builder(
-                        scrollDirection: Axis.vertical, // Change to vertical
-                        itemCount: 2, // Update itemCount to the number of tracking cards
-                        itemBuilder: (context, index) {
-                          return _buildTrackingCard(
-                            "iPhone Pro Max 17 2012",
-                            "Tracking ID: 94929394",
-                          ); // Use dynamic data if available
-                        },
-                      ),
+                  ),
+                  SizedBox(height: 2.h),
+                  Container(
+                    height: 150.0.h,
+                    child: ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      itemCount: 2,
+                      itemBuilder: (context, index) {
+                        return _buildTrackingCard(
+                          "iPhone Pro Max 17 2012",
+                          "Tracking ID: 94929394",
+                        );
+                      },
                     ),
-                    SizedBox(height: 24),
-                    Text(
+                  ),
+                  SizedBox(height: 24),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
                       "Statistics",
                       style: TextStyle(
                         fontSize: 18.sp,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Ordersdashboard(),
-                    Text(
+                  ),
+                  Ordersdashboard(),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
                       "Current Shipment",
                       style: TextStyle(
                         fontSize: 18.sp,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    PackageTrackingCard(),
-                  ],
-                ),
+                  ),
+                  PackageTrackingCard(),
+                ],
               ),
             ],
           ),
@@ -215,13 +215,13 @@ class HomeScreen extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: 15.0),
       child: ListTile(
         leading: Container(
-          padding: EdgeInsets.all(12.0), // Adjust padding as needed
+          padding: EdgeInsets.all(12.0),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: AppColors.redLight, // Red background color
+            color: AppColors.redLight,
           ),
           child: Image.asset(
-            AppIcons.Box, // Update with your image path
+            AppIcons.Box,
           ),
         ),
         title: Text(
@@ -234,5 +234,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-
-
