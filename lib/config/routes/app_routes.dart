@@ -4,18 +4,17 @@ import 'package:delifast/features/main_screen/screens/main_screen.dart';
 import 'package:delifast/features/splash/screens/splash_screen.dart';
 import '../../core/utils/app_strings.dart';
 import 'package:page_transition/page_transition.dart';
-import '../../features/Home/screens/account/screens/about/screens/about_screen.dart';
-import '../../features/Home/screens/account/screens/contact_us/screens/contact_us.dart';
-import '../../features/Home/screens/account/screens/profile/profile.dart';
-import '../../features/Home/screens/home_screen.dart';
-import '../../features/Home/screens/notificationi.dart';
-import '../../features/Home/screens/order_details/screens/order_details.dart';
-import '../../features/Home/screens/order_screen.dart';
-import '../../features/Home/screens/pick_up.dart';
-import '../../features/Home/screens/shipment _status/screens/shipment _status_screen.dart';
-import '../../features/Home/wallet/screens/wallet_screen.dart';
+import '../../features/home/screens/home_screen.dart';
+import '../../features/notifications/screens/notificationi.dart';
+import '../../features/setting/screens/about_screen.dart';
+import '../../features/setting/screens/contact_us.dart';
 import '../../features/login/screens/login_screen.dart';
+import '../../features/order_details/screens/order_details.dart';
+import '../../features/orders/screens/order_screen.dart';
+import '../../features/setting/screens/profile.dart';
+import '../../features/order_details/screens/shipment _status_screen.dart';
 import '../../features/verfication_otp/screens/verfiy_otp.dart';
+import '../../features/home/screens/wallet_screen.dart';
 
 class Routes {
   static const String initialRoute = '/';
@@ -24,19 +23,18 @@ class Routes {
   static const String loginRoute = '/login';
   static const String mainRoute = '/main';
   static const String onboardingPageScreenRoute = '/onboardingPageScreenRoute';
-
   static const String verificationCodeScreenRoute = '/VerificationCodeScreenRoute';
   static const String homeScreenRoutes = '/HomeScreenRoutes';
   static const String ordersRoutes = '/ordersRoutes';
   static const String pickUpRoutes = '/pickUpRoutes';
-  static const String OrdersDetailsRoutes = '/pickUpRoutes';
+  static const String ordersDetailsRoutes = '/pickUpRoutes';
   static const String notificationRoutes = '/notificationRoute';
   static const String profileRoutes = '/profileRoutes';
   static const String contactRoutes = '/contactRoutes';
   static const String aboutRoutes = '/aboutRoutes';
   static const String shipmentRoutes = '/shipmentRoutes';
   static const String walletRoutes = '/walletRoutes';
-  }
+}
 
 class AppRoutes {
   static String route = '';
@@ -47,17 +45,17 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (context) => const SplashScreen(),
         );
-        case Routes.shipmentRoutes:
+      case Routes.shipmentRoutes:
         return MaterialPageRoute(
-          builder: (context) => Shipment_Status (),
+          builder: (context) => const ShipmentStatus(),
         );
-        case Routes.aboutRoutes:
+      case Routes.aboutRoutes:
         return MaterialPageRoute(
           builder: (context) => const AboutScreen(),
         );
-        case Routes.walletRoutes:
+      case Routes.walletRoutes:
         return MaterialPageRoute(
-          builder: (context) =>  WalletScreen(),
+          builder: (context) => const WalletScreen(),
         );
       case Routes.contactRoutes:
         return MaterialPageRoute(
@@ -69,26 +67,17 @@ class AppRoutes {
         );
       case Routes.notificationRoutes:
         return MaterialPageRoute(
-          builder: (context) =>  NotificaionScreen(),
+          builder: (context) => const NotificaionScreen(),
         );
 
-      case Routes.OrdersDetailsRoutes:
+      case Routes.ordersDetailsRoutes:
         return MaterialPageRoute(
           builder: (context) => const orderDetails(),
         );
-      case Routes.pickUpRoutes:
-        return MaterialPageRoute(
-          builder: (context) => const PickUpScreen(),
-        );
       case Routes.ordersRoutes:
         return MaterialPageRoute(
-          builder: (context) =>  const OrderScreen(),
+          builder: (context) => const OrderScreen(isInMainScreen: true,),
         );
-      case Routes.initialRoute:
-        return MaterialPageRoute(
-          builder: (context) => const SplashScreen(),
-        );
-
       // case Routes.detailsRoute:
       //   final service = settings.arguments as ServicesModel;
       //   return MaterialPageRoute(
@@ -99,7 +88,7 @@ class AppRoutes {
       //
       case Routes.loginRoute:
         return PageTransition(
-          child: LoginScreen(),
+          child: const LoginScreen(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 800),
@@ -114,7 +103,7 @@ class AppRoutes {
         );
       case Routes.verificationCodeScreenRoute:
         return PageTransition(
-          child: VerificationCodeScreen(),
+          child: const VerificationCodeScreen(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 800),
@@ -122,12 +111,11 @@ class AppRoutes {
 
       case Routes.mainRoute:
         return PageTransition(
-          child: MainScreen(),
+          child: const MainScreen(),
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 800),
         );
-    
 
       case Routes.onBoarding:
         return MaterialPageRoute(

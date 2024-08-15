@@ -82,7 +82,6 @@
   "privacy": "سياسة الخصوصية",
   "logout": "تسجيل الخروج",
   "lang":"AR",
-  "newPassword": "كلمة مرور جديدة",
   "confirm_password": "تاكيد كلمة المرور",
   "wallet": "محفظتي",
   "subject": "موضوع",
@@ -90,6 +89,17 @@
   "messgae": "رسالتك",
 "history": "التاريخ",
   "shipment_status": "حالة الشحن",
-  "addNotes": "اضافة ملاحظة "
-
+  "addNotes": "اضافة ملاحظة ",
+"verification_code": "كود التحقق",
+  "shipping_status": "حالة الشحن",
+  "track_your_package": "تتبع عنوانك",
+  "please_enter_your_tracking_number": "الرجاء ادخال رقم التتبع الخاص بك",
+  "Enter_tracking_number": "ادخل رقم التتبع",
+  "tracking_history": "تاريخ التتبع",
+  "see_all": "عرض الكل",
+  "statistics": "الاحصائيات",
+  "current_shipment": "الشحن الحالي",
+  "contact_us": "تواصل معنا",
+  "from": "من",
+  "shipped_to": "الشحن الي"
 }

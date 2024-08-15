@@ -1,14 +1,11 @@
 import 'package:delifast/core/utils/app_export.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:delifast/core/utils/app_colors.dart';
 import 'package:delifast/features/main_screen/cubit/cubit.dart';
 import 'package:delifast/features/main_screen/cubit/state.dart';
-
-import '../../Home/screens/account/screens/menu.dart';
-import '../../Home/screens/home_screen.dart';
-import '../../Home/screens/notificationi.dart';
-import '../../Home/screens/order_screen.dart';
+import '../../home/screens/home_screen.dart';
+import '../../notifications/screens/notificationi.dart';
+import '../../delivered/screens/delivered_screen.dart';
+import '../../orders/screens/order_screen.dart';
+import '../../setting/screens/menu.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -25,52 +22,58 @@ class _MainScreenState extends State<MainScreen> {
       _selectedIndex = index;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MainCubit, MainState>(
       builder: (context, state) {
         return SafeArea(
-        child: Scaffold(
-          body: IndexedStack(
-            index: _selectedIndex,
-            children: [
-              HomeScreen(),
-              OrderScreen(),Container(child:Text("hello")),NotificaionScreen(),AccountScreen(),
-
-            ],
+          child: Scaffold(
+            body: IndexedStack(
+              index: _selectedIndex,
+              children: [
+                HomeScreen(),
+                const OrderScreen(
+                  isInMainScreen: true,
+                ),
+                const DeliveredScreen(),
+                const NotificaionScreen(),
+                AccountScreen(),
+              ],
+            ),
+            bottomNavigationBar: BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
+              selectedItemColor: const Color(0xffCE0001),
+              unselectedItemColor: Colors.grey,
+              currentIndex: _selectedIndex,
+              onTap: _onItemTapped,
+              items: [
+                const BottomNavigationBarItem(
+                  icon: Icon(Icons.home),
+                  label: 'Home',
+                ),
+                const BottomNavigationBarItem(
+                  icon: Icon(Icons.list_alt),
+                  label: 'Orders',
+                ),
+                BottomNavigationBarItem(
+                  icon: CircleAvatar(
+                      backgroundColor: AppColors.primary,
+                      child: Image.asset(AppIcons.scanicon,
+                          color: AppColors.white)),
+                  label: 'Delivered',
+                ),
+                const BottomNavigationBarItem(
+                  icon: Icon(Icons.notifications),
+                  label: 'Notifications',
+                ),
+                const BottomNavigationBarItem(
+                  icon: Icon(Icons.person),
+                  label: 'Account',
+                ),
+              ],
+            ),
           ),
-          bottomNavigationBar: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            selectedItemColor: Colors.red,
-            unselectedItemColor: Colors.grey,
-            currentIndex: _selectedIndex,
-            onTap: _onItemTapped,
-            items: [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: 'Home',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.list_alt),
-                label: 'Orders',
-              ),
-              BottomNavigationBarItem(
-                icon: CircleAvatar(
-                  backgroundColor: AppColors.primary,
-                    child: Image.asset(AppIcons.scanicon,color:AppColors.white)),
-                label: 'Delivered',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.notifications),
-                label: 'Notifications',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.person),
-                label: 'Account',
-              ),
-            ],
-          ),
-        ),
         );
       },
     );

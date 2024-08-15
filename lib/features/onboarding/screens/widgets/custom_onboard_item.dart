@@ -1,7 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-
 import '../../../../core/utils/app_export.dart';
 
 class CustomOnboardItem extends StatelessWidget {
@@ -26,18 +23,18 @@ class CustomOnboardItem extends StatelessWidget {
             image,
             height: MediaQuery.of(context).size.width / 1.5,
           ),
-        const SizedBox(
-          height: 20,
+        SizedBox(
+          height: 20.h,
         ),
         Flexible(
           child: Text(
             title.tr(),
             textAlign: TextAlign.center,
-            style: getBoldStyle(fontSize: 22.sp, color: AppColors.red),
+            style: getBoldStyle(fontSize: 20.sp, color: AppColors.red),
           ),
         ),
          SizedBox(
-          height: 5.h,
+          height: 20.h,
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),

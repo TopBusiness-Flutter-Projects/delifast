@@ -84,12 +84,24 @@
     "privacy": "Privacy Policy",
     "logout": "Logout",
     "lang":"EN",
-    "newPassword": "new password",
     "confirm_password": "Confirm Password",
     "wallet": "Wallet",
     "messgae": "Messgae",
     "enterMessgae": "Enter Messgae",
     "history": "History",
     "shipment_status": "Shipment Status",
-    "addNotes": "Add Notes"
+    "addNotes": "Add Notes",
+    "verification_code": "Verification Code",
+    "shipping_status": "Shipping Status",
+    "track_your_package": "Track your package",
+    "please_enter_your_tracking_number": "Please enter your tracking number",
+    "Enter_tracking_number":"Enter tracking number",
+    "tracking_history": "Tracking History",
+    "see_all": "See All",
+    "statistics": "Statistics",
+    "current_shipment":"Current Shipment",
+    "contact_us": "Contact us",
+    "from": "From",
+    "shipped_to": "Shipped to"
+
 }
