@@ -102,5 +102,8 @@
   "contact_us": "تواصل معنا",
   "from": "من",
   "shipped_to": "الشحن الي",
-  "otal"
+  "orders": "الطلبات",
+  "data_filter": "ترتيب البيانات",
+  "status_filter": "ترتيب الحالة",
+  "my_balance": "رصيدى"
 }

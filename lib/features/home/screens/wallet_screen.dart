@@ -87,7 +87,7 @@ class _WalletScreenState extends State<WalletScreen> {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                "My Balance",
+                                "my_balance".tr(),
                                 style: TextStyle(
                                     color: AppColors.white,
                                     fontSize: 20.sp,

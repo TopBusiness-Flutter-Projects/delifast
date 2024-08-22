@@ -1,16 +1,10 @@
 // ignore_for_file: prefer_interpolation_to_compose_strings, avoid_print, unnecessary_brace_in_string_interps
 
-import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
-import 'package:easy_localization/easy_localization.dart';
+
 
 import 'package:odoo_rpc/odoo_rpc.dart';
-
 import '../api/base_api_consumer.dart';
 import '../api/end_points.dart';
-import '../error/exceptions.dart';
-import '../error/failures.dart';
-import '../models/login_model.dart';
 import '../preferences/preferences.dart';
 
 class ServiceApi {

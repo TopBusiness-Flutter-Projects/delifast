@@ -69,7 +69,7 @@ dependencies:
   qr_code_scanner: ^1.0.1
   ai_barcode: ^3.2.7
   ai_barcode_scanner: ^3.4.3
-  odoo_rpc: 
+  odoo_rpc: ^0.5.4 
   flutter_html:
 dev_dependencies:
   flutter_test:
