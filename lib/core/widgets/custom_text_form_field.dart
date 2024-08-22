@@ -70,7 +70,9 @@ class _CustomTextField2State extends State<CustomTextField2> {
             controller: widget.controller,
             expands: false,
             onTap: widget.onTap,
-            onTapOutside: (event) {FocusManager.instance.primaryFocus?.unfocus();},
+            onTapOutside: (event) {
+              FocusManager.instance.primaryFocus?.unfocus();
+            },
             focusNode: myFocusNode,
             style: getBoldStyle(),
             onChanged: widget.onChanged,
@@ -87,7 +89,8 @@ class _CustomTextField2State extends State<CustomTextField2> {
                 fillColor: AppColors.white,
                 labelText: widget.labelText,
                 labelStyle: getRegularStyle(
-                    fontHeight: 1.5, color:
+                    fontHeight: 1.5,
+                    color:
                         myFocusNode.hasFocus ? AppColors.gray : AppColors.gray),
                 prefixIcon: widget.prefixIcon,
                 // prefixIconColor: myFocusNode.hasFocus ? ColorManager.primary : ColorManager.primaryGrey,
