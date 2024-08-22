@@ -8,6 +8,7 @@ import '../api/base_api_consumer.dart';
 import '../api/end_points.dart';
 import '../error/exceptions.dart';
 import '../error/failures.dart';
+import '../models/login_model.dart';
 import '../models/order_model.dart';
 import '../preferences/preferences.dart';
 
@@ -21,6 +22,7 @@ class ServiceApi {
       final odoResponse =
           await odoo.authenticate(database ?? EndPoints.db, "admin", "admin");
 
+      ///! a250de4222bacb0355f3bee5df6efa04542c5549
       final sessionId = odoResponse.id;
       print("getSessionId = $sessionId");
       await Preferences.instance.setSessionId(sessionId);
@@ -32,27 +34,50 @@ class ServiceApi {
     }
   }
 
-  Future<Either<Failure, MainOrderModel>> getOrders({
+  Future<Either<ServerFailure, AuthModel>> login(
+      String phoneOrMail, String password) async {
+    String sessionIddd = await getSessionId();
+    if (sessionIddd == 'error') {
+      return Left(ServerFailure(message: "server_error".tr()));
+    } else {
+      try {
+        final response = await dio.post(
+          EndPoints.auth,
+          options: Options(
+            headers: {"Cookie": "frontend_lang=en_US;session_id=$sessionIddd"},
+          ),
+          body: {
+            "params": {
+              'login': phoneOrMail,
+              "password": password,
+              "db": EndPoints.db
+            },
+          },
+        );
+        return Right(AuthModel.fromJson(response));
+      } on ServerException catch (e) {
+        return Left(ServerFailure(message: e.toString()));
+      }
+    }
+  }
 
-    String? state
-  }) async {
-    print('${  EndPoints.ordersUrl +
+  Future<Either<Failure, MainOrderModel>> getOrders({String? state}) async {
+    print(EndPoints.ordersUrl +
         (state != null
-            ? ('filter=[["user_id", "=", 12],["state_id", "=", "${state}"]]&query={id,name,sender_street,sender_mobile,receiver_street,receiver_mobile,total_charge_amount,notes,courier_lines,state_id}')
-            : ('filter=[["user_id", "=", 12]]&query={id,name,sender_street,sender_mobile,receiver_street,receiver_mobile,total_charge_amount,notes,courier_lines,state_id}'))
-        }');
+            ? ('filter=[["user_id", "=", 12],["state_id", "=", "New"]]&query={id,name,sender_street,sender_mobile,receiver_street,receiver_mobile,total_charge_amount,notes,courier_lines,state_id}')
+            : ('filter=[["user_id", "=", 12]]&query={id,name,sender_street,sender_mobile,receiver_street,receiver_mobile,total_charge_amount,notes,courier_lines,state_id,category_id}')));
     try {
-      String userId = await Preferences.instance.getUserId() ?? "1";
-      print("lllllllllll${userId}");
+      // String userId = await Preferences.instance.getUserId() ?? "1";
+      // print("lllllllllll${userId}");
 
       String? sessionId = await Preferences.instance.getSessionId();
       final response = await dio.get(
         EndPoints.ordersUrl +
             (state != null
                 ? ('filter=[["user_id", "=", 12],["state_id", "=", "${state}"]]&query={id,name,sender_street,sender_mobile,receiver_street,receiver_mobile,total_charge_amount,notes,courier_lines,state_id}')
-                : ('filter=[["user_id", "=", 12]]&query={id,name,sender_street,sender_mobile,receiver_street,receiver_mobile,total_charge_amount,notes,courier_lines,state_id}')),
+                : ('filter=[["user_id", "=", 12]]&query={id,name,sender_street,sender_mobile,receiver_street,receiver_mobile,total_charge_amount,notes,courier_lines,state_id,category_id}')),
         options: Options(
-          headers: {"Cookie": "frontend_lang=en_US;session_id=$sessionId"},
+          headers: {"Cookie": "frontend_lang=en_US;session_id=a8af99171ec4c7e7afef224de8fef6a2080b74b7"},
         ),
       );
       return Right(MainOrderModel.fromJson(response));

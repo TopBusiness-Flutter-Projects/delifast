@@ -79,10 +79,13 @@ class _OrderScreenHomeState extends State<OrderScreenHome> {
                     return InkWell(
                         onTap: () {
                           Navigator.pushNamed(
-                              context, Routes.ordersDetailsRoutes);
+                              context, Routes.ordersDetailsRoutes, arguments: {
+                            cubit.mainOrderModelFilter?.result?[index].name
+                          });
                         },
                         child: PackageTrackingCard(
-                          orderModel: cubit.mainOrderModelFilter?.result?[index],
+                          orderModel:
+                              cubit.mainOrderModelFilter?.result?[index],
                         ));
                   },
                   itemCount: cubit.mainOrderModelFilter?.result?.length,

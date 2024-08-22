@@ -1,4 +1,3 @@
-import 'package:delifast/core/preferences/preferences.dart';
 import 'package:delifast/core/remote/service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,7 +14,7 @@ class SplashCubit extends Cubit<SplashState> {
     emit(SplashLoading());
 
     final res = await api.getSessionId();
-print('res : $res');
+    print('res : $res');
     // if (res == 'error') {
     //   // Preferences.instance.setSessionId('');
     //   emit(SplashError());

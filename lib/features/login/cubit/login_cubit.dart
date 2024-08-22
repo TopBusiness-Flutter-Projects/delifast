@@ -1,6 +1,9 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:delifast/core/models/login_model.dart';
+import 'package:delifast/core/preferences/preferences.dart';
 import 'package:delifast/core/remote/service.dart';
+import 'package:delifast/core/utils/appwidget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/utils/app_export.dart';
@@ -23,43 +26,72 @@ class LoginCubit extends Cubit<LoginStates> {
     isHidden = !isHidden;
     emit(changePasswordState()); // Trigger a rebuild by emitting a new state
   }
+
   void togglePasswordVisibility2() {
     isHiddenNewPass = !isHiddenNewPass;
     emit(changePasswordState()); // Trigger a rebuild by emitting a new state
   }
+
   void togglePasswordVisibility3() {
     isHiddenConfirm = !isHiddenConfirm;
     emit(changePasswordState()); // Trigger a rebuild by emitting a new state
   }
 
-  Future<void> login() async {
-    // if (formKey.currentState!.validate()) {
-    //   // Perform login with API
-    //   final result = await api.login(phoneNumberController.text, passwordController.text);
-    //
-    //   if (result.isSuccess) {
-    //     emit(LoginSuccessState());
-    //     clearControllers(); // Clear the controllers after successful login
-    //   } else {
-    //     emit(LoginFailureState(result.error));
-    //   }
-    // }
+  AuthModel? authModel;
+
+  Future<String> setSessionId() async {
+    String mySessionId = await api.getSessionId();
+
+    return mySessionId;
   }
+
+  login(BuildContext context,
+      {required String phoneOrMail, required String password}) async {
+    emit(LoadingLoginState());
+    AppWidget.createProgressDialog(context, 'انتظر');
+    final response = await api.login(phoneOrMail, password);
+    response.fold((l) {
+      Navigator.pop(context);
+      errorGetBar(l.message ?? '');
+      emit(FailureLoginState());
+    }, (r) async {
+      if (r.result != null) {
+        authModel = r;
+        // String sessionId =
+        //     await api.getSessionId(phone: "admin", password: "admin");
+        emit(SuccessLoginState());
+        await Preferences.instance
+            .setSessionId("07ae3f8fc94837d3915c99466591fc60664baf6e");
+        await Preferences.instance.setUserName(phoneOrMail);
+        await Preferences.instance.setUserPass(password);
+        Navigator.pop(context);
+        Preferences.instance.setUserId(r.result!.userContext!.uid.toString());
+        Navigator.pushNamedAndRemoveUntil(
+            context, Routes.mainRoute, (route) => false);
+      } else {
+        errorGetBar("حدث خطأ ما");
+        Navigator.pop(context);
+      }
+    });
+  }
+
   void closeControllers() {
     EmailController.dispose();
     passwordController.dispose();
   }
-  void signupValidate( BuildContext context) {
+
+  void signupValidate(BuildContext context) {
     if (formKey.currentState!.validate()) {
-    //  login();
-      Navigator.pushNamedAndRemoveUntil(context,
-          Routes.mainRoute, (route) => false);
+      login(context,
+          phoneOrMail: EmailController.text, password: passwordController.text);
     }
   }
+
   void clearControllers() {
     EmailController.clear();
     passwordController.clear();
   }
+
   @override
   Future<void> close() {
     closeControllers();

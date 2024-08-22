@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
 
 part 'order_details_state.dart';
+
 //
 class OrderDetailsCubit extends Cubit<OrderDetailsState> {
   OrderDetailsCubit() : super(OrderDetailsInitial());
