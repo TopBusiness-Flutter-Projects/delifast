@@ -169,7 +169,7 @@ class ServiceApi {
 //     } on ServerException {
 //       return Left(ServerFailure());
 //     }
-//   }
+//   }//
 //
 //   Future<Either<Failure, HomeModel>> homeData() async {
 //     LoginModel loginModel = await Preferences.instance.getUserModel();
