@@ -10,7 +10,7 @@ class CustomTextField2 extends StatefulWidget {
   final String? initialValue;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
-  final double? borderRadius;//
+  final double? borderRadius;// //
 
   final bool isMessage;
   final bool isPassword;
