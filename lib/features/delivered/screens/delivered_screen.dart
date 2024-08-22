@@ -1,5 +1,6 @@
 import 'package:ai_barcode_scanner/ai_barcode_scanner.dart';
 import 'package:delifast/core/utils/app_colors.dart';
+import 'package:delifast/features/order_details/screens/order_details.dart';
 import 'package:flutter/material.dart';
 
 class DeliveredScreen extends StatefulWidget {
@@ -29,9 +30,7 @@ class _DeliveredScreenState extends State<DeliveredScreen> {
                 final String? scannedValue = await Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => AiBarcodeScanner(
-                      onScan: (p0) {
-
-                      },
+                      onScan: (p0) {},
                       onDispose: () {
                         debugPrint("Barcode scanner disposed!");
                       },
@@ -39,7 +38,8 @@ class _DeliveredScreenState extends State<DeliveredScreen> {
                         detectionSpeed: DetectionSpeed.noDuplicates,
                       ),
                       onDetect: (BarcodeCapture capture) {
-                        final String? scannedValue = capture.barcodes.first.rawValue;
+                        final String? scannedValue =
+                            capture.barcodes.first.rawValue;
                         debugPrint("Barcode scanned: $scannedValue");
 
                         // Update the barcode value and pop back to the previous screen
@@ -57,7 +57,17 @@ class _DeliveredScreenState extends State<DeliveredScreen> {
                 }
               },
             ),
-            Text(barcode),
+            GestureDetector(
+                onTap: () {
+                  //!
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => orderDetails(
+                                barcode: barcode,
+                              )));
+                },
+                child: Text(barcode)),
           ],
         ),
       ),

@@ -23,7 +23,8 @@ class Routes {
   static const String loginRoute = '/login';
   static const String mainRoute = '/main';
   static const String onboardingPageScreenRoute = '/onboardingPageScreenRoute';
-  static const String verificationCodeScreenRoute = '/VerificationCodeScreenRoute';
+  static const String verificationCodeScreenRoute =
+      '/VerificationCodeScreenRoute';
   static const String homeScreenRoutes = '/HomeScreenRoutes';
   static const String ordersRoutes = '/ordersRoutes';
   static const String pickUpRoutes = '/pickUpRoutes';
@@ -71,12 +72,16 @@ class AppRoutes {
         );
 
       case Routes.ordersDetailsRoutes:
+        String? barcode = settings.arguments as String;
+
         return MaterialPageRoute(
-          builder: (context) => const orderDetails(),
+          builder: (context) => orderDetails(barcode: barcode),
         );
       case Routes.ordersRoutes:
         return MaterialPageRoute(
-          builder: (context) => const OrderScreen(isInMainScreen: true,),
+          builder: (context) => const OrderScreen(
+            isInMainScreen: true,
+          ),
         );
       // case Routes.detailsRoute:
       //   final service = settings.arguments as ServicesModel;

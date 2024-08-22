@@ -27,6 +27,7 @@ class ServiceApi {
       final odoResponse =
           await odoo.authenticate(database ?? EndPoints.db, phone, password);
 
+      ///! a250de4222bacb0355f3bee5df6efa04542c5549
       final sessionId = odoResponse.id;
       print("getSessionId = $sessionId");
       await Preferences.instance.setSessionId(sessionId);
@@ -724,7 +725,7 @@ class ServiceApi {
 //               "filter": [
 //                 ["id", "=", int.parse(userId)]
 //               ],
-//               "data": {    
+//               "data": {
 //             "favorite_user_ids": newFavouriteList
 //         }
 //             }
@@ -815,5 +816,4 @@ class ServiceApi {
 //       return Left(ServerFailure());
 //     }
 //   }
-
 }
