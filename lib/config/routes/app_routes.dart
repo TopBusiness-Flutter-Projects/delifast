@@ -72,7 +72,7 @@ class AppRoutes {
         );
 
       case Routes.ordersDetailsRoutes:
-        String? barcode = settings.arguments as String;
+        dynamic barcode = settings.arguments as dynamic;
 
         return MaterialPageRoute(
           builder: (context) => orderDetails(barcode: barcode),

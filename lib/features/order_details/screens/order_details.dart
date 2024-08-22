@@ -6,8 +6,8 @@ import '../../../core/widgets/custom_note.dart';
 import '../cubit/order_details_cubit.dart';
 
 class orderDetails extends StatefulWidget {
-  orderDetails({super.key, this.barcode});
-  String? barcode;
+  orderDetails({super.key, this.barcode = ''});
+  dynamic? barcode;
   @override
   _orderDetailsState createState() => _orderDetailsState();
 }
@@ -193,146 +193,146 @@ class _orderDetailsState extends State<orderDetails> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16.0,
-                  ),
-                  child: Row(
-                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Flexible(
-                        child: InkWell(
-                          onTap: () async {
-                            cubit.pickLogoImage();
-                          },
-                          child: Row(
-                            children: [
-                              Icon(Icons.camera_alt, color: AppColors.red),
-                              SizedBox(
-                                width: 2.w,
-                              ),
-                              Flexible(
-                                  child: Text("Add Photo",
-                                      style: TextStyle(
-                                          color: AppColors.red,
-                                          fontSize: 12.sp))),
-                            ],
-                          ),
-                        ),
-                      ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(
+                //     horizontal: 16.0,
+                //   ),
+                //   child: Row(
+                //     // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //     children: [
+                //       Flexible(
+                //         child: InkWell(
+                //           onTap: () async {
+                //             cubit.pickLogoImage();
+                //           },
+                //           child: Row(
+                //             children: [
+                //               Icon(Icons.camera_alt, color: AppColors.red),
+                //               SizedBox(
+                //                 width: 2.w,
+                //               ),
+                //               Flexible(
+                //                   child: Text("Add Photo",
+                //                       style: TextStyle(
+                //                           color: AppColors.red,
+                //                           fontSize: 12.sp))),
+                //             ],
+                //           ),
+                //         ),
+                //       ),
 
-                      // SizedBox(width: 10.w,),
-                      Flexible(
-                        child: Row(
-                          children: [
-                            Icon(Icons.note_alt, color: AppColors.red),
-                            //    Flexible(child: Image.asset(AppImages.location)),
-                            SizedBox(
-                              width: 2.w,
-                            ),
-                            Flexible(
-                                child: InkWell(
-                                    onTap: () {
-                                      showModalBottomSheet(
-                                        context: context,
-                                        isScrollControlled:
-                                            true, // This is important to make the bottom sheet adjustable
-                                        builder: (BuildContext context) {
-                                          return Container(
-                                            // height:
-                                            // MediaQuery.of(context).size.width * 1.4,
-                                            padding: EdgeInsets.only(
-                                              left: 16.0,
-                                              right: 16.0,
-                                              top: 16.0,
-                                              bottom: MediaQuery.of(context)
-                                                      .viewInsets
-                                                      .bottom +
-                                                  16.0, // Adjust padding to account for the keyboard
-                                            ),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(3.0),
-                                                  child: TextField(
-                                                    maxLines: 4,
-                                                    controller: EmailController,
-                                                    onSubmitted:
-                                                        (data) async {},
-                                                    decoration: InputDecoration(
-                                                      hintText:
-                                                          "SendMessage".tr(),
-                                                      filled: true,
+                //       // SizedBox(width: 10.w,),
+                //       // Flexible(
+                //       //   child: Row(
+                //       //     children: [
+                //       //       Icon(Icons.note_alt, color: AppColors.red),
+                //       //       //    Flexible(child: Image.asset(AppImages.location)),
+                //       //       SizedBox(
+                //       //         width: 2.w,
+                //       //       ),
+                //       //       Flexible(
+                //       //           child: InkWell(
+                //       //               onTap: () {
+                //       //                 showModalBottomSheet(
+                //       //                   context: context,
+                //       //                   isScrollControlled:
+                //       //                       true, // This is important to make the bottom sheet adjustable
+                //       //                   builder: (BuildContext context) {
+                //       //                     return Container(
+                //       //                       // height:
+                //       //                       // MediaQuery.of(context).size.width * 1.4,
+                //       //                       padding: EdgeInsets.only(
+                //       //                         left: 16.0,
+                //       //                         right: 16.0,
+                //       //                         top: 16.0,
+                //       //                         bottom: MediaQuery.of(context)
+                //       //                                 .viewInsets
+                //       //                                 .bottom +
+                //       //                             16.0, // Adjust padding to account for the keyboard
+                //       //                       ),
+                //       //                       child: Column(
+                //       //                         mainAxisSize: MainAxisSize.min,
+                //       //                         children: [
+                //       //                           Padding(
+                //       //                             padding:
+                //       //                                 const EdgeInsets.all(3.0),
+                //       //                             child: TextField(
+                //       //                               maxLines: 4,
+                //       //                               controller: EmailController,
+                //       //                               onSubmitted:
+                //       //                                   (data) async {},
+                //       //                               decoration: InputDecoration(
+                //       //                                 hintText:
+                //       //                                     "SendMessage".tr(),
+                //       //                                 filled: true,
 
-                                                      fillColor: Colors.grey[
-                                                          200], // Set the background color to grey
-                                                      contentPadding:
-                                                          const EdgeInsets
-                                                              .symmetric(
-                                                        vertical: 10,
-                                                        horizontal: 15,
-                                                      ), // Adjust the content padding
-                                                      border:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(15),
-                                                        borderSide: BorderSide
-                                                            .none, // Remove the border color
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                                SizedBox(height: 20.sp),
-                                                // ElevatedButton(
-                                                //   onPressed: () {},
-                                                //   child: Text('SendReply'.tr()),
-                                                // ),
-                                                CustomButton(
-                                                  text: "addNotes".tr(),
-                                                  onPressed: () {},
-                                                  width: 100.w,
-                                                )
-                                              ],
-                                            ),
-                                          );
-                                        },
-                                      );
-                                    },
-                                    child: Text("addNotes".tr(),
-                                        style: TextStyle(
-                                            color: AppColors.red,
-                                            fontSize: 12.sp)))),
-                          ],
-                        ),
-                      ),
-                      //
-                      // ///
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                GridView.builder(
-                  physics:
-                      const NeverScrollableScrollPhysics(), // Disable GridView's own scrolling
-                  shrinkWrap: true,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, // Number of items in each row
-                    crossAxisSpacing:
-                        10, // Spacing between each item horizontally
-                    mainAxisSpacing: 10, // Spacing between each item vertically
-                  ),
-                  itemCount: 3,
-                  itemBuilder: (BuildContext context, int index) {
-                    return const CustomNoteWidget(
-                      isText: false,
-                    );
-                  },
-                )
+                //       //                                 fillColor: Colors.grey[
+                //       //                                     200], // Set the background color to grey
+                //       //                                 contentPadding:
+                //       //                                     const EdgeInsets
+                //       //                                         .symmetric(
+                //       //                                   vertical: 10,
+                //       //                                   horizontal: 15,
+                //       //                                 ), // Adjust the content padding
+                //       //                                 border:
+                //       //                                     OutlineInputBorder(
+                //       //                                   borderRadius:
+                //       //                                       BorderRadius
+                //       //                                           .circular(15),
+                //       //                                   borderSide: BorderSide
+                //       //                                       .none, // Remove the border color
+                //       //                                 ),
+                //       //                               ),
+                //       //                             ),
+                //       //                           ),
+                //       //                           SizedBox(height: 20.sp),
+                //       //                           // ElevatedButton(
+                //       //                           //   onPressed: () {},
+                //       //                           //   child: Text('SendReply'.tr()),
+                //       //                           // ),
+                //       //                           CustomButton(
+                //       //                             text: "addNotes".tr(),
+                //       //                             onPressed: () {},
+                //       //                             width: 100.w,
+                //       //                           )
+                //       //                         ],
+                //       //                       ),
+                //       //                     );
+                //       //                   },
+                //       //                 );
+                //       //               },
+                //       //               child: Text("addNotes".tr(),
+                //       //                   style: TextStyle(
+                //       //                       color: AppColors.red,
+                //       //                       fontSize: 12.sp)))),
+                //       //     ],
+                //       //   ),
+                //       // ),
+                //       //
+                //       // ///
+                //     ],
+                //   ),
+                // ),
+                // SizedBox(
+                //   height: 10.h,
+                // ),
+                // GridView.builder(
+                //   physics:
+                //       const NeverScrollableScrollPhysics(), // Disable GridView's own scrolling
+                //   shrinkWrap: true,
+                //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                //     crossAxisCount: 2, // Number of items in each row
+                //     crossAxisSpacing:
+                //         10, // Spacing between each item horizontally
+                //     mainAxisSpacing: 10, // Spacing between each item vertically
+                //   ),
+                //   itemCount: 3,
+                //   itemBuilder: (BuildContext context, int index) {
+                //     return const CustomNoteWidget(
+                //       isText: false,
+                //     );
+                //   },
+                // )
               ],
             ),
           )

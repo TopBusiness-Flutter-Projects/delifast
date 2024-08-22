@@ -6,13 +6,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/utils/app_export.dart';
 
 class PackageTrackingCard extends StatelessWidget {
-  const PackageTrackingCard({super.key,  this.orderModel});
-   final OrderModel? orderModel;
+  const PackageTrackingCard({super.key, this.orderModel});
+  final OrderModel? orderModel;
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, Routes.ordersDetailsRoutes);
+        Navigator.pushNamed(context, Routes.ordersDetailsRoutes,
+            arguments: {orderModel?.name});
       },
       child: Container(
         decoration: BoxDecoration(
@@ -47,12 +48,12 @@ class PackageTrackingCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        orderModel?.id.toString()??'',
+                        orderModel?.id.toString() ?? '',
                         style: TextStyle(
                             fontSize: 18.sp, fontWeight: FontWeight.bold),
                       ),
-                       Text(   orderModel?.name.toString()??''
-                       ,
+                      Text(
+                        orderModel?.name.toString() ?? '',
                         style: TextStyle(color: Colors.grey),
                       ),
                     ],
@@ -64,7 +65,7 @@ class PackageTrackingCard extends StatelessWidget {
                 icon: Icons.radio_button_checked_rounded,
                 color: Colors.grey,
                 text: "from".tr(),
-                location: orderModel?.senderMobile.toString()??'',
+                location: orderModel?.senderMobile.toString() ?? '',
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,7 +83,7 @@ class PackageTrackingCard extends StatelessWidget {
                       Text("shipped_to".tr(),
                           style: const TextStyle(color: Colors.grey)),
                       SizedBox(height: 4.h),
-                      Text(orderModel?.receiverMobile.toString()??'',
+                      Text(orderModel?.receiverMobile.toString() ?? '',
                           style: TextStyle(fontWeight: FontWeight.bold)),
                     ],
                   ),
@@ -95,8 +96,8 @@ class PackageTrackingCard extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.all(8.0.sp),
-                child:  Text(
-                  'Status: Your package is new${orderModel?.stateId?.toString()??''}',
+                child: Text(
+                  'Status: Your package is new${orderModel?.stateId?.toString() ?? ''}',
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
@@ -146,7 +147,3 @@ class PackageTrackingCard extends StatelessWidget {
     );
   }
 }
-
-
-
-

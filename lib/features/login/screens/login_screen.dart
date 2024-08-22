@@ -55,7 +55,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 hintText: "email@yourdomain.com",
                                 suffixIcon: Icon(
                                   isEmailValid ? Icons.check : Icons.email,
-                                  color: isEmailValid ? Colors.green : AppColors.red,
+                                  color: isEmailValid
+                                      ? Colors.green
+                                      : AppColors.red,
                                   size: 20.h,
                                 ),
                                 borderRadius: 20,
@@ -64,19 +66,21 @@ class _LoginScreenState extends State<LoginScreen> {
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return 'enter_email'.tr();
-                                  } else if (!RegExp(
-                                      r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$')
-                                      .hasMatch(value)) {
-                                    return 'invalid_email'.tr();
+                                    // } else if (!RegExp(
+                                    //     r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$')
+                                    //     .hasMatch(value)) {
+                                    //   return 'invalid_email'.tr();
+                                    // }
                                   }
+                                 else
                                   return null;
                                 },
                                 onChanged: (value) {
-                                  setState(() {
-                                    isEmailValid = RegExp(
-                                        r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$')
-                                        .hasMatch(value);
-                                  });
+                                  // setState(() {
+                                  //   isEmailValid = RegExp(
+                                  //           r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$')
+                                  //       .hasMatch(value);
+                                  // });
                                 },
                               ),
                               SizedBox(height: 15.h),
@@ -101,16 +105,17 @@ class _LoginScreenState extends State<LoginScreen> {
                                 borderRadius: 20,
                                 validator: (value) {
                                   if (value!.isEmpty) {
-                                    return 'enterPassword'.tr();
-                                  } else if (value.length < 8) {
-                                    return 'password_too_short'.tr();
+                                    return 'enter_password'.tr();
                                   }
+                                  //  else if (value.length < 8) {
+                                  //   return 'password_too_short'.tr();
+                                  // }
                                   return null;
                                 },
                                 onChanged: (value) {
-                                  setState(() {
-                                    isPasswordValid = value.length >= 8;
-                                  });
+                                  // setState(() {
+                                  //   isPasswordValid = value.length >= 8;
+                                  // });
                                 },
                               ),
                               SizedBox(height: 10.h),
@@ -121,7 +126,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                       children: [
                                         Padding(
                                           padding: const EdgeInsets.all(8.0),
-                                          child: Image.asset(AppIcons.checkIcon),
+                                          child:
+                                              Image.asset(AppIcons.checkIcon),
                                         ),
                                         Text(
                                           AppLanguages.remember_me,
@@ -153,7 +159,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   text: AppLanguages.sign_in,
                                   buttonColor: AppColors.primaryButton,
                                   onPressed: () {
-                                    if (cubit.formKey.currentState!.validate()) {
+                                    if (cubit.formKey.currentState!
+                                        .validate()) {
                                       cubit.signupValidate(context);
                                     }
                                   },

@@ -8,6 +8,7 @@ import '../api/base_api_consumer.dart';
 import '../api/end_points.dart';
 import '../error/exceptions.dart';
 import '../error/failures.dart';
+import '../models/login_model.dart';
 import '../models/order_model.dart';
 import '../preferences/preferences.dart';
 
@@ -33,15 +34,42 @@ class ServiceApi {
     }
   }
 
-  Future<Either<Failure, MainOrderModel>> getOrders({
+  Future<Either<ServerFailure, AuthModel>> login(
+      String phoneOrMail, String password) async {
+    // String sessionIddd =
+    //     await getSessionId(phone: phoneOrMail, password: password);
+    //  / if (sessionIddd == 'error') {
+    //     return Left(ServerFailure(message: "server_error".tr()));
+    //   } else {
+    try {
+      final response = await dio.post(
+        EndPoints.auth,
+        options: Options(
+          headers: {
+            "Cookie":
+                "frontend_lang=en_US;session_id=07ae3f8fc94837d3915c99466591fc60664baf6e"
+          },
+        ),
+        body: {
+          "params": {
+            'login': phoneOrMail,
+            "password": password,
+            "db": EndPoints.db
+          },
+        },
+      );
+      return Right(AuthModel.fromJson(response));
+    } on ServerException catch (e) {
+      return Left(ServerFailure(message: e.toString()));
+    }
+    //}
+  }
 
-    String? state
-  }) async {
-    print('${  EndPoints.ordersUrl +
+  Future<Either<Failure, MainOrderModel>> getOrders({String? state}) async {
+    print(EndPoints.ordersUrl +
         (state != null
             ? ('filter=[["user_id", "=", 12],["state_id", "=", "${state}"]]&query={id,name,sender_street,sender_mobile,receiver_street,receiver_mobile,total_charge_amount,notes,courier_lines,state_id}')
-            : ('filter=[["user_id", "=", 12]]&query={id,name,sender_street,sender_mobile,receiver_street,receiver_mobile,total_charge_amount,notes,courier_lines,state_id}'))
-        }');
+            : ('filter=[["user_id", "=", 12]]&query={id,name,sender_street,sender_mobile,receiver_street,receiver_mobile,total_charge_amount,notes,courier_lines,state_id}')));
     try {
       String userId = await Preferences.instance.getUserId() ?? "1";
       print("lllllllllll${userId}");

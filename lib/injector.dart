@@ -23,11 +23,10 @@ Future<void> setup() async {
   serviceLocator.registerFactory(
     () => SplashCubit(
       serviceLocator(),
-
     ),
   );
   serviceLocator.registerFactory(
-        () => OrderDetailsCubit(),
+    () => OrderDetailsCubit(),
   );
 
   serviceLocator.registerFactory(
@@ -41,7 +40,7 @@ Future<void> setup() async {
     ),
   );
   serviceLocator.registerFactory(
-        () => OrdersCubit(
+    () => OrdersCubit(
       serviceLocator(),
     ),
   );
@@ -68,14 +67,11 @@ Future<void> setup() async {
       ),
     ),
   );
-  serviceLocator.registerLazySingleton(
-    () => LogInterceptor(
+  serviceLocator.registerLazySingleton(() => LogInterceptor(
       request: true,
       requestBody: true,
       requestHeader: true,
       responseBody: true,
       responseHeader: true,
-      error: true,
-    ),
-  );
+      error: true));
 }
