@@ -1,6 +1,5 @@
 import 'package:delifast/core/utils/app_export.dart';
 import 'package:easy_localization/easy_localization.dart';
-import '../../../core/widgets/package_order.dart';
 import '../../order_details/screens/widget/shipment_widget.dart';
 class DropOffScreen extends StatefulWidget {
   const DropOffScreen({super.key});
@@ -90,7 +89,7 @@ class _DropOffScreenState extends State<DropOffScreen> {
         }
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
         decoration: BoxDecoration(
           border: Border.all(color: Colors.grey[300]!),
           borderRadius: BorderRadius.circular(20),
@@ -101,7 +100,7 @@ class _DropOffScreenState extends State<DropOffScreen> {
             Text(
               selectedDate != null
                   ? '${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}'
-                  : 'Date Filter',
+                  : "data_filter".tr(),
               style: TextStyle(
                 color: Colors.grey[600],
                 fontSize: 16.sp,

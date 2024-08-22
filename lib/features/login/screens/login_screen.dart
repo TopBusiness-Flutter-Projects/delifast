@@ -101,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 borderRadius: 20,
                                 validator: (value) {
                                   if (value!.isEmpty) {
-                                    return 'enter_password'.tr();
+                                    return 'enterPassword'.tr();
                                   } else if (value.length < 8) {
                                     return 'password_too_short'.tr();
                                   }

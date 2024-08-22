@@ -88,7 +88,7 @@ class _OrderScreenState extends State<OrderScreen> {
       child: DropdownButton<String>(
         isExpanded: true,
         value: selectedStatus,
-        hint: Text('Status Filter', style: TextStyle(color: Colors.grey[600],
+        hint: Text("status_filter".tr(), style: TextStyle(color: Colors.grey[600],
             fontSize: 14.sp)),
         underline: const SizedBox(),
         icon: Icon(Icons.arrow_drop_down, color: Colors.grey[600]),
@@ -135,7 +135,7 @@ class _OrderScreenState extends State<OrderScreen> {
             Text(
               selectedDate != null
                   ? '${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}'
-                  : 'Date Filter',
+                  : "data_filter".tr(),
               style: TextStyle(
                 color: Colors.grey[600],
                 fontSize: 16.sp,
