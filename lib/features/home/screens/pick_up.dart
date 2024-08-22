@@ -1,7 +1,5 @@
 import 'package:delifast/core/utils/app_export.dart';
 import 'package:easy_localization/easy_localization.dart';
-
-import '../../../core/widgets/package_order.dart';
 import '../../order_details/screens/widget/shipment_widget.dart';
 
 
@@ -104,7 +102,7 @@ class _PickUpScreenState extends State<PickUpScreen> {
             Text(
               selectedDate != null
                   ? '${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}'
-                  : 'Date Filter',
+                  : "data_filter".tr(),
               style: TextStyle(
                 color: Colors.grey[600],
                 fontSize: 16.sp,
