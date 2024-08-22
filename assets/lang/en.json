@@ -105,6 +105,10 @@
     "shipped_to": "Shipped to",
     "data_filter": "Data Filter",
     "status_filter": "Status Filter",
-    "my_balance": "My Balance"
+    "my_balance": "My Balance",
+    "Notifications": "Notifications",
+    "Account": "Account",
+    "Delivered" : "Delivered",
+    "Orders": "Orders"
 
 }

@@ -34,6 +34,7 @@ class OptionButton extends StatelessWidget {
         Flexible(
           child: Text(
             label,
+            maxLines: 1,
             style: TextStyle(
               fontSize: 16.sp,
               color: AppColors.primary,

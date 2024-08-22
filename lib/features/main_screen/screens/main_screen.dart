@@ -1,6 +1,7 @@
 import 'package:delifast/core/utils/app_export.dart';
 import 'package:delifast/features/main_screen/cubit/cubit.dart';
 import 'package:delifast/features/main_screen/cubit/state.dart';
+import 'package:easy_localization/easy_localization.dart';
 import '../../home/screens/home_screen.dart';
 import '../../notifications/screens/notificationi.dart';
 import '../../delivered/screens/delivered_screen.dart';
@@ -15,26 +16,21 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int _selectedIndex = 0; // State variable to track the selected index
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MainCubit, MainState>(
       builder: (context, state) {
+        var cubit = context.read<MainCubit>();
         return SafeArea(
           child: Scaffold(
             body: IndexedStack(
-              index: _selectedIndex,
+              index: cubit.selectedIndex,
               children: [
                 HomeScreen(),
                 const OrderScreen(
-                  isInMainScreen: true,
+                  isInMainScreen: true
                 ),
                 const DeliveredScreen(),
                 const NotificaionScreen(),
@@ -45,12 +41,12 @@ class _MainScreenState extends State<MainScreen> {
               type: BottomNavigationBarType.fixed,
               selectedItemColor: const Color(0xffCE0001),
               unselectedItemColor: Colors.grey,
-              currentIndex: _selectedIndex,
-              onTap: _onItemTapped,
+              currentIndex: cubit.selectedIndex,
+              onTap: cubit.onItemTapped,
               items: [
-                const BottomNavigationBarItem(
+                 BottomNavigationBarItem(
                   icon: Icon(Icons.home),
-                  label: 'Home',
+                  label: 'Home'.tr(),
                 ),
                 const BottomNavigationBarItem(
                   icon: Icon(Icons.list_alt),
@@ -61,15 +57,15 @@ class _MainScreenState extends State<MainScreen> {
                       backgroundColor: AppColors.primary,
                       child: Image.asset(AppIcons.scanicon,
                           color: AppColors.white)),
-                  label: 'Delivered',
+                  label: 'Delivered'.tr(),
                 ),
-                const BottomNavigationBarItem(
+                 BottomNavigationBarItem(
                   icon: Icon(Icons.notifications),
-                  label: 'Notifications',
+                  label: 'Notifications'.tr(),
                 ),
-                const BottomNavigationBarItem(
+                 BottomNavigationBarItem(
                   icon: Icon(Icons.person),
-                  label: 'Account',
+                  label: 'Account'.tr(),
                 ),
               ],
             ),

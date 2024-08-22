@@ -7,6 +7,7 @@ import 'config/themes/app_theme.dart';
 import 'package:delifast/injector.dart' as injector;
 
 import 'features/order_details/cubit/order_details_cubit.dart';
+import 'features/orders/cubit/cubit.dart';
 import 'features/splash/cubit/cubit.dart';
 
 class DelifastApp extends StatefulWidget {
@@ -49,6 +50,9 @@ class _DelifastAppState extends State<DelifastApp> {
                 ),
                 BlocProvider(
                   create: (_) => injector.serviceLocator<OrderDetailsCubit>(),
+                ),
+                BlocProvider(
+                  create: (_) => injector.serviceLocator<OrdersCubit>(),
                 ),
               ],
               child: GetMaterialApp(

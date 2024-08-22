@@ -105,5 +105,10 @@
   "orders": "الطلبات",
   "data_filter": "ترتيب البيانات",
   "status_filter": "ترتيب الحالة",
-  "my_balance": "رصيدى"
+  "my_balance": "رصيدى",
+  "Notifications": "الاشعارات",
+  "Account": "الحساب",
+  "Delivered" : "تم التوصيل",
+  "Orders": "الطلبات"
+
 }
