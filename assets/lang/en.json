@@ -102,7 +102,13 @@
     "current_shipment":"Current Shipment",
     "contact_us": "Contact us",
     "from": "From",
-    "shipped_to": "Shipped to"
-
+    "shipped_to": "Shipped to",
+    "data_filter": "Data Filter",
+    "status_filter": "Status Filter",
+    "my_balance": "My Balance",
+    "Notifications": "Notifications",
+    "Account": "Account",
+    "Delivered" : "Delivered",
+    "Orders": "Orders"
 
 }

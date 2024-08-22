@@ -1,11 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:delifast/core/api/status_code.dart';
-
 import '../error/exceptions.dart';
 import 'app_interceptors.dart';
 import 'base_api_consumer.dart';

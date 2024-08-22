@@ -4,44 +4,49 @@ import 'package:easy_localization/easy_localization.dart';
 import '../../../core/widgets/package_order.dart';
 import '../cubit/cubit.dart';
 
-
-class OrderScreen extends StatefulWidget {
-  const OrderScreen({super.key, required this.isInMainScreen});
- final  bool isInMainScreen;
+class OrderScreenHome extends StatefulWidget {
+  OrderScreenHome({super.key, required this.stateId});
+  String? stateId;
   @override
-  _OrderScreenState createState() => _OrderScreenState();
+  _OrderScreenHomeState createState() => _OrderScreenHomeState();
 }
 
-class _OrderScreenState extends State<OrderScreen> {
+class _OrderScreenHomeState extends State<OrderScreenHome> {
   String? selectedStatus;
   DateTime? selectedDate;
 
-  final List<String> statusOptions = ['Pending', 'In Progress', 'Delivered', 'Cancelled'];
-@override
+  final List<String> statusOptions = [
+    'Pending',
+    'In Progress',
+    'Delivered',
+    'Cancelled'
+  ];
+  @override
   void initState() {
-
-
-context.read<OrdersCubit>().getOrders();
+    context.read<OrdersCubit>().getOrders(state: widget.stateId);
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<OrdersCubit , OrdersState>(builder: (context, state) {
+    return BlocBuilder<OrdersCubit, OrdersState>(builder: (context, state) {
       var cubit = context.read<OrdersCubit>();
-    return SafeArea(
+      return SafeArea(
         child: Scaffold(
-          backgroundColor:  AppColors.white,
+          backgroundColor: AppColors.white,
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
-                  widget.isInMainScreen ? const SizedBox() :
                   GestureDetector(
                       onTap: () {
                         Navigator.pop(context);
                       },
-                      child: Icon(Icons.arrow_back,color: AppColors.primary,)),
+                      child: Icon(
+                        Icons.arrow_back,
+                        color: AppColors.primary,
+                      )),
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Text(
@@ -65,24 +70,22 @@ context.read<OrdersCubit>().getOrders();
                     Expanded(
                       child: _buildDateFilter(context),
                     ),
-
                   ],
                 ),
               ),
               Expanded(
                 child: ListView.builder(
-
-                  itemBuilder: (context,index){
+                  itemBuilder: (context, index) {
                     return InkWell(
-                        onTap: (){
-                          Navigator.pushNamed(context, Routes.ordersDetailsRoutes);
-
+                        onTap: () {
+                          Navigator.pushNamed(
+                              context, Routes.ordersDetailsRoutes);
                         },
-                        child:  PackageTrackingCard(
-                          orderModel: cubit.mainOrderModel?.result?[index],
+                        child: PackageTrackingCard(
+                          orderModel: cubit.mainOrderModelFilter?.result?[index],
                         ));
                   },
-                  itemCount: cubit.mainOrderModel?.result?.length,
+                  itemCount: cubit.mainOrderModelFilter?.result?.length,
                 ),
               )
             ],
@@ -102,8 +105,8 @@ context.read<OrdersCubit>().getOrders();
       child: DropdownButton<String>(
         isExpanded: true,
         value: selectedStatus,
-        hint: Text("status_filter".tr(), style: TextStyle(color: Colors.grey[600],
-            fontSize: 14.sp)),
+        hint: Text("status_filter".tr(),
+            style: TextStyle(color: Colors.grey[600], fontSize: 14.sp)),
         underline: const SizedBox(),
         icon: Icon(Icons.arrow_drop_down, color: Colors.grey[600]),
         onChanged: (String? newValue) {
@@ -111,6 +114,7 @@ context.read<OrdersCubit>().getOrders();
             selectedStatus = newValue;
           });
         },
+
         ///j
         items: statusOptions.map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(

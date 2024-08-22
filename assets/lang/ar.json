@@ -101,5 +101,14 @@
   "current_shipment": "الشحن الحالي",
   "contact_us": "تواصل معنا",
   "from": "من",
-  "shipped_to": "الشحن الي"
+  "shipped_to": "الشحن الي",
+  "orders": "الطلبات",
+  "data_filter": "ترتيب البيانات",
+  "status_filter": "ترتيب الحالة",
+  "my_balance": "رصيدى",
+  "Notifications": "الاشعارات",
+  "Account": "الحساب",
+  "Delivered" : "تم التوصيل",
+  "Orders": "الطلبات"
+
 }

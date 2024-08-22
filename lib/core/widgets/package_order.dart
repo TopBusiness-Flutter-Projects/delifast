@@ -1,3 +1,4 @@
+import 'package:delifast/core/models/order_model.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -5,8 +6,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/utils/app_export.dart';
 
 class PackageTrackingCard extends StatelessWidget {
-  const PackageTrackingCard({super.key});
-
+  const PackageTrackingCard({super.key,  this.orderModel});
+   final OrderModel? orderModel;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -46,12 +47,12 @@ class PackageTrackingCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        'Blue Flying Shoes',
+                        orderModel?.id.toString()??'',
                         style: TextStyle(
                             fontSize: 18.sp, fontWeight: FontWeight.bold),
                       ),
-                      const Text(
-                        'Tracking ID:94756294',
+                       Text(   orderModel?.name.toString()??''
+                       ,
                         style: TextStyle(color: Colors.grey),
                       ),
                     ],
@@ -63,7 +64,7 @@ class PackageTrackingCard extends StatelessWidget {
                 icon: Icons.radio_button_checked_rounded,
                 color: Colors.grey,
                 text: "from".tr(),
-                location: '750 Ar Rutab St, Dubai, UAE',
+                location: orderModel?.senderMobile.toString()??'',
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,7 +82,7 @@ class PackageTrackingCard extends StatelessWidget {
                       Text("shipped_to".tr(),
                           style: const TextStyle(color: Colors.grey)),
                       SizedBox(height: 4.h),
-                      const Text("888 Al Nahyan, Abu Dhabi, UAE",
+                      Text(orderModel?.receiverMobile.toString()??'',
                           style: TextStyle(fontWeight: FontWeight.bold)),
                     ],
                   ),
@@ -94,9 +95,9 @@ class PackageTrackingCard extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.all(8.0.sp),
-                child: const Text(
-                  'Status: Your package is new',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                child:  Text(
+                  'Status: Your package is new${orderModel?.stateId?.toString()??''}',
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
             ],
