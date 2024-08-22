@@ -1,5 +1,11 @@
 class EndPoints {
-  static const String baseUrl = 'https://khdamat.topbusiness.io/api/';
-  static const String loginUrl = '${baseUrl}auth/login';
-  static const String homeUrl = '${baseUrl}home';
+   static String baseUrl = "https://demo17.topbuziness.com/";
+  static String db = "demo17.topbuziness.com";
+
+  ///
+   static String ordersUrl = "${baseUrl}api/dev.courier.request/?";
+
 }
+
+
+//d

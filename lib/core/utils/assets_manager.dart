@@ -6,7 +6,8 @@ class AppImages {
   //images
   static const String logoImage = '$imagePath/logo.png';
   static const String logo2Image = '$imagePath/logo2.png';
-
+  static const String contactUsss = '$imagePath/contacttUss.png';
+  static const String daliFast = '$imagePath/dalifastt.png';
   static const String topBusinessLogo = '$imagePath/topBusiness.png';
   static const String splashDetails = '$imagePath/splashDetails.png';
   static const String onboarding1 = '$imagePath/onBoarding1.png';
@@ -14,6 +15,7 @@ class AppImages {
   static const String onboarding3 = '$imagePath/onBoarding3.png';
   static const String onboardingTop = '$imagePath/onBoardingTop.png';
   static const String onboardingBottom = '$imagePath/onBoardingBottom.png';
+  static const String walletPhoto = '$imagePath/wallet.png';
   static const String code = '$imagePath/code.png';
   static const String login = '$imagePath/login.png';
   static const String home = '$imagePath/home.png';
@@ -31,7 +33,7 @@ class AppImages {
   static const String sendMessage = '$imagePath/sendMessage.png';
   static const String uploadIcon = '$imagePath/upload_icon.png';
   static const String calender = '$imagePath/Calender.png';
-  static const String editIcon = '$imagePath/editIcon.png';
+
 
   // static const String phoneIcon = '$iconsPath/phone.svg';
 
@@ -73,5 +75,27 @@ class AppIcons {
   static const String callContactUs = '$iconsPath/callContactUs.png';
   static const String messageContactUs = '$iconsPath/messageContactUs.png';
   static const String checkIcon = '$iconsPath/check.png';
+  static const String Truck = '$iconsPath/Truck.png';
+  static const String Drops = '$iconsPath/Drop.png';
+  static const String History = '$iconsPath/History.png';
+  static const String Box = '$iconsPath/Icon_Box.png';
+  static const String location = '$iconsPath/locationnn.png';
+  static const String whatsapp = '$iconsPath/whatsapp.png';
+  static const String callIcon = '$iconsPath/callicon.png';
+  static const String daliFast = '$iconsPath/Dalifast.png';
+  static const String profile = '$iconsPath/profilee.png';
+  static const String contact = '$iconsPath/contactUss.png';
+  static const String account = '$iconsPath/account.png';
+  static const String info = '$iconsPath/info.png';
+  static const String rate = '$iconsPath/rate.png';
+  static const String share = '$iconsPath/share.png';
+  static const String privacy = '$iconsPath/privacy.png';
+  static const String logout = '$iconsPath/logout.png';
+  static const String lang = '$iconsPath/lang.png';
+  static const String wallet = '$iconsPath/walleticon.png';
+  static const String forwadicon = '$iconsPath/forward-arrow.png';
+  static const String scanicon = '$iconsPath/IconScan.png';
+  static const String boxOrange = '$iconsPath/Icon_Box_orange.png';
+  static const String user = '$iconsPath/user.svg';
 
 }

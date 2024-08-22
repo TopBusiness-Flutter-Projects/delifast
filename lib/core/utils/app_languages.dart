@@ -73,5 +73,4 @@ class AppLanguages {
   static String remember_me = 'remember_me'.tr();
   static String verify = 'verify'.tr();
 
-
 }

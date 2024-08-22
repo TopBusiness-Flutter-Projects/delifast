@@ -13,7 +13,25 @@ class LoginCubit extends Cubit<LoginStates> {
 
   TextEditingController EmailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController ConfirmPasswordController = TextEditingController();
+  TextEditingController newPasswordController = TextEditingController();
+
   bool isHidden = true;
+  bool isHiddenNewPass = true;
+  bool isHiddenConfirm = true;
+  void togglePasswordVisibility() {
+    isHidden = !isHidden;
+    emit(changePasswordState()); // Trigger a rebuild by emitting a new state
+  }
+  void togglePasswordVisibility2() {
+    isHiddenNewPass = !isHiddenNewPass;
+    emit(changePasswordState()); // Trigger a rebuild by emitting a new state
+  }
+  void togglePasswordVisibility3() {
+    isHiddenConfirm = !isHiddenConfirm;
+    emit(changePasswordState()); // Trigger a rebuild by emitting a new state
+  }
+
   Future<void> login() async {
     // if (formKey.currentState!.validate()) {
     //   // Perform login with API
@@ -35,7 +53,7 @@ class LoginCubit extends Cubit<LoginStates> {
     if (formKey.currentState!.validate()) {
     //  login();
       Navigator.pushNamedAndRemoveUntil(context,
-          Routes.verificationCodeScreenRoute, (route) => false);
+          Routes.mainRoute, (route) => false);
     }
   }
   void clearControllers() {
