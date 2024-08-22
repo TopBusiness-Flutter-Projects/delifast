@@ -1,8 +1,9 @@
 import 'package:delifast/core/utils/app_export.dart';
 import 'package:delifast/features/home/screens/pick_up.dart';
 import 'package:delifast/core/widgets/buttons_container.dart';
-import 'package:delifast/core/widgets/order_shared.dart';
+import 'package:delifast/features/home/screens/widgets/order_shared.dart';
 import 'package:delifast/features/delivered/screens/delivered_screen.dart';
+import 'package:delifast/features/order_details/screens/widget/shipment_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../../../core/widgets/package_order.dart';
 import '../../orders/screens/order_screen.dart';
@@ -27,11 +28,11 @@ class HomeScreen extends StatelessWidget {
         body: Column(
           children: [
             Container(
-              padding: const EdgeInsets.all(16.0),
+              padding:  EdgeInsets.all(16.0.sp),
               decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(30),
-                    bottomRight: Radius.circular(30)),
+                borderRadius:  BorderRadius.only(
+                    bottomLeft: Radius.circular(30.sp),
+                    bottomRight: Radius.circular(30.sp)),
                 color: AppColors.primary,
               ),
               child: Column(
@@ -41,14 +42,14 @@ class HomeScreen extends StatelessWidget {
                     width: 250.w,
                     height: 40.h,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30.0),
+                      borderRadius: BorderRadius.circular(30.0.sp),
                       color: AppColors.blackblue,
                     ),
                     child: Center(
                       child: Row(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding:  EdgeInsets.all(8.0.sp),
                             child: Icon(Icons.location_on_rounded,
                                 color: AppColors.red),
                           ),
@@ -227,6 +228,7 @@ class HomeScreen extends StatelessWidget {
                      ],
                    ),
                  ),
+
                  const PackageTrackingCard(),
                ],
              ),

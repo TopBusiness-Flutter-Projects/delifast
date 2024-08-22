@@ -4,7 +4,7 @@ class OptionButton extends StatelessWidget {
   final String icon;
   final String label;
 
-  const OptionButton({
+  const OptionButton({super.key,
     required this.icon,
     required this.label,
   });

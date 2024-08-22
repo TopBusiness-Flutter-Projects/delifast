@@ -1,6 +1,7 @@
 import 'package:delifast/core/utils/app_export.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../../../core/widgets/package_order.dart';
+import '../../order_details/screens/widget/shipment_widget.dart';
 class DropOffScreen extends StatefulWidget {
   const DropOffScreen({super.key});
 
@@ -62,7 +63,7 @@ class _DropOffScreenState extends State<DropOffScreen> {
             Expanded(
               child: ListView.builder(
                 itemBuilder: (context,index){
-                  return const PackageTrackingCard2();
+                  return const ShipmentWidget();
                 },
                 itemCount: 3,
               ),

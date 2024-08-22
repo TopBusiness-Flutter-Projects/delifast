@@ -57,7 +57,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                children: [
                  Padding(
                    padding: const EdgeInsets.all(10.0),
-                   child: CustomTextField2(labelText: 'name'.tr()),
+                   child: CustomTextField2(
+
+                       labelText: 'name'.tr()),
                  ),
                  Padding(
                    padding: EdgeInsets.all(10.0),

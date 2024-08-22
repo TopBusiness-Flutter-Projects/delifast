@@ -1,5 +1,6 @@
 import 'package:delifast/core/utils/app_export.dart';
-import 'package:delifast/core/widgets/shniping_status.dart';
+import 'package:delifast/features/order_details/screens/widget/shniping_status.dart';
+import 'package:delifast/features/order_details/screens/widget/shipment_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../../../core/widgets/custom_note.dart';
 import '../../../core/widgets/package_order.dart';
@@ -61,10 +62,10 @@ class _orderDetailsState extends State<orderDetails> {
          Expanded(
            child: ListView(
              children: [
-               const PackageTrackingCard2(),
+               const ShipmentWidget(),
                const ShippingStatusWidget(),
                Padding(
-                 padding:  EdgeInsets.all(20.0.sp),
+                 padding:  EdgeInsets.only(top: 5.sp,left: 10.sp,right: 10.sp,bottom: 20.sp),
                  child: Padding(
                    padding: EdgeInsets.only(top: 20.h),
                    child: Stack(

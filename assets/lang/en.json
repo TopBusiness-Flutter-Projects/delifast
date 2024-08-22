@@ -48,7 +48,7 @@
     "logOut": "log out",
     "myOrders": "My Orders",
     "orderNumber": "order number",
-    "total": "total",
+    "total": "Total : ",
     "currency": "riyal",
     "details": "details",
     "orderDetails": "order details",
@@ -103,5 +103,6 @@
     "contact_us": "Contact us",
     "from": "From",
     "shipped_to": "Shipped to"
+
 
 }

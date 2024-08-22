@@ -46,7 +46,7 @@
   "logOut": "تسجيل خروج",
   "myOrders": "طلباتى",
   "orderNumber": "رقم الطلب",
-  "total": "الاجمالى ",
+  "total": "الاجمالى :",
   "currency": "ريال",
   "details": "التفاصيل",
   "orderDetails": "تفاصيل الطلب",
@@ -101,5 +101,6 @@
   "current_shipment": "الشحن الحالي",
   "contact_us": "تواصل معنا",
   "from": "من",
-  "shipped_to": "الشحن الي"
+  "shipped_to": "الشحن الي",
+  "otal"
 }

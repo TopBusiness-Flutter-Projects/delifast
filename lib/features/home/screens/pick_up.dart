@@ -2,6 +2,7 @@ import 'package:delifast/core/utils/app_export.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 import '../../../core/widgets/package_order.dart';
+import '../../order_details/screens/widget/shipment_widget.dart';
 
 
 class PickUpScreen extends StatefulWidget {
@@ -65,7 +66,7 @@ class _PickUpScreenState extends State<PickUpScreen> {
             Expanded(
               child: ListView.builder(
                 itemBuilder: (context,index){
-                  return const PackageTrackingCard2();
+                  return const ShipmentWidget();
                 },
                 itemCount: 3,
               ),
