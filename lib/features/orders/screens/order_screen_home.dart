@@ -84,6 +84,7 @@ class _OrderScreenHomeState extends State<OrderScreenHome> {
                           });
                         },
                         child: PackageTrackingCard(
+                          index: index,
                           orderModel:
                               cubit.mainOrderModelFilter?.result?[index],
                         ));

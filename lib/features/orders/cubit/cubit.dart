@@ -1,8 +1,9 @@
 import 'package:delifast/core/models/order_model.dart';
 import 'package:delifast/core/remote/service.dart';
 import 'package:delifast/features/orders/cubit/state.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../core/models/get_order_name.dart';
 
 class OrdersCubit extends Cubit<OrdersState> {
   OrdersCubit(this.api) : super(OrdersInitial()) {
@@ -31,5 +32,22 @@ class OrdersCubit extends Cubit<OrdersState> {
         emit(OrdersSuccess());
       },
     );
+  }
+
+  String? name;
+  getOrderName(String id, int? index) async {
+    var res = await api.getNameOfOrder(id);
+
+    res.fold((l) {
+      return GetOrderNameModel(name: '');
+    }, (r) {
+      mainOrderModel == null
+          ? null
+          : mainOrderModel?.result?[index ?? 0].currentName = r.name;
+      mainOrderModelFilter == null
+          ? null
+          : mainOrderModelFilter?.result?[index ?? 0].currentName = r.name;
+      return r;
+    });
   }
 }

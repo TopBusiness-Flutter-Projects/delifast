@@ -27,6 +27,7 @@ import '../api/base_api_consumer.dart';
 import '../api/end_points.dart';
 import '../error/exceptions.dart';
 import '../error/failures.dart';
+import '../models/get_order_name.dart';
 import '../models/login_model.dart';
 import '../preferences/preferences.dart';
 
@@ -630,7 +631,7 @@ class ServiceApi {
 //       return Left(ServerFailure());
 //     }
 //   }
-    Future<Either<Failure, MainOrderModel>> getOrders({String? state}) async {
+  Future<Either<Failure, MainOrderModel>> getOrders({String? state}) async {
     print(EndPoints.ordersUrl +
         (state != null
             ? ('filter=[["user_id", "=", 12],["state_id", "=", "New"]]&query={id,name,sender_street,sender_mobile,receiver_street,receiver_mobile,total_charge_amount,notes,courier_lines,state_id}')
@@ -645,7 +646,10 @@ class ServiceApi {
                 ? ('filter=[["user_id", "=", 12],["state_id", "=", "${state}"]]&query={id,name,sender_street,sender_mobile,receiver_street,receiver_mobile,total_charge_amount,notes,courier_lines,state_id}')
                 : ('filter=[["user_id", "=", 12]]&query={id,name,sender_street,sender_mobile,receiver_street,receiver_mobile,total_charge_amount,notes,courier_lines,state_id,category_id}')),
         options: Options(
-          headers: {"Cookie": "frontend_lang=en_US;session_id=a8af99171ec4c7e7afef224de8fef6a2080b74b7"},
+          headers: {
+            "Cookie":
+                "frontend_lang=en_US;session_id=a8af99171ec4c7e7afef224de8fef6a2080b74b7"
+          },
         ),
       );
       return Right(MainOrderModel.fromJson(response));
@@ -833,8 +837,9 @@ class ServiceApi {
       return Left(ServerFailure());
     }
   }
+
   // nehal
-Future<Either<Failure, DefaultModel>> updateProfile({
+  Future<Either<Failure, DefaultModel>> updateProfile({
     required String name,
     //required String address,
     required String mobile,
@@ -847,9 +852,7 @@ Future<Either<Failure, DefaultModel>> updateProfile({
     try {
       final response = await dio.put(EndPoints.updatePartner,
           options: Options(
-         
-          headers: {"Cookie": "frontend_lang=en_US;session_id=$sessionId"},
-          
+            headers: {"Cookie": "frontend_lang=en_US;session_id=$sessionId"},
           ),
           body: {
             "params": {
@@ -879,11 +882,11 @@ Future<Either<Failure, DefaultModel>> updateProfile({
     try {
       String userId = await Preferences.instance.getUserId() ?? "1";
       print("lllllllllll${userId}");
-     String? sessionId = await Preferences.instance.getSessionId();
-     // String? sessionId = await getSessionId(phone: 'admin', password: 'admin',);
-       print(sessionId);
+      String? sessionId = await Preferences.instance.getSessionId();
+      // String? sessionId = await getSessionId(phone: 'admin', password: 'admin',);
+      print(sessionId);
       final response = await dio.get(
-        EndPoints.getUserData+'&filter=[["id","=","$userId"]]',
+        EndPoints.getUserData + '&filter=[["id","=","$userId"]]',
         options: Options(
           headers: {"Cookie": "frontend_lang=en_US;session_id=$sessionId"},
         ),
@@ -894,5 +897,21 @@ Future<Either<Failure, DefaultModel>> updateProfile({
     }
   }
 
- 
+  Future<Either<Failure, GetOrderNameModel>> getNameOfOrder(String id) async {
+    try {
+      String userId = await Preferences.instance.getUserId() ?? "1";
+      print("lllllllllll${userId}");
+      String? sessionId = await Preferences.instance.getSessionId();
+      print(sessionId);
+      final response = await dio.get(
+        EndPoints.getOrderName + '$id?query={name}',
+        options: Options(
+          headers: {"Cookie": "frontend_lang=en_US;session_id=$sessionId"},
+        ),
+      );
+      return Right(GetOrderNameModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
 }

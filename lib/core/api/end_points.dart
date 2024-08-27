@@ -6,7 +6,7 @@ class EndPoints {
   ///
   static String auth = "$baseUrl/auth/";
   static String register = "$baseUrl/api/res.users/";
- // static String updatePartner = "$baseUrl/api/res.partner/";
+  // static String updatePartner = "$baseUrl/api/res.partner/";
   static String allCategoriesUrl =
       '$baseUrl/api/product.category?query={id, name,image}&filter=[["is_available","=","true"]]';
   static String categoryUrl = "$baseUrl/api/product.category/";
@@ -56,20 +56,19 @@ class EndPoints {
   static String createPayment = '$baseUrl/api/account.payment/';
   static String confirmPayment = '$baseUrl/object/account.payment/';
   static String createInvoice = '$baseUrl/api/account.move/';
- 
- 
+
   static String invoiceLine = '$baseUrl/api/account.move.line';
- // thanaa 
- 
+  // thanaa
+
   static String getAllJournals =
       '$baseUrl/api/account.journal/?query={id, display_name}';
-        static String ordersUrl = "$baseUrl/api/dev.courier.request/?";
- // nehal 
+  static String ordersUrl = "$baseUrl/api/dev.courier.request/?";
+  // nehal
 
- static String updatePartner = "$baseUrl/api/res.users/";
+  static String updatePartner = "$baseUrl/api/res.users/";
   static String getUserData =
       '$baseUrl/api/res.users/?query={id, name,mobile,street,email,image_1920}';
+  static String getOrderName = '$baseUrl/api/dev.courier.category/';
 }
-
 
 //d

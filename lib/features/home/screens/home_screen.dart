@@ -319,6 +319,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
                                     ),
                                     PackageTrackingCard(
+                                      index: 0,
                                       orderModel:
                                           cubit.mainOrderModel!.result!.first,
                                     ),

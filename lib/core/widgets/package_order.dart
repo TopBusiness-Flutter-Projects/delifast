@@ -1,110 +1,144 @@
 import 'package:delifast/core/models/order_model.dart';
+import 'package:delifast/features/orders/cubit/cubit.dart';
+import 'package:delifast/features/orders/cubit/state.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../core/utils/app_export.dart';
 
-class PackageTrackingCard extends StatelessWidget {
-  const PackageTrackingCard({super.key, this.orderModel});
+class PackageTrackingCard extends StatefulWidget {
+  const PackageTrackingCard({
+    super.key,
+    this.orderModel,
+    this.index,
+  });
   final OrderModel? orderModel;
+  final int? index;
+
+  @override
+  State<PackageTrackingCard> createState() => _PackageTrackingCardState();
+}
+
+class _PackageTrackingCardState extends State<PackageTrackingCard> {
+  @override
+  void initState() {
+    print('ssssssss${widget.orderModel?.name.toString()}');
+    print('ssssssss${widget.orderModel?.id.toString()}');
+    context
+        .read<OrdersCubit>()
+        .getOrderName(widget.orderModel?.id.toString() ?? '', widget.index);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.pushNamed(context, Routes.ordersDetailsRoutes,
-            arguments: {orderModel?.name});
-      },
-      child: Container(
-        decoration: BoxDecoration(
-          color: AppColors.white,
-          borderRadius: BorderRadius.circular(12.sp),
-          boxShadow: const [
-            BoxShadow(
-              color: Colors.grey,
-              blurRadius: 5.0,
-              offset: Offset(0, 2),
-            )
-          ],
-        ),
-        margin: EdgeInsets.all(10.sp),
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: Colors.orange[100],
-                      shape: BoxShape.circle,
-                    ),
-                    child: SvgPicture.asset("assets/icons/blueBox.svg"),
-                  ),
-                  const SizedBox(width: 12),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        orderModel?.id.toString() ?? '',
-                        style: TextStyle(
-                            fontSize: 18.sp, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        orderModel?.name.toString() ?? '',
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              SizedBox(height: 20.h),
-              _buildLocationRow(
-                icon: Icons.radio_button_checked_rounded,
-                color: Colors.grey,
-                text: "from".tr(),
-                location: orderModel?.senderMobile.toString() ?? '',
-              ),
-              Row(
+    return BlocBuilder<OrdersCubit, OrdersState>(
+      builder: (context, state) {
+        var cubit = context.read<OrdersCubit>();
+        return InkWell(
+          onTap: () {
+            Navigator.pushNamed(context, Routes.ordersDetailsRoutes,
+                arguments: {widget.orderModel?.name});
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              color: AppColors.white,
+              borderRadius: BorderRadius.circular(12.sp),
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.grey,
+                  blurRadius: 5.0,
+                  offset: Offset(0, 2),
+                )
+              ],
+            ),
+            margin: EdgeInsets.all(10.sp),
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(
+                  Row(
                     children: [
-                      Icon(Icons.radio_button_checked_rounded,
-                          color: const Color(0xffCE0001), size: 20.sp),
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: Colors.orange[100],
+                          shape: BoxShape.circle,
+                        ),
+                        child: SvgPicture.asset("assets/icons/blueBox.svg"),
+                      ),
+                      const SizedBox(width: 12),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            cubit.mainOrderModel?.result?[widget.index!]
+                                    .currentName ??
+                                '',
+                            style: TextStyle(
+                                fontSize: 18.sp, fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            widget.orderModel?.categoryId == false
+                                ? ''
+                                : widget.orderModel?.name.toString() ?? 'xx',
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
-                  SizedBox(width: 12.w),
-                  Column(
+                  SizedBox(height: 20.h),
+                  _buildLocationRow(
+                    icon: Icons.radio_button_checked_rounded,
+                    color: Colors.grey,
+                    text: "from".tr(),
+                    location: widget.orderModel?.senderMobile.toString() ?? '',
+                  ),
+                  Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("shipped_to".tr(),
-                          style: const TextStyle(color: Colors.grey)),
-                      SizedBox(height: 4.h),
-                      Text(orderModel?.receiverMobile.toString() ?? '',
-                          style: TextStyle(fontWeight: FontWeight.bold)),
+                      Column(
+                        children: [
+                          Icon(Icons.radio_button_checked_rounded,
+                              color: const Color(0xffCE0001), size: 20.sp),
+                        ],
+                      ),
+                      SizedBox(width: 12.w),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("shipped_to".tr(),
+                              style: const TextStyle(color: Colors.grey)),
+                          SizedBox(height: 4.h),
+                          Text(
+                              widget.orderModel?.receiverMobile.toString() ??
+                                  '',
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                        ],
+                      ),
                     ],
+                  ),
+                  SizedBox(height: 20.h),
+                  Divider(
+                    height: 6.h,
+                    thickness: 1,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(8.0.sp),
+                    child: Text(
+                      'Status: Your package is new${widget.orderModel?.stateId?.toString() ?? ''}',
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ],
               ),
-              SizedBox(height: 20.h),
-              Divider(
-                height: 6.h,
-                thickness: 1,
-              ),
-              Padding(
-                padding: EdgeInsets.all(8.0.sp),
-                child: Text(
-                  'Status: Your package is new${orderModel?.stateId?.toString() ?? ''}',
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ),
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
