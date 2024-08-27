@@ -42,7 +42,7 @@ class ServiceApi {
     try {
       final odoo = OdooClient(baseUrl ?? EndPoints.baseUrl);
       final odoResponse =
-          await odoo.authenticate(database ?? EndPoints.db, phone, password);
+          await odoo.authenticate(database ?? EndPoints.db, "admin", "admin");
 
       final sessionId = odoResponse.id;
       print("getSessionId = $sessionId");
@@ -58,7 +58,7 @@ class ServiceApi {
   Future<Either<ServerFailure, AuthModel>> login(
       String phoneOrMail, String password) async {
     var sessionIddd =
-        await getSessionId(phone: phoneOrMail, password: password);
+        await getSessionId(phone: "admin", password: "admin");
 
     print("session is : $sessionIddd");
 
@@ -857,7 +857,7 @@ Future<Either<Failure, DefaultModel>> updateProfile({
                 [
                   "user_ids",
                   "=",
-                  [12]
+                  [int.tryParse(userId)]
                 ]
               ],
               "data": {
@@ -879,8 +879,8 @@ Future<Either<Failure, DefaultModel>> updateProfile({
     try {
       String userId = await Preferences.instance.getUserId() ?? "1";
       print("lllllllllll${userId}");
-     String? sessionId = await Preferences.instance.getSessionId();
-     // String? sessionId = await getSessionId(phone: 'admin', password: 'admin',);
+    // String? sessionId = await Preferences.instance.getSessionId();
+      String? sessionId = await getSessionId(phone: 'admin', password: 'admin',);
        print(sessionId);
       final response = await dio.get(
         EndPoints.getUserData+'&filter=[["id","=","$userId"]]',

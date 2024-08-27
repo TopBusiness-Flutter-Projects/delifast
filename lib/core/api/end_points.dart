@@ -12,7 +12,6 @@ class EndPoints {
   static String categoryUrl = "$baseUrl/api/product.category/";
   static String allProducts = '$baseUrl/api/product.template/';
   static String authWithSession = "$baseUrl/web/session/authenticate";
-
   static String allCategoryProducts = '$baseUrl/api/product.product/';
   static String getOffers =
       '$baseUrl/api/offer/?query={ad_url,id,offer_des,service_offer,service_id,offer_type,image}';
@@ -59,8 +58,7 @@ class EndPoints {
  
  
   static String invoiceLine = '$baseUrl/api/account.move.line';
- // thanaa 
- 
+ // thanaa  
   static String getAllJournals =
       '$baseUrl/api/account.journal/?query={id, display_name}';
         static String ordersUrl = "$baseUrl/api/dev.courier.request/?";
