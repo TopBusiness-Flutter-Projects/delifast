@@ -2,7 +2,6 @@
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:odoo_rpc/odoo_rpc.dart';
 import '../api/base_api_consumer.dart';
 import '../api/end_points.dart';
