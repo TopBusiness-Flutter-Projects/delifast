@@ -11,6 +11,7 @@ import '../../features/setting/screens/contact_us.dart';
 import '../../features/login/screens/login_screen.dart';
 import '../../features/order_details/screens/order_details.dart';
 import '../../features/orders/screens/order_screen.dart';
+import '../../features/setting/screens/privacy_Screen.dart';
 import '../../features/setting/screens/profile.dart';
 import '../../features/order_details/screens/shipment _status_screen.dart';
 import '../../features/verfication_otp/screens/verfiy_otp.dart';
@@ -35,6 +36,9 @@ class Routes {
   static const String aboutRoutes = '/aboutRoutes';
   static const String shipmentRoutes = '/shipmentRoutes';
   static const String walletRoutes = '/walletRoutes';
+  static const String privcyRoutes = '/privcyRoutes';
+
+
 }
 
 class AppRoutes {
@@ -65,6 +69,9 @@ class AppRoutes {
       case Routes.profileRoutes:
         return MaterialPageRoute(
           builder: (context) => const ProfileScreen(),
+        ); case Routes.privcyRoutes:
+        return MaterialPageRoute(
+          builder: (context) => const Privacy_screen(),
         );
       case Routes.notificationRoutes:
         return MaterialPageRoute(

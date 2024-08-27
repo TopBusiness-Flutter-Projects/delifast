@@ -133,6 +133,9 @@ class AccountScreen extends StatelessWidget {
               padding: EdgeInsets.all(8.0.sp),
               child: CustomSettingsRow(
                 text: "privacy".tr(),
+                onTap: (){
+                  Navigator.pushNamed(context, Routes.privcyRoutes);
+                },
                 icon: AppIcons.privacy,
               ),
             ),
