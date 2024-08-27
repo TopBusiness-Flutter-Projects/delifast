@@ -115,18 +115,17 @@ class Preferences {
     print("userId = $userId");
   }
 
-
   Future<String?> getUserId() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     String? userId = preferences.getString('userId');
     return userId;
   }
+
   Future<void> setCompanyId(String companyId) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.setString('companyId', companyId);
     print("userId = $companyId");
   }
-
 
   Future<String?> getCompanyId() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -137,7 +136,6 @@ class Preferences {
   Future<void> setUserName(String userName) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.setString('userName', userName);
-   
   }
 
   Future<void> removeUserName() async {
@@ -172,7 +170,7 @@ class Preferences {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     return preferences.getBool(key);
   }
-//
+
   Future<dynamic> setIsFirstTime({required String key, required value}) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     return preferences.setBool(key, value);

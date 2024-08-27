@@ -35,26 +35,29 @@ class Result {
   int? id;
   String? name;
   dynamic? street;
-  int? partnerId;
+  dynamic? mobile;
+  dynamic? email;
+  dynamic? login;
+  
   dynamic? image1920;
-  String? login; List<int>? favoriteUserIds;
 
   Result({
     this.id,
     this.name,
     this.street,
-    this.partnerId,
+    this.mobile,
     this.image1920,
-    this.login,this.favoriteUserIds,
+    this.login,this.email,
   });
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
         id: json["id"],
         name: json["name"],
         street: json["street"],
-        partnerId: json["partner_id"],
+        email: json["email"],
+        mobile: json["mobile"],
         image1920: json["image_1920"],
-        login: json["login"],        favoriteUserIds: json["favorite_user_ids"] == null ? [] : List<int>.from(json["favorite_user_ids"]!.map((x) => x)),
+        login: json["login"],   
 
       );
 
@@ -62,9 +65,10 @@ class Result {
         "id": id,
         "name": name,
         "street": street,
-        "partner_id": partnerId,
         "image_1920": image1920,
-        "login": login,        "favorite_user_ids": favoriteUserIds == null ? [] : List<dynamic>.from(favoriteUserIds!.map((x) => x)),
+        "login": login,  
+        'email': email,
+         'mobile': mobile, 
 
       };
 }

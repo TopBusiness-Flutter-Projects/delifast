@@ -39,14 +39,16 @@ class LoginCubit extends Cubit<LoginStates> {
 
   AuthModel? authModel;
 
-  Future<String> setSessionId() async {
-    String mySessionId = await api.getSessionId();
-
+  Future<String> setSessionId(
+      ) async {
+    String mySessionId =
+        await api.getSessionId(phone: "admin", password: "admin");
+print ("llll : $mySessionId");
     return mySessionId;
   }
 
   login(BuildContext context,
-      {required String phoneOrMail, required String password}) async {
+      {required String phoneOrMail, required String password}) async {   
     emit(LoadingLoginState());
     AppWidget.createProgressDialog(context, 'انتظر');
     final response = await api.login(phoneOrMail, password);
@@ -57,13 +59,12 @@ class LoginCubit extends Cubit<LoginStates> {
     }, (r) async {
       if (r.result != null) {
         authModel = r;
-        // String sessionId =
-        //     await api.getSessionId(phone: "admin", password: "admin");
+       // String sessionId =
+       //     await api.getSessionId(phone: "admin", password: "admin");
         emit(SuccessLoginState());
-        await Preferences.instance
-            .setSessionId("07ae3f8fc94837d3915c99466591fc60664baf6e");
-        await Preferences.instance.setUserName(phoneOrMail);
-        await Preferences.instance.setUserPass(password);
+      //  await Preferences.instance.setSessionId("07ae3f8fc94837d3915c99466591fc60664baf6e");        
+           await Preferences.instance.setUserName(phoneOrMail);
+          await Preferences.instance.setUserPass(password);     
         Navigator.pop(context);
         Preferences.instance.setUserId(r.result!.userContext!.uid.toString());
         Navigator.pushNamedAndRemoveUntil(
@@ -82,8 +83,8 @@ class LoginCubit extends Cubit<LoginStates> {
 
   void signupValidate(BuildContext context) {
     if (formKey.currentState!.validate()) {
-      login(context,
-          phoneOrMail: EmailController.text, password: passwordController.text);
+        login(context,phoneOrMail: EmailController.text,password: passwordController.text);
+    
     }
   }
 

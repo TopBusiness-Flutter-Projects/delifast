@@ -1,4 +1,6 @@
 import 'package:delifast/core/utils/app_export.dart';
+import 'package:delifast/features/login/cubit/login_cubit.dart';
+import 'package:delifast/features/setting/cubit/setting_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:delifast/features/main_screen/cubit/cubit.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -42,9 +44,9 @@ class _DelifastAppState extends State<DelifastApp> {
                 BlocProvider(
                   create: (_) => injector.serviceLocator<SplashCubit>(),
                 ),
-                // BlocProvider(
-                //   create: (_) => injector.serviceLocator<LoginCubit>(),
-                // ),
+                 BlocProvider(
+                   create: (_) => injector.serviceLocator<LoginCubit>(),
+                 ),
                 BlocProvider(
                   create: (_) => injector.serviceLocator<MainCubit>(),
                 ),
@@ -53,6 +55,9 @@ class _DelifastAppState extends State<DelifastApp> {
                 ),
                 BlocProvider(
                   create: (_) => injector.serviceLocator<OrdersCubit>(),
+                ),
+                BlocProvider(
+                  create: (_) => injector.serviceLocator<SettingCubit>(),
                 ),
               ],
               child: GetMaterialApp(

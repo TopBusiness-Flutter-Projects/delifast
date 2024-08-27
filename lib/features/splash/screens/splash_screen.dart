@@ -1,6 +1,5 @@
 import 'package:delifast/core/widgets/top_business_logo.dart';
-import 'package:delifast/features/splash/cubit/cubit.dart';
-import 'package:delifast/features/splash/cubit/state.dart';
+import 'package:delifast/features/login/cubit/login_cubit.dart';
 
 import '../../../core/preferences/preferences.dart';
 import '../../../core/utils/app_export.dart';
@@ -25,24 +24,53 @@ class _SplashScreenState extends State<SplashScreen>
     super.initState();
   }
 
-  void navigateToHome() async {
+ void navigateToHome() async {
     Future.delayed(
       const Duration(seconds: 4),
       () {
+       
+
         Preferences.instance.getIsFirstTime(key: 'onBoarding').then((value) {
           if (value != null && value == true) {
-            Navigator.pushReplacementNamed(context, Routes.loginRoute);
-            // Navigator.pushReplacementNamed(context, Routes.homeRoute);
-            // Preferences.instance.getUserToken().then((value) {
-            //   if (value != null) {
-            //     Navigator.pushNamedAndRemoveUntil(
-            //         context, Routes.homeRoute, (route) => false);
-            //     //    context.read<HomeCubit>().getUser();
-            //   } else {
-            //     //  Navigator.pushNamedAndRemoveUntil(
-            //     //      context, Routes.loginRoute, (route) => false);
-            //   }
-            // });
+            Preferences.instance.getUserName().then((value) async {
+              if (value != null) {
+                
+
+
+     String session = await context
+                    .read<LoginCubit>()
+                    .setSessionId();
+                if (session != "error") {
+                  Navigator.pushReplacementNamed(context, Routes.mainRoute);
+                } else {
+                  Navigator.pushReplacementNamed(context, Routes.loginRoute);
+                }
+               // userName = value;
+                // Preferences.instance.getUserPass().then((value) async {
+                //   if (value != null) {
+                //     userPass = value;
+
+                //       String session = await context
+                //     .read<LoginCubit>()
+                //     .setSessionId(phoneOrMail: userName, password: userPass);
+                // if (session != "error") {
+                //   Navigator.pushReplacementNamed(context, Routes.mainRoute);
+                // } else {
+                //   Navigator.pushReplacementNamed(context, Routes.loginRoute);
+                // }
+                //   }
+                // }).catchError((error) {
+                //   debugPrint("ffffffffff" + error.toString());
+                // });
+
+              
+              } else {
+                Navigator.pushReplacementNamed(context, Routes.loginRoute);
+              }
+            }).catchError((error) {
+              debugPrint("ffffffffff" + error.toString());
+            });
+
             print('not first time');
           } else {
             Navigator.pushReplacementNamed(context, Routes.onBoarding);
@@ -76,30 +104,28 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SplashCubit,SplashState>(builder: (context, state) {
-      return Scaffold(
-        backgroundColor: AppColors.white,
-        body: Column(
+    return Scaffold(
+      backgroundColor: AppColors.white,
+      body: Column(
           //crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const SizedBox(
-                height: 170,
-              ),
-              CustomAppLogo(
-                slidingAnimation: slidingAnimation,
-              ),
-              Center(
-                child: Padding(
-                  padding: EdgeInsets.only(bottom: 70.h, right: 20, left: 20),
-                  child: Image.asset(
-                    width: 170.w,
-                    AppImages.splashDetails,
-                  ),
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const SizedBox(
+              height: 170,
+            ),
+            CustomAppLogo(
+              slidingAnimation: slidingAnimation,
+            ),
+            Center(
+              child: Padding(
+                padding: EdgeInsets.only(bottom: 70.h, right: 20, left: 20),
+                child: Image.asset(
+                  width: 170.w,
+                  AppImages.splashDetails,
                 ),
-              )
-            ]),
-      );
-    });
+              ),
+            )
+          ]),
+    );
   }
 }
