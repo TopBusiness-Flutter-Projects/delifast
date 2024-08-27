@@ -51,12 +51,13 @@ class SettingCubit extends Cubit<SettingState> {
 
       emit(ErrorUserDatay());
     }, (r) {
+        userDataModel = r;
       print('dddddddddddd${r.result?.first.name??'ppppppp'}');
-      nameControllser.text =  userDataModel.result?.first.name ?? "nono";
-      emailController.text =  userDataModel.result?.first.email ?? "nono";
-      addressController.text =  userDataModel.result?.first.street ?? "nono";
-      mobileController.text =  userDataModel.result?.first.mobile ?? "nono";
-      userDataModel = r;
+      nameControllser.text =  userDataModel.result?.first.name ?? "";
+      emailController.text =  userDataModel.result?.first.email ?? "";
+      addressController.text =  userDataModel.result?.first.street ?? "";
+      mobileController.text =  userDataModel.result?.first.mobile ?? "";
+    
       emit(LoadedUserData());
     });
   }
