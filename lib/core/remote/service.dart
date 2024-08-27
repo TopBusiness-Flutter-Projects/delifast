@@ -645,7 +645,7 @@ class ServiceApi {
                 ? ('filter=[["user_id", "=", 12],["state_id", "=", "${state}"]]&query={id,name,sender_street,sender_mobile,receiver_street,receiver_mobile,total_charge_amount,notes,courier_lines,state_id}')
                 : ('filter=[["user_id", "=", 12]]&query={id,name,sender_street,sender_mobile,receiver_street,receiver_mobile,total_charge_amount,notes,courier_lines,state_id,category_id}')),
         options: Options(
-          headers: {"Cookie": "frontend_lang=en_US;session_id=a8af99171ec4c7e7afef224de8fef6a2080b74b7"},
+          headers: {"Cookie": "frontend_lang=en_US;session_id=$sessionId"},
         ),
       );
       return Right(MainOrderModel.fromJson(response));
@@ -857,14 +857,14 @@ Future<Either<Failure, DefaultModel>> updateProfile({
                 [
                   "user_ids",
                   "=",
-                  [int.tryParse(userId)]
+                  ["12"]
                 ]
               ],
               "data": {
                 "name": "$name", //base_64
                 "mobile": "$mobile",
                 "street": "$street",
-                "new_password": "$newpass",
+                "password": "$newpass",
                 "email": "$email",
               }
             }

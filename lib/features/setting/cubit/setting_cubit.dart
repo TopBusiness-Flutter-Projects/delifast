@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/models/get_about_model.dart';
 import '../../../core/models/get_policy_model.dart';
 import '../../../core/models/user_data_model.dart';
+import '../../../core/preferences/preferences.dart';
 import '../../../core/remote/service.dart';
 import '../../../core/utils/app_export.dart';
 
@@ -87,25 +89,46 @@ class SettingCubit extends Cubit<SettingState> {
   }
   //update profile
   updateProfile(BuildContext context) async {
-    emit(LoadingUpdateProfileState());
-    // print("fffffff $base64String");
-    // print(base64String);
-    final response = await api.updateProfile(
-      mobile:mobileController.text , name:nameControllser.text, street: addressController.text, newpass: newPasswordController.text, email: emailController.text,
-    );
-    response.fold((l) {
-      errorGetBar("d");
-      emit(FailureUpdateProfileState());
-    }, (r) async {
-      print(r.result);
-      if (r.result != null) {
-        // Navigator.pushNamedAndRemoveUntil(
-        // context, Routes.mainRoute, (route) => false);
-        successGetBar(r.result);
-        emit(SuccessUpdateProfileState());
-      } else {
-        errorGetBar("حدث خطأ ما");
+    print("user profile");
+ //   print(Preferences.instance.getUserPass()()??"");
+    Preferences.instance.getUserPass();
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String? userPass = preferences.getString('userPass');
+    print(userPass);
+    if(passwordController.text==userPass){
+      print("pass=userpass");
+      if(newPasswordController.text==ConfirmPasswordController.text){
+        print("pass=confirm pass");
+        emit(LoadingUpdateProfileState());
+        final response = await api.updateProfile(
+          mobile:mobileController.text , name:nameControllser.text, street: addressController.text, newpass: newPasswordController.text, email: emailController.text,
+        );
+        response.fold((l) {
+          errorGetBar("d");
+          emit(FailureUpdateProfileState());
+        }, (r) async {
+          print(r.result);
+          if (r.result != null) {
+            // Navigator.pushNamedAndRemoveUntil(
+            // context, Routes.mainRoute, (route) => false);
+            successGetBar(r.result.toString());
+            Preferences.instance.setUserPass(newPasswordController.text);
+print(newPasswordController.text);
+            Navigator.pushReplacementNamed(context, Routes.mainRoute);
+            newPasswordController.clear();
+            ConfirmPasswordController.clear();
+            passwordController.clear();
+
+          } else {
+            errorGetBar("حدث خطأ ما");
+          }
+        });
       }
-    });
+      else{
+        errorGetBar("passeError".tr());      }
+      }else{
+      errorGetBar("passwordNotSame".tr());
+    }
+
   }
 }
