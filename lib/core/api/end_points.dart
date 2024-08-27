@@ -68,7 +68,7 @@ class EndPoints {
 
  static String updatePartner = "$baseUrl/api/res.users/";
   static String getUserData =
-      '$baseUrl/api/res.partner/?query={id, name,mobile,street,email,image_1920}';
+      '$baseUrl/api/res.users/?query={id, name,mobile,street,email,image_1920}';
 }
 
 
