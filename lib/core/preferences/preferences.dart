@@ -23,7 +23,7 @@ class Preferences {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     return preferences.getBool(key);
   }
-
+//
   Future<dynamic> setIsFirstTime({required String key, required value}) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     return preferences.setBool(key, value);
