@@ -4,12 +4,12 @@ import 'package:delifast/features/main_screen/cubit/cubit.dart';
 import 'package:delifast/features/splash/cubit/cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:delifast/core/remote/service.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'core/api/app_interceptors.dart';
 import 'core/api/base_api_consumer.dart';
 import 'core/api/dio_consumer.dart';
+import 'features/order_details/cubit/order_details_cubit.dart';
+import 'features/orders/cubit/cubit.dart';
 
 // import 'features/downloads_videos/cubit/downloads_videos_cubit.dart';
 
@@ -21,7 +21,13 @@ Future<void> setup() async {
   ///////////////////////// Blocs ////////////////////////
 
   serviceLocator.registerFactory(
-    () => SplashCubit(),
+    () => SplashCubit(
+      serviceLocator(),
+
+    ),
+  );
+  serviceLocator.registerFactory(
+        () => OrderDetailsCubit(),
   );
 
   serviceLocator.registerFactory(
@@ -34,7 +40,11 @@ Future<void> setup() async {
       serviceLocator(),
     ),
   );
-
+  serviceLocator.registerFactory(
+        () => OrdersCubit(
+      serviceLocator(),
+    ),
+  );
   ///////////////////////////////////////////////////////////////////////////////
 
   final sharedPreferences = await SharedPreferences.getInstance();

@@ -12,6 +12,7 @@ class AppColors {
   static Color secondText = HexColor('#80869A');
   static Color dotsColor = HexColor('#F4E07D');
   static Color red = HexColor('#CE0001');
+  static Color redLight = HexColor('#F5CCCC');
   static Color primaryHint = HexColor('#E2E2E2');
   static Color primaryButton = HexColor('#002850');
   static Color hint = Colors.grey;

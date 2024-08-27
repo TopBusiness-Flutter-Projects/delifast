@@ -38,7 +38,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         .setIsFirstTime(key: 'onBoarding', value: true)
         .then((value) {
       print('first timee');
-      //  Navigator.pushNamed(context, Routes.welcomeScreen);
+        Navigator.pushNamed(context, Routes.loginRoute);
     }).catchError((error) {
       print('error${error.toString()}');
     });
@@ -47,6 +47,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+backgroundColor: AppColors.white,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -62,7 +63,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       isFirst
-                          ? SizedBox(
+                          ? const SizedBox(
                               width: 1,
                               height: 1,
                             )
@@ -74,12 +75,12 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                               },
                               child: Icon(
                                 Icons.arrow_back_ios,
-                                size: 24.h,
+                                size: 20.h,
                                 color: AppColors.black,
                               )),
-                      Spacer(),
+                      const Spacer(),
                       isLast
-                          ? SizedBox(
+                          ? const SizedBox(
                               width: 1,
                               height: 1,
                             )
@@ -98,7 +99,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                   ),
                                   Icon(
                                     Icons.arrow_forward_ios,
-                                    size: 24.h,
+                                    size: 20.h,
+                                    color: AppColors.red,
                                   )
                                 ],
                               ),
@@ -112,7 +114,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     alignment: Alignment.topLeft,
                     child: Image.asset(
                       AppImages.onboardingTop,
-                      height: 70.h,
+                      height: 50.h,
                     ),
                   ),
                   Expanded(
@@ -155,22 +157,22 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           paintStyle: PaintingStyle.stroke,
                           activeDotColor: AppColors.secondPrimary,
                           dotColor: AppColors.secondPrimary,
-                          dotHeight: 15,
-                          dotWidth: 15),
+                          dotHeight: 8.sp,
+                          dotWidth: 8.sp),
                       // your preferred effect
                       onDotClicked: (index) {}),
                   Align(
                     alignment: Alignment.topRight,
                     child: Image.asset(
                       AppImages.onboardingBottom,
-                      height: 45.h,
+                      height: 40.h,
                     ),
                   ),
                 ],
               ),
             ),
             SizedBox(
-              height: 40.h,
+              height: 20.h,
             ),
             isLast
                 ? CustomButton(
