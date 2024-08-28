@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_interpolation_to_compose_strings, avoid_print, unnecessary_brace_in_string_interps
 
 import 'package:dartz/dartz.dart';
+import 'package:delifast/core/models/get_states_model.dart';
 import 'package:delifast/core/models/order_model.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -27,6 +28,7 @@ import '../api/base_api_consumer.dart';
 import '../api/end_points.dart';
 import '../error/exceptions.dart';
 import '../error/failures.dart';
+import '../models/get_count_order.dart';
 import '../models/login_model.dart';
 import '../preferences/preferences.dart';
 
@@ -36,13 +38,13 @@ class ServiceApi {
 
   Future<String> getSessionId(
       {required String phone,
-      required String password,
-      String? baseUrl,
-      String? database}) async {
+        required String password,
+        String? baseUrl,
+        String? database}) async {
     try {
       final odoo = OdooClient(baseUrl ?? EndPoints.baseUrl);
       final odoResponse =
-          await odoo.authenticate(database ?? EndPoints.db, "admin", "admin");
+      await odoo.authenticate(database ?? EndPoints.db, "admin", "admin");
 
       final sessionId = odoResponse.id;
       print("getSessionId = $sessionId");
@@ -58,7 +60,7 @@ class ServiceApi {
   Future<Either<ServerFailure, AuthModel>> login(
       String phoneOrMail, String password) async {
     var sessionIddd =
-        await getSessionId(phone: "admin", password: "admin");
+    await getSessionId(phone: "admin", password: "admin");
 
     print("session is : $sessionIddd");
 
@@ -88,8 +90,8 @@ class ServiceApi {
 
   Future<Either<ServerFailure, DefaultModel>> register(
       {required String phoneOrMail,
-      required String name,
-      required String password}) async {
+        required String name,
+        required String password}) async {
     String sessionIddd = await getSessionId(phone: "admin", password: "admin");
     if (sessionIddd == 'error') {
       return Left(ServerFailure(message: "server_error".tr()));
@@ -398,9 +400,9 @@ class ServiceApi {
       final response = await dio.get(
         level == "all"
             ? EndPoints.getProvidersWithFilters +
-                'filter=[["user_type","=","provider"],["specialization_id","=",$categoryId]]'
+            'filter=[["user_type","=","provider"],["specialization_id","=",$categoryId]]'
             : EndPoints.getProvidersWithFilters +
-                'filter=[["user_type","=","provider"],["level","=","$level"],["specialization_id","=",$categoryId]]',
+            'filter=[["user_type","=","provider"],["level","=","$level"],["specialization_id","=",$categoryId]]',
         options: Options(
           headers: {"Cookie": "frontend_lang=en_US;session_id=$sessionId"},
         ),
@@ -447,6 +449,57 @@ class ServiceApi {
       return Left(ServerFailure());
     }
   }
+// get states
+  Future<Either<Failure, GetStatesModel>> getStates() async {
+    try {
+      String? sessionId = await Preferences.instance.getSessionId();
+      final response = await dio.get(
+        EndPoints.getStates +
+            '?query={id,name}',
+        //+'&page_size=$pageSize&page=$page',
+        options: Options(
+          headers: {"Cookie": "frontend_lang=en_US;session_id=$sessionId"},
+        ),
+      );
+      return Right(GetStatesModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+  //get  orderCount
+  Future<Either<Failure, GetCountOrder>> getOrderCount({required int id}) async {
+    try {
+      String? sessionId = await Preferences.instance.getSessionId();
+      final response = await dio.get(
+        EndPoints.getOrderCount +
+            '?filter=[["user_id", "=", 12],["state_id", "=",${id}]]&query={}&page_size=1',
+        //+'&page_size=$pageSize&page=$page',
+        options: Options(
+          headers: {"Cookie": "frontend_lang=en_US;session_id=$sessionId"},
+        ),
+      );
+      return Right(GetCountOrder.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+  //get all orders
+  Future<Either<Failure, GetCountOrder>> getAllOrdersCount() async {
+    try {
+      String? sessionId = await Preferences.instance.getSessionId();
+      final response = await dio.get(
+        EndPoints.getOrderCount +
+            '?filter=[["user_id", "=", 12]]&query={}&page_size=1',
+        //+'&page_size=$pageSize&page=$page',
+        options: Options(
+          headers: {"Cookie": "frontend_lang=en_US;session_id=$sessionId"},
+        ),
+      );
+      return Right(GetCountOrder.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
 
   /// ADD SERVICE
   Future<Either<Failure, DefaultModel>> addService({
@@ -466,42 +519,42 @@ class ServiceApi {
     try {
       final response = await dio
           .post(EndPoints.order,
-              options: Options(
-                headers: {"Cookie": "session_id=$sessionId"},
-              ),
-              body: servicePrice == null
-                  ? {
-                      "params": {
-                        "data": {
-                          "client_id": int.parse(userId),
-                          "category_id": int.parse(categoryId), //sebaka
-                          "service_id": int.parse(serviceId), // tarkeb
-                          "provider_id": int.parse(providerId),
-                          //  "service_price": servicePrice,
-                          "quantity": qty,
-                          "level": level,
-                          "date": date
-                          // ,
-                          // "attachment_ids":["dd","fff"]
-                        }
-                      }
-                    }
-                  : {
-                      "params": {
-                        "data": {
-                          "client_id": int.parse(userId),
-                          "category_id": int.parse(categoryId), //sebaka
-                          "service_id": int.parse(serviceId), // tarkeb
-                          "provider_id": int.parse(providerId),
-                          "service_price": servicePrice,
-                          "quantity": qty,
-                          "level": level,
-                          "date": date
-                          // ,
-                          // "attachment_ids":["dd","fff"]
-                        }
-                      }
-                    })
+          options: Options(
+            headers: {"Cookie": "session_id=$sessionId"},
+          ),
+          body: servicePrice == null
+              ? {
+            "params": {
+              "data": {
+                "client_id": int.parse(userId),
+                "category_id": int.parse(categoryId), //sebaka
+                "service_id": int.parse(serviceId), // tarkeb
+                "provider_id": int.parse(providerId),
+                //  "service_price": servicePrice,
+                "quantity": qty,
+                "level": level,
+                "date": date
+                // ,
+                // "attachment_ids":["dd","fff"]
+              }
+            }
+          }
+              : {
+            "params": {
+              "data": {
+                "client_id": int.parse(userId),
+                "category_id": int.parse(categoryId), //sebaka
+                "service_id": int.parse(serviceId), // tarkeb
+                "provider_id": int.parse(providerId),
+                "service_price": servicePrice,
+                "quantity": qty,
+                "level": level,
+                "date": date
+                // ,
+                // "attachment_ids":["dd","fff"]
+              }
+            }
+          })
           .onError((error, stackTrace) {
         print(error.toString());
       });
@@ -650,7 +703,7 @@ class ServiceApi {
 //       return Left(ServerFailure());
 //     }
 //   }
-    Future<Either<Failure, MainOrderModel>> getOrders({String? state}) async {
+  Future<Either<Failure, MainOrderModel>> getOrders({String? state}) async {
     print(EndPoints.ordersUrl +
         (state != null
             ? ('filter=[["user_id", "=", 12],["state_id", "=", "New"]]&query={id,name,sender_street,sender_mobile,receiver_street,receiver_mobile,total_charge_amount,notes,courier_lines,state_id}')
@@ -707,21 +760,21 @@ class ServiceApi {
           ),
           body: qty == 0
               ? {
-                  "params": {
-                    "filter": [
-                      ["id", "=", orderId]
-                    ],
-                    "data": {"date": date}
-                  }
-                }
+            "params": {
+              "filter": [
+                ["id", "=", orderId]
+              ],
+              "data": {"date": date}
+            }
+          }
               : {
-                  "params": {
-                    "filter": [
-                      ["id", "=", orderId]
-                    ],
-                    "data": {"quantity": qty, "date": date}
-                  }
-                });
+            "params": {
+              "filter": [
+                ["id", "=", orderId]
+              ],
+              "data": {"quantity": qty, "date": date}
+            }
+          });
       return Right(DefaultModel.fromJson(response));
     } on ServerException {
       return Left(ServerFailure());
@@ -854,7 +907,7 @@ class ServiceApi {
     }
   }
   // nehal
-Future<Either<Failure, DefaultModel>> updateProfile({
+  Future<Either<Failure, DefaultModel>> updateProfile({
     required String name,
     //required String address,
     required String mobile,
@@ -867,9 +920,9 @@ Future<Either<Failure, DefaultModel>> updateProfile({
     try {
       final response = await dio.put(EndPoints.updatePartner,
           options: Options(
-         
-          headers: {"Cookie": "frontend_lang=en_US;session_id=$sessionId"},
-          
+
+            headers: {"Cookie": "frontend_lang=en_US;session_id=$sessionId"},
+
           ),
           body: {
             "params": {
@@ -899,9 +952,9 @@ Future<Either<Failure, DefaultModel>> updateProfile({
     try {
       String userId = await Preferences.instance.getUserId() ?? "1";
       print("lllllllllll${userId}");
-    // String? sessionId = await Preferences.instance.getSessionId();
+      // String? sessionId = await Preferences.instance.getSessionId();
       String? sessionId = await getSessionId(phone: 'admin', password: 'admin',);
-       print(sessionId);
+      print(sessionId);
       final response = await dio.get(
         EndPoints.getUserData+'&filter=[["id","=","$userId"]]',
         options: Options(
@@ -914,5 +967,5 @@ Future<Either<Failure, DefaultModel>> updateProfile({
     }
   }
 
- 
+
 }

@@ -26,7 +26,7 @@ class _OrdersdashboardState extends State<Ordersdashboard> {
       'label': 'complete',
     },
   ];
-@override
+  @override
   void initState() {
     context.read<OrdersCubit>().getStates();
     context.read<OrdersCubit>().getAllOrdersCount();
@@ -37,7 +37,7 @@ class _OrdersdashboardState extends State<Ordersdashboard> {
   @override
   Widget build(BuildContext context) {
 
-   return BlocBuilder<OrdersCubit, OrdersState>(
+    return BlocBuilder<OrdersCubit, OrdersState>(
         builder: (context, state) {
           var cubit = context.read<OrdersCubit>();
           return
@@ -72,26 +72,26 @@ class _OrdersdashboardState extends State<Ordersdashboard> {
                           children: [
                             Icon(Icons.local_shipping, color: Colors.white,
                               size: 30.sp,),
-                           Row(children: [
-                             Text(
-                               'All orders :',
-                               style: TextStyle(color: Colors.white,
-                                   fontSize: 14.sp,
-                                   fontWeight: FontWeight.bold),
-                             ),
-                             Text(
-                               cubit.allOrderCount.toString(),
-                               style: TextStyle(color: Colors.white,
-                                   fontSize: 14.sp,
-                                   fontWeight: FontWeight.bold),
-                             ),
-                           ],)
+                            Row(children: [
+                              Text(
+                                'All orders :',
+                                style: TextStyle(color: Colors.white,
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                cubit.allOrderCount.toString(),
+                                style: TextStyle(color: Colors.white,
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],)
 
                           ],
                         ),
                         const SizedBox(height: 8),
 
-                         SizedBox(height: 16.h),
+                        SizedBox(height: 16.h),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
