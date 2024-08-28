@@ -4,6 +4,8 @@ import 'package:delifast/features/orders/cubit/state.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../core/utils/app_export.dart';
+
 class OrdersCubit extends Cubit<OrdersState> {
   OrdersCubit(this.api) : super(OrdersInitial()) {
     getOrders();
@@ -32,4 +34,24 @@ class OrdersCubit extends Cubit<OrdersState> {
       },
     );
   }
+  //get search
+  TextEditingController searchController = TextEditingController();
+  MainOrderModel searchedproductsModel = MainOrderModel();
+  searchProducts({
+required  BuildContext? contexttt,
+    required String searchKey,
+  }) async {
+    searchedproductsModel = MainOrderModel();
+    final response = await api.searchOrder( searchKey: searchKey);
+    response.fold((l) => emit(AllProductsFailureState()), (r) {
+       if( r.result!.isEmpty){
+         errorGetBar("لا يوجد نتائج");
+       }else{
+         searchedproductsModel = r;
+         Navigator.pushNamed(contexttt, Routes.ordersRoutes);
+       }
+      emit(AllProductsSuccessState());
+    });
+  }
+
 }

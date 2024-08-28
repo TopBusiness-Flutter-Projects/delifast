@@ -109,6 +109,8 @@
     "Notifications": "Notifications",
     "Account": "Account",
     "Delivered" : "Delivered",
-    "Orders": "Orders"
+    "Orders": "Orders",
+    "passeError": "The New password and the confirmation password are not the same",
+    "passwordNotSame": "The Password id not The same"
 
 }
