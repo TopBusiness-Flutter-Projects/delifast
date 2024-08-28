@@ -25,3 +25,7 @@ class Success3GetName extends OrdersState {}
 class Loading3GetName extends OrdersState {}
 
 class Error3GetName extends OrdersState {}
+
+class AllProductsFailureState extends OrdersState {}
+
+class AllProductsSuccessState extends OrdersState {}
