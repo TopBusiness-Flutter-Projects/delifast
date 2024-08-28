@@ -2,6 +2,8 @@ class EndPoints {
   static const String baseUrl = "https://demo17.topbuziness.com";
   // static String baseUrl = "";
   static String db = "demo17.topbuziness.com";
+  static String getStates = "/api/dev.courier.stages/";
+  static String getOrderCount = "/api/dev.courier.request/";
 
   ///
   static String auth = "$baseUrl/auth/";

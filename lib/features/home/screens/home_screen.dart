@@ -55,7 +55,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: BlocBuilder<OrdersCubit, OrdersState>(
+    return SafeArea(
+        child:
+        BlocBuilder<OrdersCubit, OrdersState>(
       builder: (context, state) {
         var cubit = context.read<OrdersCubit>();
         return Scaffold(
