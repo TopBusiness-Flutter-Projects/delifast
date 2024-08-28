@@ -14,6 +14,7 @@ class EndPoints {
   static String authWithSession = "$baseUrl/web/session/authenticate";
 
   static String allCategoryProducts = '$baseUrl/api/product.product/';
+  static String searchOrder = '$baseUrl/api/dev.courier.request/';
   static String getOffers =
       '$baseUrl/api/offer/?query={ad_url,id,offer_des,service_offer,service_id,offer_type,image}';
   static String getProviders =

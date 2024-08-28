@@ -109,7 +109,9 @@
     "Notifications": "Notifications",
     "Account": "Account",
     "Delivered" : "Delivered",
-    "Orders": "Orders" ,  "no_data":"There are no orders"
+    "Orders": "Orders" ,  "no_data":"There are no orders",
 
+    "passeError": "The New password and the confirmation password are not the same",
+    "passwordNotSame": "The Password id not The same"
 
 }

@@ -342,6 +342,7 @@ class ServiceApi {
     }
   }
 
+
   Future<Either<Failure, GetProviderRatesModel>> getProviderRates(
       {required int providerId}) async {
     try {
@@ -409,7 +410,26 @@ class ServiceApi {
       return Left(ServerFailure());
     }
   }
+//get product  by search
+  Future<Either<Failure, MainOrderModel>> searchOrder(
+      {required String searchKey}) async {
+    try {
+      String? sessionId = await Preferences.instance.getSessionId();
+      final response = await dio.get(
+        EndPoints.searchOrder +
+            '/?query={id,name,sender_street,sender_mobile,receiver_street,receiver_mobile,total_charge_amount,notes,courier_lines}&filter=[["name", "ilike", "$searchKey"]]',
+        //+'&page_size=$pageSize&page=$page',
+        options: Options(
+          headers: {"Cookie": "frontend_lang=en_US;session_id=$sessionId"},
+        ),
+      );
+      return Right(MainOrderModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
 
+  //
   Future<Either<Failure, GetProviderDetailsModel>> getClientDetails(
       {required int clientId}) async {
     try {
@@ -856,14 +876,14 @@ class ServiceApi {
                 [
                   "user_ids",
                   "=",
-                  [int.tryParse(userId)]
+                  ["12"]
                 ]
               ],
               "data": {
                 "name": "$name", //base_64
                 "mobile": "$mobile",
                 "street": "$street",
-                "new_password": "$newpass",
+                "password": "$newpass",
                 "email": "$email",
               }
             }

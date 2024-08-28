@@ -23,7 +23,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     });
 
-
+// 1:check pasword  == sharedpref
+// 2: new pass== confirm pass
   }
   @override
   Widget build(BuildContext context) {
@@ -129,6 +130,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: CustomTextField2(
+
                           isPassword: cubit.isHiddenConfirm,
                           suffixIcon: IconButton(
                             onPressed: () {

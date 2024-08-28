@@ -50,6 +50,8 @@ print ("llll : $mySessionId");
   login(BuildContext context,
       {required String phoneOrMail, required String password}) async {   
     emit(LoadingLoginState());
+
+
     AppWidget.createProgressDialog(context, 'انتظر');
     final response = await api.login(phoneOrMail, password);
     response.fold((l) {
@@ -64,8 +66,12 @@ print ("llll : $mySessionId");
         emit(SuccessLoginState());
       //  await Preferences.instance.setSessionId("07ae3f8fc94837d3915c99466591fc60664baf6e");        
            await Preferences.instance.setUserName(phoneOrMail);
-          await Preferences.instance.setUserPass(password);     
+          await Preferences.instance.setUserPass(password);
+          await Preferences.instance.getUserPass();
+          print(password);
         Navigator.pop(context);
+        passwordController.clear();
+        EmailController.clear();
         Preferences.instance.setUserId(r.result!.userContext!.uid.toString());
         Navigator.pushNamedAndRemoveUntil(
             context, Routes.mainRoute, (route) => false);
