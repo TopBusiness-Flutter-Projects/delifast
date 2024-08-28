@@ -70,6 +70,9 @@ class EndPoints {
  static String updatePartner = "$baseUrl/api/res.users/";
   static String getUserData =
       '$baseUrl/api/res.users/?query={id, name,mobile,street,email,image_1920}';
+  static String getOrderCategoryName = '$baseUrl/api/dev.courier.category/';
+  static String getOrderName = '$baseUrl/api/courier.request.lines/';
+  static String getStateOrderName = '$baseUrl/api/dev.courier.stages/';
 }
 
 

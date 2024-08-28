@@ -72,50 +72,7 @@ class OrdersCubit extends Cubit<OrdersState> {
           item.count = await getOrderCount(item.id!); // Assuming `count` is a field in your model where you want to store the total count
         }
       }
-      emit(StatesLoaded());
+      emit(AllProductsSuccessState());
     });
   }
-
-//get count
-
-  Future<int>? getOrderCount(int id) async {
-    print("loading");
-    emit(StatesLoading());
-    int totalCount = 0;
-    final response = await api.getOrderCount(id: id);
-
-    response.fold((l) {
-
-      emit(StatesError());
-
-
-    }, (r) {
-     // getStatesModel = r;
-       totalCount = r.totalPages ?? 0;
-
-      emit(StatesLoaded());
-    });
-return totalCount;
-  }
-  GetCountOrder?getCountOrder;
-  //get all orders count
-  Future<int>? getAllOrdersCount() async {
-    print("loading");
-    emit(StatesLoading());
-    int totalCount = 0;
-    final response = await api.getAllOrdersCount();
-
-    response.fold((l) {
-      emit(StatesError());
-    }, (r) {
-      // getStatesModel = r;
-      totalCount = r.totalPages ?? 0;
-
-      emit(StatesLoaded());
-    });
-    return totalCount;
-  }
-
-
-
 }
