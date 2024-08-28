@@ -52,6 +52,7 @@ class _MainScreenState extends State<MainScreen> {
                   icon: Icon(Icons.list_alt),
                   label: 'Orders',
                 ),
+           //     ),
                 BottomNavigationBarItem(
                   icon: CircleAvatar(
                       backgroundColor: AppColors.primary,
