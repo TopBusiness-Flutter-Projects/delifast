@@ -7,13 +7,13 @@ import '../../../core/models/get_order_name.dart';
 
 class OrdersCubit extends Cubit<OrdersState> {
   OrdersCubit(this.api) : super(OrdersInitial()) {
-    getOrders();
+    getOrders(isFilter: false);
   }
   ServiceApi api;
 
   MainOrderModel? mainOrderModel;
   MainOrderModel? mainOrderModelFilter;
-  Future getOrders({String? state}) async {
+  Future getOrders({String? state, required bool isFilter}) async {
     emit(OrdersLoading());
     final result = await api.getOrders(state: state);
     result.fold(
@@ -21,12 +21,27 @@ class OrdersCubit extends Cubit<OrdersState> {
         emit(OrdersError());
       },
       (r) {
-        if (state == null) {
+        if (isFilter == false) {
           mainOrderModel = r;
+
+          for (int i = 0; i < r.result!.length; i++) {
+            getOrderNameCategory(r.result![i].categoryId.toString(), i,
+                isFilter: isFilter);
+            getStateOfOrder(r.result![i].stateId.toString(), i,
+                isFilter: isFilter);
+            getNameOfOrder(i, r.result![i].courierLines ?? [],
+                isFilter: isFilter);
+          }
         } else {
           mainOrderModelFilter = r;
-
-          state = null;
+          for (int i = 0; i < r.result!.length; i++) {
+            getOrderNameCategory(r.result![i].categoryId.toString(), i,
+                isFilter: isFilter);
+            getStateOfOrder(r.result![i].stateId.toString(), i,
+                isFilter: isFilter);
+            getNameOfOrder(i, r.result![i].courierLines ?? [],
+                isFilter: isFilter);
+          }
         }
 
         emit(OrdersSuccess());
@@ -34,20 +49,73 @@ class OrdersCubit extends Cubit<OrdersState> {
     );
   }
 
-  String? name;
-  getOrderName(String id, int? index) async {
-    var res = await api.getNameOfOrder(id);
+  getOrderNameCategory(String id, int? index, {required bool isFilter}) async {
+    emit(LoadingGetName());
+    var res = await api.getCategoryNameOfOrder(id);
 
     res.fold((l) {
+      emit(ErrorGetName());
+
       return GetOrderNameModel(name: '');
     }, (r) {
-      mainOrderModel == null
-          ? null
-          : mainOrderModel?.result?[index ?? 0].currentName = r.name;
-      mainOrderModelFilter == null
-          ? null
-          : mainOrderModelFilter?.result?[index ?? 0].currentName = r.name;
+      if (isFilter == false) {
+        mainOrderModel?.result?[index ?? 0].currentNameOfCategory = r.name;
+      } else {
+        mainOrderModelFilter?.result?[index ?? 0].currentNameOfCategory =
+            r.name;
+      }
+
+      emit(SuccessGetName());
       return r;
     });
+  }
+
+  getStateOfOrder(String id, int? index, {required bool isFilter}) async {
+    emit(Loading2GetName());
+    var res = await api.getStateOfOrder(id);
+
+    res.fold((l) {
+      emit(Error2GetName());
+
+      return GetOrderNameModel(name: '');
+    }, (r) {
+      if (isFilter == false) {
+        mainOrderModel?.result?[index ?? 0].stateName = r.name;
+      } else {
+        mainOrderModelFilter?.result?[index ?? 0].stateName = r.name;
+      }
+      emit(Success2GetName());
+      return r;
+    });
+  }
+
+  getNameOfOrder(int index, List data, {required bool isFilter}) async {
+    emit(Loading3GetName());
+
+    for (int i = 0; i < data.length; i++) {
+      final res = await api.getNamesOfOrder(
+          mainOrderModel!.result?[index].courierLines?[i].toString() ?? '1');
+      res.fold((l) {
+        emit(Error3GetName());
+      }, (r) {
+        if (mainOrderModel != null &&
+            isFilter == false &&
+            mainOrderModel?.result != []) {
+          mainOrderModel!.result?[index].orderName = '';
+
+          mainOrderModel!.result?[index].orderName = '';
+          mainOrderModel!.result?[index].orderName += '${r.name ?? ''}, ';
+        }
+        if (mainOrderModelFilter != null &&
+            isFilter == true &&
+            mainOrderModelFilter?.result != []) {
+          mainOrderModelFilter!.result?[index].orderName = '';
+
+          mainOrderModelFilter?.result?[index].orderName += '${r.name ?? ''}, ';
+        }
+
+        emit(Success3GetName());
+      });
+    }
   }
 }

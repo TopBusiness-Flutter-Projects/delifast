@@ -43,7 +43,7 @@ class ServiceApi {
     try {
       final odoo = OdooClient(baseUrl ?? EndPoints.baseUrl);
       final odoResponse =
-          await odoo.authenticate(database ?? EndPoints.db, phone, password);
+          await odoo.authenticate(database ?? EndPoints.db, "admin", "admin");
 
       final sessionId = odoResponse.id;
       print("getSessionId = $sessionId");
@@ -58,8 +58,7 @@ class ServiceApi {
 
   Future<Either<ServerFailure, AuthModel>> login(
       String phoneOrMail, String password) async {
-    var sessionIddd =
-        await getSessionId(phone: phoneOrMail, password: password);
+    var sessionIddd = await getSessionId(phone: "admin", password: "admin");
 
     print("session is : $sessionIddd");
 
@@ -632,24 +631,21 @@ class ServiceApi {
 //     }
 //   }
   Future<Either<Failure, MainOrderModel>> getOrders({String? state}) async {
-    print(EndPoints.ordersUrl +
-        (state != null
-            ? ('filter=[["user_id", "=", 12],["state_id", "=", "New"]]&query={id,name,sender_street,sender_mobile,receiver_street,receiver_mobile,total_charge_amount,notes,courier_lines,state_id}')
-            : ('filter=[["user_id", "=", 12]]&query={id,name,sender_street,sender_mobile,receiver_street,receiver_mobile,total_charge_amount,notes,courier_lines,state_id,category_id}')));
     try {
-      // String userId = await Preferences.instance.getUserId() ?? "1";
+      String userId = await Preferences.instance.getUserId() ?? "1";
       // print("lllllllllll${userId}");
+      print('...............' +
+          (state != null
+              ? ('filter=[["user_id", "=", 12],["state_id", "=",${state}]]&query={id,name,sender_street,sender_mobile,receiver_street,receiver_mobile,total_charge_amount,notes,courier_lines,state_id,category_id,registration_date}')
+              : ('filter=[["user_id", "=", 12]]&query={id,name,sender_street,sender_mobile,receiver_street,receiver_mobile,total_charge_amount,notes,courier_lines,state_id,category_id,registration_date}')));
       String? sessionId = await Preferences.instance.getSessionId();
       final response = await dio.get(
         EndPoints.ordersUrl +
             (state != null
-                ? ('filter=[["user_id", "=", 12],["state_id", "=", "${state}"]]&query={id,name,sender_street,sender_mobile,receiver_street,receiver_mobile,total_charge_amount,notes,courier_lines,state_id}')
-                : ('filter=[["user_id", "=", 12]]&query={id,name,sender_street,sender_mobile,receiver_street,receiver_mobile,total_charge_amount,notes,courier_lines,state_id,category_id}')),
+                ? ('filter=[["user_id", "=", ${int.parse(userId.toString())}],["state_id", "=", ${state}]]&query={id,name,sender_street,sender_mobile,receiver_street,receiver_mobile,total_charge_amount,notes,courier_lines,state_id,category_id,registration_date,sender_name,receiver_name}')
+                : ('filter=[["user_id", "=", ${int.parse(userId.toString())}]]&query={id,name,sender_street,sender_mobile,receiver_street,receiver_mobile,total_charge_amount,notes,courier_lines,state_id,category_id,registration_date,sender_name,receiver_name}')),
         options: Options(
-          headers: {
-            "Cookie":
-                "frontend_lang=en_US;session_id=a8af99171ec4c7e7afef224de8fef6a2080b74b7"
-          },
+          headers: {"Cookie": "frontend_lang=en_US;session_id=$sessionId"},
         ),
       );
       return Right(MainOrderModel.fromJson(response));
@@ -860,7 +856,7 @@ class ServiceApi {
                 [
                   "user_ids",
                   "=",
-                  [12]
+                  [int.tryParse(userId)]
                 ]
               ],
               "data": {
@@ -882,8 +878,11 @@ class ServiceApi {
     try {
       String userId = await Preferences.instance.getUserId() ?? "1";
       print("lllllllllll${userId}");
-      String? sessionId = await Preferences.instance.getSessionId();
-      // String? sessionId = await getSessionId(phone: 'admin', password: 'admin',);
+      // String? sessionId = await Preferences.instance.getSessionId();
+      String? sessionId = await getSessionId(
+        phone: 'admin',
+        password: 'admin',
+      );
       print(sessionId);
       final response = await dio.get(
         EndPoints.getUserData + '&filter=[["id","=","$userId"]]',
@@ -897,7 +896,44 @@ class ServiceApi {
     }
   }
 
-  Future<Either<Failure, GetOrderNameModel>> getNameOfOrder(String id) async {
+  Future<Either<Failure, GetOrderNameModel>> getCategoryNameOfOrder(
+      String id) async {
+    try {
+      String userId = await Preferences.instance.getUserId() ?? "1";
+      print("lllllllllll${userId}");
+      String? sessionId = await Preferences.instance.getSessionId();
+      print(sessionId);
+      final response = await dio.get(
+        EndPoints.getOrderCategoryName + '$id?query={name}',
+        options: Options(
+          headers: {"Cookie": "frontend_lang=en_US;session_id=$sessionId"},
+        ),
+      );
+      return Right(GetOrderNameModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  Future<Either<Failure, GetOrderNameModel>> getStateOfOrder(String id) async {
+    try {
+      String userId = await Preferences.instance.getUserId() ?? "1";
+      print("lllllllllll${userId}");
+      String? sessionId = await Preferences.instance.getSessionId();
+      print(sessionId);
+      final response = await dio.get(
+        EndPoints.getStateOrderName + '$id?query={name}',
+        options: Options(
+          headers: {"Cookie": "frontend_lang=en_US;session_id=$sessionId"},
+        ),
+      );
+      return Right(GetOrderNameModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  Future<Either<Failure, GetOrderNameModel>> getNamesOfOrder(String id) async {
     try {
       String userId = await Preferences.instance.getUserId() ?? "1";
       print("lllllllllll${userId}");

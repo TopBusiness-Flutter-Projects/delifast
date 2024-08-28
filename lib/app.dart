@@ -44,9 +44,9 @@ class _DelifastAppState extends State<DelifastApp> {
                 BlocProvider(
                   create: (_) => injector.serviceLocator<SplashCubit>(),
                 ),
-                 BlocProvider(
-                   create: (_) => injector.serviceLocator<LoginCubit>(),
-                 ),
+                BlocProvider(
+                  create: (_) => injector.serviceLocator<LoginCubit>(),
+                ),
                 BlocProvider(
                   create: (_) => injector.serviceLocator<MainCubit>(),
                 ),

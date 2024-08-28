@@ -4,7 +4,8 @@ class OptionButton extends StatelessWidget {
   final String icon;
   final String label;
 
-  const OptionButton({super.key,
+  const OptionButton({
+    super.key,
     required this.icon,
     required this.label,
   });
@@ -15,8 +16,8 @@ class OptionButton extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-           width: 70.w,
-           height: 70.h,
+          width: 70.w,
+          height: 70.h,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(
@@ -27,10 +28,9 @@ class OptionButton extends StatelessWidget {
           child: Image.asset(
             icon,
             color: AppColors.primary,
-
           ),
         ),
-       SizedBox(height: 2.h),
+        SizedBox(height: 2.h),
         Flexible(
           child: Text(
             label,
@@ -38,7 +38,6 @@ class OptionButton extends StatelessWidget {
             style: TextStyle(
               fontSize: 16.sp,
               color: AppColors.primary,
-
             ),
           ),
         ),

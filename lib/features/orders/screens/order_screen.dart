@@ -23,7 +23,7 @@ class _OrderScreenState extends State<OrderScreen> {
   ];
   @override
   void initState() {
-    context.read<OrdersCubit>().getOrders();
+    context.read<OrdersCubit>().getOrders(isFilter: false);
     super.initState();
   }
 
@@ -81,9 +81,11 @@ class _OrderScreenState extends State<OrderScreen> {
                     return InkWell(
                         onTap: () {
                           Navigator.pushNamed(
-                              context, Routes.ordersDetailsRoutes);
+                              context, Routes.ordersDetailsRoutes,
+                              arguments: cubit.mainOrderModel?.result?[index]);
                         },
                         child: PackageTrackingCard(
+                          isFilter: false,
                           index: index,
                           orderModel: cubit.mainOrderModel?.result?[index],
                         ));

@@ -63,8 +63,9 @@ class _DeliveredScreenState extends State<DeliveredScreen> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => orderDetails(
-                                barcode: barcode,
+                          builder: (context) => OrderDetails(
+
+                              // barcode: barcode,
                               )));
                 },
                 child: Text(barcode)),

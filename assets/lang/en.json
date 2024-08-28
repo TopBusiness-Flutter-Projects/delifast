@@ -109,6 +109,7 @@
     "Notifications": "Notifications",
     "Account": "Account",
     "Delivered" : "Delivered",
-    "Orders": "Orders"
+    "Orders": "Orders" ,  "no_data":"There are no orders"
+
 
 }

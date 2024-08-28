@@ -47,34 +47,50 @@ class OrderModel {
   dynamic receiverStreet;
   dynamic receiverMobile;
   dynamic totalChargeAmount;
+  dynamic senderName;
+
+  dynamic receiverName;
   dynamic notes;
-  dynamic currentName;
+  dynamic currentNameOfCategory;
   List<dynamic>? courierLines;
   int? stateId;
+  dynamic stateName;
+  dynamic orderName;
   dynamic categoryId;
+  dynamic registrationDate;
   OrderModel({
     this.id,
     this.name,
+    this.stateName,
     this.senderStreet,
     this.senderMobile,
+    this.orderName,
     this.receiverStreet,
     this.receiverMobile,
     this.totalChargeAmount,
     this.notes,
+    this.registrationDate,
     this.courierLines,
+    this.senderName,
+    this.receiverName,
     this.stateId,
     this.categoryId,
-    this.currentName,
+    this.currentNameOfCategory,
   });
 
   factory OrderModel.fromJson(Map<String, dynamic> json) => OrderModel(
         id: json["id"],
         name: json["name"],
+        stateName: '',
+        orderName: '',
+        receiverName: json['receiver_name'],
+        senderName: json['sender_name'],
         senderStreet: json["sender_street"],
+        registrationDate: json["registration_date"],
         senderMobile: json["sender_mobile"],
         receiverStreet: json["receiver_street"],
         receiverMobile: json["receiver_mobile"],
-        currentName: '',
+        currentNameOfCategory: '',
         totalChargeAmount: json["total_charge_amount"],
         notes: json["notes"],
         courierLines: json["courier_lines"] == null
@@ -89,11 +105,15 @@ class OrderModel {
         "name": name,
         "sender_street": senderStreet,
         "sender_mobile": senderMobile,
-        "currentName": currentName,
+        "stateName": stateName,
+        "orderName": orderName,
+        "currentName": currentNameOfCategory,
         "receiver_street": receiverStreet,
         "receiver_mobile": receiverMobile,
+        "registration_date": registrationDate,
         "total_charge_amount": totalChargeAmount,
         "notes": notes,
+        "sender_name": senderName,
         "courier_lines": courierLines == null
             ? []
             : List<dynamic>.from(courierLines!.map((x) => x)),

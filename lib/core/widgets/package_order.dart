@@ -12,9 +12,11 @@ class PackageTrackingCard extends StatefulWidget {
     super.key,
     this.orderModel,
     this.index,
+    required this.isFilter,
   });
   final OrderModel? orderModel;
   final int? index;
+  final bool isFilter;
 
   @override
   State<PackageTrackingCard> createState() => _PackageTrackingCardState();
@@ -25,9 +27,17 @@ class _PackageTrackingCardState extends State<PackageTrackingCard> {
   void initState() {
     print('ssssssss${widget.orderModel?.name.toString()}');
     print('ssssssss${widget.orderModel?.id.toString()}');
-    context
-        .read<OrdersCubit>()
-        .getOrderName(widget.orderModel?.id.toString() ?? '', widget.index);
+    context.read<OrdersCubit>().getOrderNameCategory(
+        widget.orderModel?.categoryId.toString() ?? '', widget.index,
+        isFilter: widget.isFilter);
+    context.read<OrdersCubit>().getStateOfOrder(
+        widget.orderModel?.stateId.toString() ?? '', widget.index,
+        isFilter: widget.isFilter);
+
+    context.read<OrdersCubit>().getNameOfOrder(
+        widget.index ?? 0, widget.orderModel?.courierLines ?? [],
+        isFilter: widget.isFilter);
+
     super.initState();
   }
 
@@ -39,7 +49,7 @@ class _PackageTrackingCardState extends State<PackageTrackingCard> {
         return InkWell(
           onTap: () {
             Navigator.pushNamed(context, Routes.ordersDetailsRoutes,
-                arguments: {widget.orderModel?.name});
+                arguments: widget.orderModel);
           },
           child: Container(
             decoration: BoxDecoration(
@@ -75,8 +85,9 @@ class _PackageTrackingCardState extends State<PackageTrackingCard> {
                         children: <Widget>[
                           Text(
                             cubit.mainOrderModel?.result?[widget.index!]
-                                    .currentName ??
+                                    .orderName ??
                                 '',
+                            maxLines: 1,
                             style: TextStyle(
                                 fontSize: 18.sp, fontWeight: FontWeight.bold),
                           ),
@@ -129,7 +140,7 @@ class _PackageTrackingCardState extends State<PackageTrackingCard> {
                   Padding(
                     padding: EdgeInsets.all(8.0.sp),
                     child: Text(
-                      'Status: Your package is new${widget.orderModel?.stateId?.toString() ?? ''}',
+                      'Status: Your package is ${widget.orderModel?.stateName?.toString() ?? ''}',
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
