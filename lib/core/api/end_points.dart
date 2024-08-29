@@ -72,6 +72,9 @@ class EndPoints {
   static String getOrderCategoryName = '$baseUrl/api/dev.courier.category/';
   static String getOrderName = '$baseUrl/api/courier.request.lines/';
   static String getStateOrderName = '$baseUrl/api/dev.courier.stages/';
+  static String getStateOfOrderDetails =
+      '$baseUrl/api/dev.courier.stages/?query={id,name}';
+  static String updateOrder = "$baseUrl/api/dev.courier.request/";
 }
 
 //d

@@ -54,7 +54,7 @@ dependencies:
   odoo_rpc: ^0.5.4
   easy_debounce: ^2.0.3
 
-  url_launcher: ^6.1.7
+  url_launcher: ^6.3.0
   flutter_screenutil: ^5.9.1
   carousel_slider: ^4.2.1
   conditional_builder_null_safety: ^0.0.6
@@ -72,6 +72,7 @@ dependencies:
   ai_barcode_scanner: ^3.4.3
 
   flutter_html:
+  flutter_widget_from_html: ^0.15.2
 dev_dependencies:
   flutter_test:
     sdk: flutter

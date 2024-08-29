@@ -93,7 +93,7 @@ class ShipmentWidget extends StatelessWidget {
                         style: const TextStyle(color: Colors.grey)),
                     SizedBox(height: 4.h),
                     Text(model?.receiverStreet ?? '',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
+                        style: const TextStyle(fontWeight: FontWeight.bold)),
                   ],
                 ),
               ],
@@ -132,7 +132,7 @@ class ShipmentWidget extends StatelessWidget {
                                 style: TextStyle(
                                     fontSize: 16.sp,
                                     fontWeight: FontWeight.w700)),
-                            Text("500",
+                            Text((model?.totalChargeAmount ?? '').toString(),
                                 style: TextStyle(
                                     color: AppColors.primary,
                                     fontSize: 16.sp,

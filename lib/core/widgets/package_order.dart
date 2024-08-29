@@ -28,7 +28,10 @@ class _PackageTrackingCardState extends State<PackageTrackingCard> {
     print('ssssssss${widget.orderModel?.name.toString()}');
     print('ssssssss${widget.orderModel?.id.toString()}');
     context.read<OrdersCubit>().getOrderNameCategory(
-        widget.orderModel?.categoryId.toString() ?? '', widget.index,
+        widget.orderModel?.categoryId == false
+            ? ''
+            : widget.orderModel?.categoryId.toString() ?? '',
+        widget.index,
         isFilter: widget.isFilter);
     context.read<OrdersCubit>().getStateOfOrder(
         widget.orderModel?.stateId.toString() ?? '', widget.index,
@@ -106,7 +109,7 @@ class _PackageTrackingCardState extends State<PackageTrackingCard> {
                     icon: Icons.radio_button_checked_rounded,
                     color: Colors.grey,
                     text: "from".tr(),
-                    location: widget.orderModel?.senderMobile.toString() ?? '',
+                    location: widget.orderModel?.senderStreet.toString() ?? '',
                   ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -125,7 +128,7 @@ class _PackageTrackingCardState extends State<PackageTrackingCard> {
                               style: const TextStyle(color: Colors.grey)),
                           SizedBox(height: 4.h),
                           Text(
-                              widget.orderModel?.receiverMobile.toString() ??
+                              widget.orderModel?.receiverStreet.toString() ??
                                   '',
                               style: TextStyle(fontWeight: FontWeight.bold)),
                         ],

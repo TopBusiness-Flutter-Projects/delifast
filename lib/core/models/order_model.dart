@@ -48,7 +48,6 @@ class OrderModel {
   dynamic receiverMobile;
   dynamic totalChargeAmount;
   dynamic senderName;
-
   dynamic receiverName;
   dynamic notes;
   dynamic currentNameOfCategory;
@@ -58,6 +57,15 @@ class OrderModel {
   dynamic orderName;
   dynamic categoryId;
   dynamic registrationDate;
+
+  dynamic outOfDeliveryStDate;
+  dynamic newStDate;
+  dynamic inTransitStDate;
+  dynamic dispatchedStDate;
+  dynamic deliveredStDate;
+  dynamic collectedStDate;
+  dynamic cancelledStDate;
+  dynamic arrivedStDate;
   OrderModel({
     this.id,
     this.name,
@@ -76,6 +84,14 @@ class OrderModel {
     this.stateId,
     this.categoryId,
     this.currentNameOfCategory,
+    this.outOfDeliveryStDate,
+    this.newStDate,
+    this.inTransitStDate,
+    this.dispatchedStDate,
+    this.deliveredStDate,
+    this.collectedStDate,
+    this.cancelledStDate,
+    this.arrivedStDate,
   });
 
   factory OrderModel.fromJson(Map<String, dynamic> json) => OrderModel(
@@ -98,6 +114,14 @@ class OrderModel {
             : List<int>.from(json["courier_lines"]!.map((x) => x)),
         stateId: json["state_id"],
         categoryId: json["category_id"],
+        outOfDeliveryStDate: json["out_of_delivery_st_date"],
+        newStDate: json["new_st_date"],
+        inTransitStDate: json["in_transit_st_date"],
+        dispatchedStDate: json["dispatched_st_date"],
+        deliveredStDate: json["delivered_st_date"],
+        collectedStDate: json["collected_st_date"],
+        cancelledStDate: json["cancelled_st_date"],
+        arrivedStDate: json["arrived_st_date"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -119,5 +143,13 @@ class OrderModel {
             : List<dynamic>.from(courierLines!.map((x) => x)),
         "state_id": stateId,
         "category_id": categoryId,
+        "out_of_delivery_st_date": outOfDeliveryStDate,
+        "new_st_date": newStDate,
+        "in_transit_st_date": inTransitStDate,
+        "dispatched_st_date": dispatchedStDate,
+        "delivered_st_date": deliveredStDate,
+        "collected_st_date": collectedStDate,
+        "cancelled_st_date": cancelledStDate,
+        "arrived_st_date": arrivedStDate,
       };
 }

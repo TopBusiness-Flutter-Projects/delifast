@@ -29,6 +29,7 @@ import '../error/exceptions.dart';
 import '../error/failures.dart';
 import '../models/get_order_name.dart';
 import '../models/login_model.dart';
+import '../models/main_state_model.dart';
 import '../preferences/preferences.dart';
 
 class ServiceApi {
@@ -342,7 +343,6 @@ class ServiceApi {
     }
   }
 
-
   Future<Either<Failure, GetProviderRatesModel>> getProviderRates(
       {required int providerId}) async {
     try {
@@ -410,6 +410,7 @@ class ServiceApi {
       return Left(ServerFailure());
     }
   }
+
 //get product  by search
   Future<Either<Failure, MainOrderModel>> searchOrder(
       {required String searchKey}) async {
@@ -417,7 +418,7 @@ class ServiceApi {
       String? sessionId = await Preferences.instance.getSessionId();
       final response = await dio.get(
         EndPoints.searchOrder +
-            '/?query={id,name,sender_street,sender_mobile,receiver_street,receiver_mobile,total_charge_amount,notes,courier_lines}&filter=[["name", "ilike", "$searchKey"]]',
+            '?query={id,name,sender_street,sender_mobile,receiver_street,receiver_mobile,total_charge_amount,notes,courier_lines,state_id,category_id,registration_date,sender_name,receiver_name,out_of_delivery_st_date,new_st_date,in_transit_st_date,dispatched_st_date,delivered_st_date,collected_st_date,cancelled_st_date,arrived_st_date}&filter=[["name", "ilike", "$searchKey"]]',
         //+'&page_size=$pageSize&page=$page',
         options: Options(
           headers: {"Cookie": "frontend_lang=en_US;session_id=$sessionId"},
@@ -662,8 +663,8 @@ class ServiceApi {
       final response = await dio.get(
         EndPoints.ordersUrl +
             (state != null
-                ? ('filter=[["user_id", "=", ${int.parse(userId.toString())}],["state_id", "=", ${state}]]&query={id,name,sender_street,sender_mobile,receiver_street,receiver_mobile,total_charge_amount,notes,courier_lines,state_id,category_id,registration_date,sender_name,receiver_name}')
-                : ('filter=[["user_id", "=", ${int.parse(userId.toString())}]]&query={id,name,sender_street,sender_mobile,receiver_street,receiver_mobile,total_charge_amount,notes,courier_lines,state_id,category_id,registration_date,sender_name,receiver_name}')),
+                ? ('filter=[["user_id", "=", ${int.parse(userId.toString())}],["state_id", "=", ${state}]]&query={id,name,sender_street,sender_mobile,receiver_street,receiver_mobile,total_charge_amount,notes,courier_lines,state_id,category_id,registration_date,sender_name,receiver_name,out_of_delivery_st_date,new_st_date,in_transit_st_date,dispatched_st_date,delivered_st_date,collected_st_date,cancelled_st_date,arrived_st_date}')
+                : ('filter=[["user_id", "=", ${int.parse(userId.toString())}]]&query={id,name,sender_street,sender_mobile,receiver_street,receiver_mobile,total_charge_amount,notes,courier_lines,state_id,category_id,registration_date,sender_name,receiver_name,out_of_delivery_st_date,new_st_date,in_transit_st_date,dispatched_st_date,delivered_st_date,collected_st_date,cancelled_st_date,arrived_st_date}')),
         options: Options(
           headers: {"Cookie": "frontend_lang=en_US;session_id=$sessionId"},
         ),
@@ -689,40 +690,6 @@ class ServiceApi {
         ),
       );
       return Right(GetOrdersDetailsModel.fromJson(response));
-    } on ServerException {
-      return Left(ServerFailure());
-    }
-  }
-
-  Future<Either<Failure, DefaultModel>> updateOrder({
-    required int orderId,
-    required String date,
-    required int qty,
-  }) async {
-    String? sessionId = await Preferences.instance.getSessionId();
-    try {
-      final response = await dio.put(EndPoints.order,
-          options: Options(
-            headers: {"Cookie": "session_id=$sessionId"},
-          ),
-          body: qty == 0
-              ? {
-                  "params": {
-                    "filter": [
-                      ["id", "=", orderId]
-                    ],
-                    "data": {"date": date}
-                  }
-                }
-              : {
-                  "params": {
-                    "filter": [
-                      ["id", "=", orderId]
-                    ],
-                    "data": {"quantity": qty, "date": date}
-                  }
-                });
-      return Right(DefaultModel.fromJson(response));
     } on ServerException {
       return Left(ServerFailure());
     }
@@ -966,6 +933,58 @@ class ServiceApi {
         ),
       );
       return Right(GetOrderNameModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  Future<Either<Failure, MainStateModel>> getStateOfOrderDetails() async {
+    try {
+      // String userId = await Preferences.instance.getUserId() ?? "1";
+      String? sessionId = await Preferences.instance.getSessionId();
+      print(sessionId);
+      final response = await dio.get(
+        EndPoints.getStateOfOrderDetails,
+        options: Options(
+          headers: {"Cookie": "frontend_lang=en_US;session_id=$sessionId"},
+        ),
+      );
+      return Right(MainStateModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  Future<Either<Failure, DefaultModel>> updateOrder({
+    required String orderId,
+    required String date,
+    required int stateId,
+  }) async {
+    String? sessionId = await Preferences.instance.getSessionId();
+    try {
+      final response = await dio.put(EndPoints.updateOrder,
+          options: Options(
+            headers: {"Cookie": "session_id=$sessionId"},
+          ),
+          body: {
+            "params": {
+              "filter": [
+                ["id", "=", orderId]
+              ],
+              "data": {
+                "state_id": stateId,
+                if (stateId == 1) "new_st_date": date,
+                if (stateId == 2) "collected_st_date": date,
+                if (stateId == 3) "dispatched_st_date": date,
+                if (stateId == 4) "in_transit_st_date": date,
+                if (stateId == 5) "arrived_st_date": date,
+                if (stateId == 6) "out_of_delivery_st_date": date,
+                if (stateId == 7) "delivered_st_date": date,
+                if (stateId == 8) "cancelled_st_date": date,
+              }
+            }
+          });
+      return Right(DefaultModel.fromJson(response));
     } on ServerException {
       return Left(ServerFailure());
     }

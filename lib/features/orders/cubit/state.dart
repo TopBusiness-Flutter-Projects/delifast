@@ -29,3 +29,7 @@ class Error3GetName extends OrdersState {}
 class AllProductsFailureState extends OrdersState {}
 
 class AllProductsSuccessState extends OrdersState {}
+
+class SuccessGetSearchOrder extends OrdersState {}
+class Success3GetSearchOrder extends OrdersState {}
+class Success2GetSearchOrder extends OrdersState {}

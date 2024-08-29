@@ -25,7 +25,11 @@ class OrdersCubit extends Cubit<OrdersState> {
           mainOrderModel = r;
 
           for (int i = 0; i < r.result!.length; i++) {
-            getOrderNameCategory(r.result![i].categoryId.toString(), i,
+            getOrderNameCategory(
+                r.result![i].categoryId == false
+                    ? ''
+                    : r.result![i].categoryId.toString(),
+                i,
                 isFilter: isFilter);
             getStateOfOrder(r.result![i].stateId.toString(), i,
                 isFilter: isFilter);
@@ -35,7 +39,11 @@ class OrdersCubit extends Cubit<OrdersState> {
         } else {
           mainOrderModelFilter = r;
           for (int i = 0; i < r.result!.length; i++) {
-            getOrderNameCategory(r.result![i].categoryId.toString(), i,
+            getOrderNameCategory(
+                r.result![i].categoryId == false
+                    ? ''
+                    : r.result![i].categoryId.toString(),
+                i,
                 isFilter: isFilter);
             getStateOfOrder(r.result![i].stateId.toString(), i,
                 isFilter: isFilter);
@@ -56,17 +64,17 @@ class OrdersCubit extends Cubit<OrdersState> {
     res.fold((l) {
       emit(ErrorGetName());
 
-      return GetOrderNameModel(name: '');
+      GetOrderNameModel(name: '');
     }, (r) {
       if (isFilter == false) {
-        mainOrderModel?.result?[index ?? 0].currentNameOfCategory = r.name;
+        mainOrderModel?.result?[index ?? 0].currentNameOfCategory =
+            r.name ?? 'other category';
       } else {
         mainOrderModelFilter?.result?[index ?? 0].currentNameOfCategory =
-            r.name;
+            r.name ?? 'other category';
       }
 
       emit(SuccessGetName());
-      return r;
     });
   }
 
@@ -76,8 +84,7 @@ class OrdersCubit extends Cubit<OrdersState> {
 
     res.fold((l) {
       emit(Error2GetName());
-
-      return GetOrderNameModel(name: '');
+      GetOrderNameModel(name: '');
     }, (r) {
       if (isFilter == false) {
         mainOrderModel?.result?[index ?? 0].stateName = r.name;
@@ -85,7 +92,7 @@ class OrdersCubit extends Cubit<OrdersState> {
         mainOrderModelFilter?.result?[index ?? 0].stateName = r.name;
       }
       emit(Success2GetName());
-      return r;
+      // return r;
     });
   }
 
@@ -124,16 +131,49 @@ class OrdersCubit extends Cubit<OrdersState> {
   MainOrderModel searchedproductsModel = MainOrderModel();
   searchProducts({
     required BuildContext contexttt,
-    required String searchKey,
   }) async {
     searchedproductsModel = MainOrderModel();
-    final response = await api.searchOrder(searchKey: searchKey);
+    final response = await api.searchOrder(searchKey: searchController.text);
     response.fold((l) => emit(AllProductsFailureState()), (r) {
       if (r.result!.isEmpty) {
         errorGetBar("لا يوجد نتائج");
       } else {
         searchedproductsModel = r;
-        Navigator.pushNamed(contexttt, Routes.ordersRoutes);
+        if (r.result!.isNotEmpty) {
+          OrderModel? model = r.result!.first;
+          //! get order name
+
+          for (int i = 0; i < model.courierLines!.length; i++) {
+            api
+                .getNamesOfOrder(model.courierLines?[i].toString() ?? '1')
+                .then((e) {
+              e.fold((l) {}, (r) {
+                model.orderName += '${r.name ?? ''},';
+                emit(Success3GetSearchOrder());
+              });
+            });
+          }
+          //! get category name
+          api.getCategoryNameOfOrder(model.categoryId.toString()).then((e) {
+            e.fold((l) {}, (r) {
+              model.currentNameOfCategory = r.name ?? 'other category';
+              emit(Success2GetSearchOrder());
+            });
+          });
+          api.getStateOfOrder(model.stateId.toString()).then((e) {
+            e.fold((l) {}, (r) {
+              model.stateName = r.name ?? '';
+              emit(SuccessGetSearchOrder());
+            });
+          });
+
+          Navigator.pushNamed(contexttt, Routes.ordersDetailsRoutes,
+              arguments: model);
+          print(
+              'dddddddddd ${model.stateName} : ${model.orderName} : ${model.currentNameOfCategory} ');
+        } else {
+          errorGetBar("لا يوجد نتائج");
+        }
       }
       emit(AllProductsSuccessState());
     });

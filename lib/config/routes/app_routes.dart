@@ -38,8 +38,6 @@ class Routes {
   static const String shipmentRoutes = '/shipmentRoutes';
   static const String walletRoutes = '/walletRoutes';
   static const String privcyRoutes = '/privcyRoutes';
-
-
 }
 
 class AppRoutes {
@@ -70,7 +68,8 @@ class AppRoutes {
       case Routes.profileRoutes:
         return MaterialPageRoute(
           builder: (context) => const ProfileScreen(),
-        ); case Routes.privcyRoutes:
+        );
+      case Routes.privcyRoutes:
         return MaterialPageRoute(
           builder: (context) => const Privacy_screen(),
         );
@@ -90,7 +89,7 @@ class AppRoutes {
       case Routes.ordersRoutes:
         return MaterialPageRoute(
           builder: (context) => const OrderScreen(
-            isInMainScreen: true,
+            isInMainScreen: true, 
           ),
         );
       // case Routes.detailsRoute:

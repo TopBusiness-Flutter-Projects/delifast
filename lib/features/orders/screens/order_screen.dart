@@ -32,68 +32,74 @@ class _OrderScreenState extends State<OrderScreen> {
     return BlocBuilder<OrdersCubit, OrdersState>(builder: (context, state) {
       var cubit = context.read<OrdersCubit>();
       return SafeArea(
-        child: Scaffold(
-          backgroundColor: AppColors.white,
-          body: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  widget.isInMainScreen
-                      ? const SizedBox()
-                      : GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: Icon(
-                            Icons.arrow_back,
-                            color: AppColors.primary,
-                          )),
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Text(
-                      'orders'.tr(),
-                      style: TextStyle(
-                        fontSize: 24.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Row(
+        child: RefreshIndicator(
+          onRefresh: () async {
+            cubit.getOrders(isFilter: false);
+          },
+          child: Scaffold(
+            backgroundColor: AppColors.white,
+            body: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
                   children: [
-                    Expanded(
-                      child: _buildStatusFilter(),
-                    ),
-                    SizedBox(width: 16.w),
-                    Expanded(
-                      child: _buildDateFilter(context),
+                    widget.isInMainScreen
+                        ? const SizedBox()
+                        : GestureDetector(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: Icon(
+                              Icons.arrow_back,
+                              color: AppColors.primary,
+                            )),
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(
+                        'orders'.tr(),
+                        style: TextStyle(
+                          fontSize: 24.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   ],
                 ),
-              ),
-              Expanded(
-                child: ListView.builder(
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(
-                              context, Routes.ordersDetailsRoutes,
-                              arguments: cubit.mainOrderModel?.result?[index]);
-                        },
-                        child: PackageTrackingCard(
-                          isFilter: false,
-                          index: index,
-                          orderModel: cubit.mainOrderModel?.result?[index],
-                        ));
-                  },
-                  itemCount: cubit.mainOrderModel?.result?.length,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: _buildStatusFilter(),
+                      ),
+                      SizedBox(width: 16.w),
+                      Expanded(
+                        child: _buildDateFilter(context),
+                      ),
+                    ],
+                  ),
                 ),
-              )
-            ],
+                Expanded(
+                  child: ListView.builder(
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, Routes.ordersDetailsRoutes,
+                                arguments:
+                                    cubit.mainOrderModel?.result?[index]);
+                          },
+                          child: PackageTrackingCard(
+                            isFilter: false,
+                            index: index,
+                            orderModel: cubit.mainOrderModel?.result?[index],
+                          ));
+                    },
+                    itemCount: cubit.mainOrderModel?.result?.length,
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       );
