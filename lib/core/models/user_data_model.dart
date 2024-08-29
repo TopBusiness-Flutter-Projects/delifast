@@ -12,7 +12,6 @@ String getUserDataModelToJson(GetUserDataModel data) =>
 
 class GetUserDataModel {
   List<Result>? result;
-
   GetUserDataModel({
     this.result,
   });
@@ -47,7 +46,8 @@ class Result {
     this.street,
     this.mobile,
     this.image1920,
-    this.login,this.email,
+    this.login,
+    this.email,
   });
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(

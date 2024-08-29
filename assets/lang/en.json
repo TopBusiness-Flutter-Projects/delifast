@@ -111,6 +111,7 @@
     "Delivered" : "Delivered",
     "Orders": "Orders",
     "passeError": "The New password and the confirmation password are not the same",
-    "passwordNotSame": "The Password id not The same"
+    "passwordNotSame": "The Password id not The same",
+    "enter_pass": "Enter Your Password"
 
 }
