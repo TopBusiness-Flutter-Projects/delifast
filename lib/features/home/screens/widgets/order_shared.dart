@@ -3,6 +3,7 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 import '../../../../core/utils/app_export.dart';
 import '../../../orders/cubit/cubit.dart';
 import '../../../orders/cubit/state.dart';
+import 'package:shimmer/shimmer.dart';
 
 class Ordersdashboard extends StatefulWidget {
   @override
@@ -36,12 +37,34 @@ class _OrdersdashboardState extends State<Ordersdashboard> {
 
   @override
   Widget build(BuildContext context) {
+    return BlocBuilder<OrdersCubit, OrdersState>(builder: (context, state) {
+      var cubit = context.read<OrdersCubit>();
+      return cubit.getStatesModel == null
+          ? SizedBox(
+              height: 220.h,
+              width: 190.w,
+              child: Shimmer.fromColors(
+                baseColor: Colors.grey.shade300,
+                highlightColor: Colors.grey.shade100,
+                enabled: true,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 5,
+                  itemBuilder: (context, index) {
+                    //final data = orderData[index];
+                    return Container(
+                      width: 190.w, height: 220.h,
 
-    return BlocBuilder<OrdersCubit, OrdersState>(
-        builder: (context, state) {
-          var cubit = context.read<OrdersCubit>();
-          return
-            SizedBox(
+                      margin: const EdgeInsets.all(8),
+                      color: Colors.white,
+                      padding: const EdgeInsets.all(16),
+                      // child: ,
+                    );
+                  },
+                ),
+              ),
+            )
+          : SizedBox(
               height: 220.h, // Set a fixed height
               width: 190.w,
               child: ListView.builder(
@@ -54,7 +77,9 @@ class _OrdersdashboardState extends State<Ordersdashboard> {
                     margin: const EdgeInsets.all(8),
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color:index%2 ==1?AppColors.primary:const Color(0xffCE0001),
+                      color: index % 2 == 1
+                          ? AppColors.primary
+                          : const Color(0xffCE0001),
                       borderRadius: BorderRadius.circular(10),
                       boxShadow: const [
                         BoxShadow(
@@ -70,23 +95,29 @@ class _OrdersdashboardState extends State<Ordersdashboard> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Icon(Icons.local_shipping, color: Colors.white,
-                              size: 30.sp,),
-                            Row(children: [
-                              Text(
-                                'All orders :',
-                                style: TextStyle(color: Colors.white,
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                cubit.allOrderCount.toString(),
-                                style: TextStyle(color: Colors.white,
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ],)
-
+                            Icon(
+                              Icons.local_shipping,
+                              color: Colors.white,
+                              size: 30.sp,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  'All orders :',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  cubit.allOrderCount.toString(),
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            )
                           ],
                         ),
                         const SizedBox(height: 8),
@@ -101,14 +132,19 @@ class _OrdersdashboardState extends State<Ordersdashboard> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Text(
-                                  cubit.getStatesModel!.result![index].count.toString()??"",
-                                  style: TextStyle(color: Colors.white,
+                                  cubit.getStatesModel!.result![index].count
+                                          .toString() ??
+                                      "",
+                                  style: TextStyle(
+                                      color: Colors.white,
                                       fontSize: 14.sp,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 Text(
-                                  cubit.getStatesModel!.result![index].name??"",
-                                  style: TextStyle(color: Colors.white,
+                                  cubit.getStatesModel!.result![index].name ??
+                                      "",
+                                  style: TextStyle(
+                                      color: Colors.white,
                                       fontSize: 14.sp,
                                       fontWeight: FontWeight.bold),
                                 ),
@@ -127,18 +163,20 @@ class _OrdersdashboardState extends State<Ordersdashboard> {
                                   'Progress',
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 12.sp),
-
                                 ),
                                 Text(
-                                  (((cubit.getStatesModel?.result?[index].count ?? 0) * 100) /
-                                      (cubit.allOrderCount ?? 1))
-                                      .toString()+"%",  // تحويل النسبة إلى نص مع منزل عشرية واحدة
+                                  (((cubit.getStatesModel?.result?[index]
+                                                          .count ??
+                                                      0) *
+                                                  100) /
+                                              (cubit.allOrderCount ?? 1))
+                                          .toString() +
+                                      "%", // تحويل النسبة إلى نص مع منزل عشرية واحدة
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 12.sp,
                                   ),
                                 ),
-
                               ],
                             ),
                             SizedBox(height: 20.h),
@@ -146,7 +184,10 @@ class _OrdersdashboardState extends State<Ordersdashboard> {
                               width: 160.w,
                               lineHeight: 10.0,
                               barRadius: const Radius.circular(20),
-                              percent:   (cubit.getStatesModel!.result![index].count??0 )/  cubit.allOrderCount ,
+                              percent:
+                                  (cubit.getStatesModel!.result![index].count ??
+                                          0) /
+                                      cubit.allOrderCount,
                               backgroundColor: AppColors.white.withOpacity(.5),
                               progressColor: AppColors.white,
                             ),
@@ -171,6 +212,6 @@ class _OrdersdashboardState extends State<Ordersdashboard> {
                 },
               ),
             );
-        } );
-  }}
-
+    });
+  }
+}

@@ -94,7 +94,7 @@
   "shipping_status": "حالة الشحن",
   "track_your_package": "تتبع عنوانك",
   "please_enter_your_tracking_number": "الرجاء ادخال رقم التتبع الخاص بك",
-  "Enter_tracking_number": "ادخل رقم التتبع",
+  "Enter_tracking_number": "(COURIER/00000) ادخل رقم التتبع",
   "tracking_history": "تاريخ التتبع",
   "see_all": "عرض الكل",
   "statistics": "الاحصائيات",
@@ -110,6 +110,6 @@
   "Account": "الحساب",
   "Delivered" : "تم التوصيل",
   "Orders": "الطلبات",
-  "passeError": "كلمة المرور و والكلمة التأكيدية غير متشابهين"
-
+  "passeError": "كلمة المرور و والكلمة التأكيدية غير متشابهين",
+"enter_pass": "ادخل كلمة المرور"
 }

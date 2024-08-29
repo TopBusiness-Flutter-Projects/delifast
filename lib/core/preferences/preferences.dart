@@ -142,7 +142,10 @@ class Preferences {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.remove('userName');
   }
-
+  Future<void> removeUserPass() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.remove('userPass');
+  }
   Future<String?> getUserName() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     String? userName = preferences.getString('userName');

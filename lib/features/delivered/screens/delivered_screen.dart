@@ -60,12 +60,11 @@ class _DeliveredScreenState extends State<DeliveredScreen> {
             GestureDetector(
                 onTap: () {
                   //!
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => orderDetails(
-                                barcode: barcode,
-                              )));
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => orderDetails(
+                  //             )));
                 },
                 child: Text(barcode)),
           ],

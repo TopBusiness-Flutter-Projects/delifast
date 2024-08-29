@@ -36,9 +36,9 @@ class CustomOnboardItem extends StatelessWidget {
          SizedBox(
           height: 20.h,
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30),
-          child: Flexible(
+        Flexible(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
             child: Text(
               textAlign: TextAlign.center,
               body.tr(),

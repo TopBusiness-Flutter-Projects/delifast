@@ -1,11 +1,13 @@
 import 'package:delifast/core/utils/app_export.dart';
+import 'package:dotted_line/dotted_line.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../../core/models/order_model.dart';
 
 class ShipmentWidget extends StatelessWidget {
-  const ShipmentWidget({super.key});
-
+  ShipmentWidget({super.key, this.model});
+  OrderModel? model;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -41,12 +43,12 @@ class ShipmentWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Blue Flying Shoes',
+                      model?.orderName ?? '',
                       style: TextStyle(
                           fontSize: 16.sp, fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      'Tracking ID:94756294',
+                      'Tracking ID:${model?.name ?? ''}',
                       style: TextStyle(color: Colors.grey, fontSize: 12.sp),
                     ),
                   ],
@@ -59,7 +61,7 @@ class ShipmentWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(30.sp)),
                   child: Center(
                       child: Text(
-                    "Glass Product",
+                    model?.currentNameOfCategory ?? '',
                     style: TextStyle(color: AppColors.orange, fontSize: 12.sp),
                   )),
                 ),
@@ -72,9 +74,9 @@ class ShipmentWidget extends StatelessWidget {
               icon: Icons.radio_button_checked_rounded,
               color: Colors.grey,
               text: "from".tr(),
-              location: '750 Ar Rutab St, Dubai, UAE',
+              location: model?.senderStreet ?? '',
             ),
-            SizedBox(height: 20.h),
+            // SizedBox(height: 20.h),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -91,7 +93,7 @@ class ShipmentWidget extends StatelessWidget {
                     Text("shipped_to".tr(),
                         style: const TextStyle(color: Colors.grey)),
                     SizedBox(height: 4.h),
-                    const Text("888 Al Nahyan, Abu Dhabi, UAE",
+                    Text(model?.receiverStreet ?? '',
                         style: TextStyle(fontWeight: FontWeight.bold)),
                   ],
                 ),
@@ -111,7 +113,7 @@ class ShipmentWidget extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
                         children: [
-                          Text("Abdulah",
+                          Text(model?.senderName ?? '',
                               style: TextStyle(
                                   fontSize: 14.sp,
                                   fontWeight: FontWeight.w700)),
@@ -164,7 +166,23 @@ class ShipmentWidget extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Icon(icon, color: color, size: 20),
+        Column(
+          children: [
+            Icon(icon, color: color, size: 20.sp),
+            DottedLine(
+              direction: Axis.vertical,
+              alignment: WrapAlignment.center,
+              lineLength: 40.sp,
+              lineThickness: 1.0,
+              dashLength: 6.0,
+              dashColor: Colors.grey,
+              dashRadius: 0.0,
+              dashGapLength: 4.0,
+              dashGapColor: Colors.transparent,
+              dashGapRadius: 0.0,
+            ),
+          ],
+        ),
         const SizedBox(width: 12),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,

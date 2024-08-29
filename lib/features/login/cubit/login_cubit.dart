@@ -72,6 +72,8 @@ print ("llll : $mySessionId");
         Navigator.pop(context);
         passwordController.clear();
         EmailController.clear();
+        await Preferences.instance.setUserPass(password);
+        await Preferences.instance.getUserPass();
         Preferences.instance.setUserId(r.result!.userContext!.uid.toString());
         Navigator.pushNamedAndRemoveUntil(
             context, Routes.mainRoute, (route) => false);

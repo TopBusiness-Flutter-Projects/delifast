@@ -4,10 +4,9 @@ import 'package:easy_localization/easy_localization.dart';
 import '../../../core/widgets/package_order.dart';
 import '../cubit/cubit.dart';
 
-
 class OrderScreen extends StatefulWidget {
   const OrderScreen({super.key, required this.isInMainScreen});
- final  bool isInMainScreen;
+  final bool isInMainScreen;
   @override
   _OrderScreenState createState() => _OrderScreenState();
 }
@@ -16,76 +15,91 @@ class _OrderScreenState extends State<OrderScreen> {
   String? selectedStatus;
   DateTime? selectedDate;
 //
-  final List<String> statusOptions = ['Pending', 'In Progress', 'Delivered', 'Cancelled'];
-@override
+  final List<String> statusOptions = [
+    'Pending',
+    'In Progress',
+    'Delivered',
+    'Cancelled'
+  ];
+  @override
   void initState() {
-
-
-context.read<OrdersCubit>().getOrders();
+    context.read<OrdersCubit>().getOrders(isFilter: false);
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<OrdersCubit , OrdersState>(builder: (context, state) {
+    return BlocBuilder<OrdersCubit, OrdersState>(builder: (context, state) {
       var cubit = context.read<OrdersCubit>();
-    return SafeArea(
-        child: Scaffold(
-          backgroundColor:  AppColors.white,
-          body: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  widget.isInMainScreen ? const SizedBox() :
-                  GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Icon(Icons.arrow_back,color: AppColors.primary,)),
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Text(
-                      'orders'.tr(),
-                      style: TextStyle(
-                        fontSize: 24.sp,
-                        fontWeight: FontWeight.bold,
+      return SafeArea(
+        child: RefreshIndicator(
+          onRefresh: () async {
+            cubit.getOrders(isFilter: false);
+          },
+          child: Scaffold(
+            backgroundColor: AppColors.white,
+            body: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    widget.isInMainScreen
+                        ? const SizedBox()
+                        : GestureDetector(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: Icon(
+                              Icons.arrow_back,
+                              color: AppColors.primary,
+                            )),
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(
+                        'orders'.tr(),
+                        style: TextStyle(
+                          fontSize: 24.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: _buildStatusFilter(),
-                    ),
-                    SizedBox(width: 16.w),
-                    Expanded(
-                      child: _buildDateFilter(context),
-                    ),
-
                   ],
                 ),
-              ),
-              Expanded(
-                child: ListView.builder(
-
-                  itemBuilder: (context,index){
-                    return InkWell(
-                        onTap: (){
-                          Navigator.pushNamed(context, Routes.ordersDetailsRoutes);
-
-                        },
-                        child:  PackageTrackingCard(
-                          orderModel: cubit.mainOrderModel?.result?[index],
-                        ));
-                  },
-                  itemCount: cubit.mainOrderModel?.result?.length,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: _buildStatusFilter(),
+                      ),
+                      SizedBox(width: 16.w),
+                      Expanded(
+                        child: _buildDateFilter(context),
+                      ),
+                    ],
+                  ),
                 ),
-              )
-            ],
+                Expanded(
+                  child: ListView.builder(
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, Routes.ordersDetailsRoutes,
+                                arguments:
+                                    cubit.mainOrderModel?.result?[index]);
+                          },
+                          child: PackageTrackingCard(
+                            isFilter: false,
+                            index: index,
+                            orderModel: cubit.mainOrderModel?.result?[index],
+                          ));
+                    },
+                    itemCount: cubit.mainOrderModel?.result?.length,
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       );
@@ -102,15 +116,16 @@ context.read<OrdersCubit>().getOrders();
       child: DropdownButton<String>(
         isExpanded: true,
         value: selectedStatus,
-        hint: Text("status_filter".tr(), style: TextStyle(color: Colors.grey[600],
-            fontSize: 14.sp)),
+        hint: Text("status_filter".tr(),
+            style: TextStyle(color: Colors.grey[600], fontSize: 14.sp)),
         underline: const SizedBox(),
-        icon: Icon(Icons.arrow_drop_down, color: Colors.grey[600]),
+        icon: Icon(Icons.arrow_drop_down, size: 20, color: Colors.grey[600]),
         onChanged: (String? newValue) {
           setState(() {
             selectedStatus = newValue;
           });
         },
+
         ///j
         items: statusOptions.map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
@@ -157,6 +172,7 @@ context.read<OrdersCubit>().getOrders();
             ),
             Icon(
               Icons.calendar_today,
+              size: 20,
               color: Colors.grey[600],
             ),
           ],

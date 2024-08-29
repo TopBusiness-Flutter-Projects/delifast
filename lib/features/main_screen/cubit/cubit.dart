@@ -8,12 +8,10 @@ class MainCubit extends Cubit<MainState> {
 
   ServiceApi api;
 
-
-
   int selectedIndex = 0; // State variable to track the selected index
 
   void onItemTapped(int index) {
-      selectedIndex = index;
-      emit(OnChnageCurrentIndex());
+    selectedIndex = index;
+    emit(OnChnageCurrentIndex());
   }
 }
