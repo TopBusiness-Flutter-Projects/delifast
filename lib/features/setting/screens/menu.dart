@@ -142,8 +142,11 @@ class AccountScreen extends StatelessWidget {
              Padding(
               padding: EdgeInsets.all(8.0.sp),
               child: CustomSettingsRow(
-                onTap: (){
+                onTap: () async{
                   Navigator.pushNamed(context, Routes.loginRoute);
+                  await Preferences.instance.removeUserName();
+                  await Preferences.instance.removeUserPass();
+
                 },
                 text: "logout".tr(),
                 icon: AppIcons.logout,
