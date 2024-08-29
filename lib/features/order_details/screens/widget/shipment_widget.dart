@@ -1,4 +1,5 @@
 import 'package:delifast/core/utils/app_export.dart';
+import 'package:dotted_line/dotted_line.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -75,7 +76,7 @@ class ShipmentWidget extends StatelessWidget {
               text: "from".tr(),
               location: model?.senderStreet ?? '',
             ),
-            SizedBox(height: 20.h),
+            // SizedBox(height: 20.h),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -93,7 +94,7 @@ class ShipmentWidget extends StatelessWidget {
                         style: const TextStyle(color: Colors.grey)),
                     SizedBox(height: 4.h),
                     Text(model?.receiverStreet ?? '',
-                        style: const TextStyle(fontWeight: FontWeight.bold)),
+                        style: TextStyle(fontWeight: FontWeight.bold)),
                   ],
                 ),
               ],
@@ -132,7 +133,7 @@ class ShipmentWidget extends StatelessWidget {
                                 style: TextStyle(
                                     fontSize: 16.sp,
                                     fontWeight: FontWeight.w700)),
-                            Text((model?.totalChargeAmount ?? '').toString(),
+                            Text("500",
                                 style: TextStyle(
                                     color: AppColors.primary,
                                     fontSize: 16.sp,
@@ -165,7 +166,23 @@ class ShipmentWidget extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Icon(icon, color: color, size: 20),
+        Column(
+          children: [
+            Icon(icon, color: color, size: 20.sp),
+            DottedLine(
+              direction: Axis.vertical,
+              alignment: WrapAlignment.center,
+              lineLength: 40.sp,
+              lineThickness: 1.0,
+              dashLength: 6.0,
+              dashColor: Colors.grey,
+              dashRadius: 0.0,
+              dashGapLength: 4.0,
+              dashGapColor: Colors.transparent,
+              dashGapRadius: 0.0,
+            ),
+          ],
+        ),
         const SizedBox(width: 12),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,

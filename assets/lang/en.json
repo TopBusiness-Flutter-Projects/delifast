@@ -95,7 +95,7 @@
     "shipping_status": "Shipping Status",
     "track_your_package": "Track your package",
     "please_enter_your_tracking_number": "Please enter your tracking number",
-    "Enter_tracking_number":"Enter tracking number",
+    "Enter_tracking_number":"Enter tracking number (COURIER/00000)",
     "tracking_history": "Tracking History",
     "see_all": "See All",
     "statistics": "Statistics",

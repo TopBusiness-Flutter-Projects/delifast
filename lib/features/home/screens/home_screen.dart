@@ -10,6 +10,7 @@ import 'package:easy_localization/easy_localization.dart';
 import '../../../core/widgets/package_order.dart';
 import '../../order_details/screens/order_details.dart';
 import '../../orders/screens/order_screen_home.dart';
+import 'wallet_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -20,7 +21,11 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final List<Map<String, dynamic>> _options = [
-    // {'icon': AppImages.walletPhoto, 'label': 'Wallet', 'screen': const WalletScreen()},
+    {
+      'icon': AppImages.walletPhoto,
+      'label': 'Wallet',
+      'screen': const WalletScreen()
+    },
     {
       'icon': AppIcons.Truck,
       'label': 'Pick Up',
@@ -126,10 +131,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                       decoration: InputDecoration(
                                         filled: true,
                                         fillColor: Colors.white,
-                                        hintText: "Enter_tracking_number".tr(),
-                                        prefixIcon: Icon(
-                                          Icons.search,
-                                          color: AppColors.gray,
+                                        hintText: "000000",
+                                        prefixIcon: const Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(' COURIER/ '),
+                                          ],
                                         ),
                                         border: OutlineInputBorder(
                                           borderRadius:
@@ -289,7 +297,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                   ),
                                   Ordersdashboard(),
-                                  cubit.mainOrderModel!.result == []
+                                  (cubit.mainOrderModel == null ||
+                                          cubit.mainOrderModel!.result == [])
                                       ? Container()
                                       : Column(children: [
                                           Padding(
@@ -352,7 +361,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                   ),
-                ),
+          ),
         );
       },
     ));

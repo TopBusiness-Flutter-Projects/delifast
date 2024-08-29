@@ -826,23 +826,6 @@ class ServiceApi {
     }
   }
 
-  Future<Either<Failure, GetNameModel>> getCategoryName(
-      {required int categoryId}) async {
-    try {
-      String? sessionId = await Preferences.instance.getSessionId();
-      final response = await dio.get(
-        EndPoints.categoryUrl +
-            '$categoryId?query={name}&filter=[["is_available","=","true"]]',
-        options: Options(
-          headers: {"Cookie": "frontend_lang=en_US;session_id=$sessionId"},
-        ),
-      );
-      return Right(GetNameModel.fromJson(response));
-    } on ServerException {
-      return Left(ServerFailure());
-    }
-  }
-
   Future<Either<Failure, GetNameModel>> getServiceName(
       {required int serviceId}) async {
     try {
@@ -855,6 +838,25 @@ class ServiceApi {
         ),
       );
       return Right(GetNameModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  Future<Either<Failure, GetOrderNameModel>> getCategoryNameOfOrder(
+      String id) async {
+    try {
+      String userId = await Preferences.instance.getUserId() ?? "1";
+      print("lllllllllll${userId}");
+      String? sessionId = await Preferences.instance.getSessionId();
+      print(sessionId);
+      final response = await dio.get(
+        EndPoints.getOrderCategoryName + '$id?query={name}',
+        options: Options(
+          headers: {"Cookie": "frontend_lang=en_US;session_id=$sessionId"},
+        ),
+      );
+      return Right(GetOrderNameModel.fromJson(response));
     } on ServerException {
       return Left(ServerFailure());
     }
