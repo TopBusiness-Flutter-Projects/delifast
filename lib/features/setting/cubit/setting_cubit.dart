@@ -125,7 +125,7 @@ class SettingCubit extends Cubit<SettingState> {
               newPasswordController.clear();
               ConfirmPasswordController.clear();
               passwordController.clear();
-
+///
             } else {
               errorGetBar("حدث خطأ ما");
             }
