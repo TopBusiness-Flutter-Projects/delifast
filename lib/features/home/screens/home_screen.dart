@@ -4,14 +4,18 @@ import 'package:delifast/core/widgets/buttons_container.dart';
 import 'package:delifast/features/home/screens/widgets/order_shared.dart';
 import 'package:delifast/features/delivered/screens/delivered_screen.dart';
 import 'package:delifast/features/main_screen/cubit/cubit.dart';
+import 'package:delifast/features/order_details/screens/widget/shipment_widget.dart';
 import 'package:delifast/features/orders/cubit/cubit.dart';
 import 'package:delifast/features/orders/cubit/state.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../../../core/widgets/package_order.dart';
+import '../../orders/screens/order_screen.dart';
 import '../../orders/screens/order_screen_home.dart';
+import 'drop_off.dart';
+import 'wallet_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -51,12 +55,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: BlocBuilder<OrdersCubit, OrdersState>(
+    return SafeArea(
+        child:
+        BlocBuilder<OrdersCubit, OrdersState>(
       builder: (context, state) {
         var cubit = context.read<OrdersCubit>();
         return Scaffold(
           backgroundColor: AppColors.white,
-          body: (state is OrdersLoading || cubit.mainOrderModel == null)
+          body: (state is OrdersLoading)
               ? const Center(
                   child: CircularProgressIndicator(),
                 )
@@ -314,14 +320,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ],
                                       ),
                                     ),
-                                    cubit.mainOrderModel!.result!.isEmpty
-                                        ? Container()
-                                        : PackageTrackingCard(
-                                            index: 0,
-                                            orderModel: cubit
-                                                .mainOrderModel!.result!.first,
-                                            isFilter: false,
-                                          ),
+                                    PackageTrackingCard(
+                                      orderModel:
+                                          cubit.mainOrderModel!.result!.first,
+                                    ),
                                   ])
                           ])
                     ],
@@ -369,8 +371,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           title: Text(
-            model?.orderName.toString() ?? '',
-            maxLines: 1,
+            model?.courierLines?.first.toString() ?? '',
             style: TextStyle(
                 color: AppColors.black,
                 fontSize: 16.sp,

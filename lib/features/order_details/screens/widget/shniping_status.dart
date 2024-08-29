@@ -2,12 +2,9 @@ import 'package:delifast/core/utils/app_export.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../core/models/order_model.dart';
-
 class ShippingStatusWidget extends StatefulWidget {
-  ShippingStatusWidget({super.key, this.model});
+  const ShippingStatusWidget({super.key});
 
-  OrderModel? model;
   @override
   _ShippingStatusWidgetState createState() => _ShippingStatusWidgetState();
 }
@@ -21,11 +18,11 @@ class _ShippingStatusWidgetState extends State<ShippingStatusWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.all(10.sp),
+          padding:  EdgeInsets.all(10.sp),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
+               Text(
                 'shipping_status'.tr(),
                 style: TextStyle(
                   fontSize: 20.sp,
@@ -79,7 +76,7 @@ class _ShippingStatusWidgetState extends State<ShippingStatusWidget> {
                 ),
               ),
               child: isActive
-                  ? Icon(Icons.check, color: Colors.white, size: 16.sp)
+                  ?  Icon(Icons.check, color: Colors.white, size: 16.sp)
                   : null,
             ),
             SizedBox(width: 16.w),

@@ -2,11 +2,10 @@ import 'package:delifast/core/utils/app_export.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../core/models/order_model.dart';
 
 class ShipmentWidget extends StatelessWidget {
-  ShipmentWidget({super.key, this.model});
-  OrderModel? model;
+  const ShipmentWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -42,12 +41,12 @@ class ShipmentWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      model?.orderName ?? '',
+                      'Blue Flying Shoes',
                       style: TextStyle(
                           fontSize: 16.sp, fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      'Tracking ID:${model?.name ?? ''}',
+                      'Tracking ID:94756294',
                       style: TextStyle(color: Colors.grey, fontSize: 12.sp),
                     ),
                   ],
@@ -60,7 +59,7 @@ class ShipmentWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(30.sp)),
                   child: Center(
                       child: Text(
-                    model?.currentNameOfCategory ?? '',
+                    "Glass Product",
                     style: TextStyle(color: AppColors.orange, fontSize: 12.sp),
                   )),
                 ),
@@ -73,7 +72,7 @@ class ShipmentWidget extends StatelessWidget {
               icon: Icons.radio_button_checked_rounded,
               color: Colors.grey,
               text: "from".tr(),
-              location: model?.senderStreet ?? '',
+              location: '750 Ar Rutab St, Dubai, UAE',
             ),
             SizedBox(height: 20.h),
             Row(
@@ -92,7 +91,7 @@ class ShipmentWidget extends StatelessWidget {
                     Text("shipped_to".tr(),
                         style: const TextStyle(color: Colors.grey)),
                     SizedBox(height: 4.h),
-                    Text(model?.receiverStreet ?? '',
+                    const Text("888 Al Nahyan, Abu Dhabi, UAE",
                         style: TextStyle(fontWeight: FontWeight.bold)),
                   ],
                 ),
@@ -112,7 +111,7 @@ class ShipmentWidget extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
                         children: [
-                          Text(model?.senderName ?? '',
+                          Text("Abdulah",
                               style: TextStyle(
                                   fontSize: 14.sp,
                                   fontWeight: FontWeight.w700)),

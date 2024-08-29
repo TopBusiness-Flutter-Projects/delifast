@@ -24,7 +24,7 @@ Future<void> setup() async {
     () => SplashCubit(),
   );
   serviceLocator.registerFactory(
-    () => OrderDetailsCubit(),
+        () => OrderDetailsCubit(),
   );
 
   serviceLocator.registerFactory(

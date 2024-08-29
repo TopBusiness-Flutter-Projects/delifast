@@ -1,7 +1,6 @@
 import 'package:delifast/core/utils/app_export.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../../order_details/screens/widget/shipment_widget.dart';
-
 class DropOffScreen extends StatefulWidget {
   const DropOffScreen({super.key});
 
@@ -13,12 +12,7 @@ class _DropOffScreenState extends State<DropOffScreen> {
   String? selectedStatus;
   DateTime? selectedDate;
 
-  final List<String> statusOptions = [
-    'Pending',
-    'In Progress',
-    'Delivered',
-    'Cancelled'
-  ];
+  final List<String> statusOptions = ['Pending', 'In Progress', 'Delivered', 'Cancelled'];
 
   @override
   Widget build(BuildContext context) {
@@ -35,11 +29,10 @@ class _DropOffScreenState extends State<DropOffScreen> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: InkWell(
-                        onTap: () {
+                        onTap: (){
                           Navigator.pop(context);
                         },
-                        child: Icon(Icons.arrow_back,
-                            size: 30.sp, color: AppColors.blackblue)),
+                        child: Icon(Icons.arrow_back,size:30.sp,color:AppColors.blackblue)),
                   ),
                   Text(
                     'dropOff'.tr(),
@@ -48,6 +41,7 @@ class _DropOffScreenState extends State<DropOffScreen> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
+
                 ],
               ),
             ),
@@ -58,18 +52,17 @@ class _DropOffScreenState extends State<DropOffScreen> {
                   Expanded(
                     child: _buildDateFilter(context),
                   ),
+
                   Expanded(
-                    child: Container(
-                      width: 100.w,
-                    ),
+                    child:Container(width: 100.w,),
                   ),
                 ],
               ),
             ),
             Expanded(
               child: ListView.builder(
-                itemBuilder: (context, index) {
-                  return ShipmentWidget();
+                itemBuilder: (context,index){
+                  return const ShipmentWidget();
                 },
                 itemCount: 3,
               ),
@@ -122,4 +115,5 @@ class _DropOffScreenState extends State<DropOffScreen> {
       ),
     );
   }
+
 }

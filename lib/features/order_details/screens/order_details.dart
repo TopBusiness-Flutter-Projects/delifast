@@ -1,20 +1,18 @@
-// ignore_for_file: must_be_immutable, library_private_types_in_public_api
-
 import 'package:delifast/core/utils/app_export.dart';
 import 'package:delifast/features/order_details/screens/widget/shniping_status.dart';
 import 'package:delifast/features/order_details/screens/widget/shipment_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
-import '../../../core/models/order_model.dart';
+import '../../../core/widgets/custom_note.dart';
 import '../cubit/order_details_cubit.dart';
 
-class OrderDetails extends StatefulWidget {
-  OrderDetails({super.key, this.orderModel});
-  OrderModel? orderModel;
+class orderDetails extends StatefulWidget {
+  orderDetails({super.key, this.barcode = ''});
+  dynamic? barcode;
   @override
-  _OrderDetailsState createState() => _OrderDetailsState();
+  _orderDetailsState createState() => _orderDetailsState();
 }
 
-class _OrderDetailsState extends State<OrderDetails> {
+class _orderDetailsState extends State<orderDetails> {
   String? selectedStatus;
   DateTime? selectedDate;
 
@@ -24,7 +22,7 @@ class _OrderDetailsState extends State<OrderDetails> {
     'Delivered',
     'Cancelled'
   ];
-  // TextEditingController EmailController = TextEditingController();
+  TextEditingController EmailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -63,12 +61,8 @@ class _OrderDetailsState extends State<OrderDetails> {
           Expanded(
             child: ListView(
               children: [
-                ShipmentWidget(
-                  model: widget.orderModel,
-                ),
-                ShippingStatusWidget(
-                  model: widget.orderModel,
-                ),
+                const ShipmentWidget(),
+                const ShippingStatusWidget(),
                 Padding(
                   padding: EdgeInsets.only(
                       top: 5.sp, left: 10.sp, right: 10.sp, bottom: 20.sp),
@@ -110,7 +104,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                     ),
                                     Flexible(
                                         child: Text(
-                                      widget.orderModel?.senderStreet ?? '',
+                                      "Riyadh, Jeddah, The Holy City of Makkah",
                                       style: TextStyle(
                                           fontSize: 14.sp,
                                           color:
@@ -121,63 +115,34 @@ class _OrderDetailsState extends State<OrderDetails> {
                                   ],
                                 ),
                               ),
-
-                              Row(
-                                children: [
-                                  const Padding(
-                                    padding: EdgeInsets.all(10.0),
-                                    child: CircleAvatar(
-                                      child: Icon(Icons.account_circle_sharp),
-                                    ),
-                                  ),
-                                  const Text("Clientt1"),
-                                  const Spacer(),
-                                  GestureDetector(
-                                    onTap: () {},
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(10.0),
-                                      child: Image.asset(AppIcons.whatsapp),
-                                    ),
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      // widget.orderModel?.senderMobile;
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(10.0),
-                                      child: Image.asset(AppIcons.callIcon),
-                                    ),
-                                  )
-                                ],
+                              ListView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                itemBuilder: (context, index) {
+                                  return Row(
+                                    children: [
+                                      const Padding(
+                                        padding: EdgeInsets.all(10.0),
+                                        child: CircleAvatar(
+                                          child:
+                                              Icon(Icons.account_circle_sharp),
+                                        ),
+                                      ),
+                                      const Text("Clientt1"),
+                                      const Spacer(),
+                                      Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: Image.asset(AppIcons.whatsapp),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: Image.asset(AppIcons.callIcon),
+                                      )
+                                    ],
+                                  );
+                                },
+                                itemCount: 2,
                               ),
-                              // ListView.builder(
-                              //   physics: const NeverScrollableScrollPhysics(),
-                              //   shrinkWrap: true,
-                              //   itemBuilder: (context, index) {
-                              //     return Row(
-                              //       children: [
-                              //         const Padding(
-                              //           padding: EdgeInsets.all(10.0),
-                              //           child: CircleAvatar(
-                              //             child:
-                              //                 Icon(Icons.account_circle_sharp),
-                              //           ),
-                              //         ),
-                              //         const Text("Clientt1"),
-                              //         const Spacer(),
-                              //         Padding(
-                              //           padding: const EdgeInsets.all(10.0),
-                              //           child: Image.asset(AppIcons.whatsapp),
-                              //         ),
-                              //         Padding(
-                              //           padding: const EdgeInsets.all(10.0),
-                              //           child: Image.asset(AppIcons.callIcon),
-                              //         )
-                              //       ],
-                              //     );
-                              //   },
-                              //   itemCount: 2,
-                              // ),
                               SizedBox(
                                 height: 10.h,
                               ),

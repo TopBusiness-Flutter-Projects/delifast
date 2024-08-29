@@ -23,10 +23,7 @@ class _OrderScreenHomeState extends State<OrderScreenHome> {
   ];
   @override
   void initState() {
-    print('eeeeeeeeeeeeeeeee${widget.stateId.toString()}');
-    context
-        .read<OrdersCubit>()
-        .getOrders(state: widget.stateId.toString(), isFilter: true);
+    context.read<OrdersCubit>().getOrders(state: widget.stateId);
     super.initState();
   }
 
@@ -37,74 +34,65 @@ class _OrderScreenHomeState extends State<OrderScreenHome> {
       return SafeArea(
         child: Scaffold(
           backgroundColor: AppColors.white,
-          body: cubit.mainOrderModelFilter == null
-              ? const Center(
-                  child: CircularProgressIndicator(),
-                )
-              : Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        GestureDetector(
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            child: Icon(
-                              Icons.arrow_back,
-                              color: AppColors.primary,
-                            )),
-                        Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Text(
-                            'orders'.tr(),
-                            style: TextStyle(
-                              fontSize: 24.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: _buildStatusFilter(),
-                          ),
-                          SizedBox(width: 16.w),
-                          Expanded(
-                            child: _buildDateFilter(context),
-                          ),
-                        ],
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Icon(
+                        Icons.arrow_back,
+                        color: AppColors.primary,
+                      )),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text(
+                      'orders'.tr(),
+                      style: TextStyle(
+                        fontSize: 24.sp,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Row(
+                  children: [
                     Expanded(
-                      child: cubit.mainOrderModelFilter?.result == []
-                          ? Center(child: Text('no_data'.tr()))
-                          : ListView.builder(
-                              itemBuilder: (context, index) {
-                                return InkWell(
-                                    onTap: () {
-                                      Navigator.pushNamed(
-                                          context, Routes.ordersDetailsRoutes,
-                                          arguments: cubit.mainOrderModelFilter
-                                              ?.result?[index]);
-                                    },
-                                    child: PackageTrackingCard(
-                                      isFilter: true,
-                                      index: index,
-                                      orderModel: cubit
-                                          .mainOrderModelFilter?.result?[index],
-                                    ));
-                              },
-                              itemCount:
-                                  cubit.mainOrderModelFilter?.result?.length,
-                            ),
-                    )
+                      child: _buildStatusFilter(),
+                    ),
+                    SizedBox(width: 16.w),
+                    Expanded(
+                      child: _buildDateFilter(context),
+                    ),
                   ],
                 ),
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(
+                              context, Routes.ordersDetailsRoutes, arguments: {
+                            cubit.mainOrderModelFilter?.result?[index].name
+                          });
+                        },
+                        child: PackageTrackingCard(
+                          orderModel:
+                              cubit.mainOrderModelFilter?.result?[index],
+                        ));
+                  },
+                  itemCount: cubit.mainOrderModelFilter?.result?.length,
+                ),
+              )
+            ],
+          ),
         ),
       );
     });
