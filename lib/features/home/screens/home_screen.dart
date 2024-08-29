@@ -25,21 +25,21 @@ class _HomeScreenState extends State<HomeScreen> {
       'icon': AppIcons.Truck,
       'label': 'Pick Up',
       'screen': OrderScreenHome(
-        stateId: '2',
+        stateId: '1',
       )
     },
     {
       'icon': AppIcons.Drops,
       'label': 'Drop Off',
       'screen': OrderScreenHome(
-        stateId: '8',
+        stateId: '2',
       )
     },
     {
       'icon': AppIcons.History,
       'label': 'History',
       'screen': OrderScreenHome(
-        stateId: '7',
+        stateId: '3',
       )
     },
   ];
@@ -352,7 +352,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                   ),
-          ),
+                ),
         );
       },
     ));

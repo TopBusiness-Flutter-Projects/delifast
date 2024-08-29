@@ -2,7 +2,6 @@ import 'package:delifast/features/onboarding/screens/onboard_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:delifast/features/main_screen/screens/main_screen.dart';
 import 'package:delifast/features/splash/screens/splash_screen.dart';
-import '../../core/models/order_model.dart';
 import '../../core/utils/app_strings.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../features/home/screens/home_screen.dart';
@@ -79,12 +78,10 @@ class AppRoutes {
         );
 
       case Routes.ordersDetailsRoutes:
-        OrderModel model = settings.arguments as OrderModel;
+        dynamic barcode = settings.arguments as dynamic;
 
         return MaterialPageRoute(
-          builder: (context) => OrderDetails(
-            orderModel: model,
-          ),
+          builder: (context) => orderDetails(barcode: barcode),
         );
       case Routes.ordersRoutes:
         return MaterialPageRoute(

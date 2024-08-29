@@ -1,27 +1,31 @@
 import 'package:delifast/core/models/order_model.dart';
 import 'package:delifast/core/remote/service.dart';
 import 'package:delifast/features/orders/cubit/state.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../core/models/get_order_name.dart';
+import '../../../core/models/get_count_order.dart';
+import '../../../core/models/get_states_model.dart';
 import '../../../core/utils/app_export.dart';
 
 class OrdersCubit extends Cubit<OrdersState> {
   OrdersCubit(this.api) : super(OrdersInitial()) {
-    getOrders(isFilter: false);
+    getOrders();
   }
   ServiceApi api;
 
   MainOrderModel? mainOrderModel;
   MainOrderModel? mainOrderModelFilter;
-  Future getOrders({String? state, required bool isFilter}) async {
+  GetStatesModel? getStatesModel;
+  Future getOrders({String? state}) async {
     emit(OrdersLoading());
     final result = await api.getOrders(state: state);
     result.fold(
-      (failure) {
+          (failure) {
         emit(OrdersError());
       },
-      (r) {
-        if (isFilter == false) {
+          (r) {
+        if (state == null) {
           mainOrderModel = r;
 
           for (int i = 0; i < r.result!.length; i++) {

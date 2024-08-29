@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_interpolation_to_compose_strings, avoid_print, unnecessary_brace_in_string_interps
 
 import 'package:dartz/dartz.dart';
+import 'package:delifast/core/models/get_states_model.dart';
 import 'package:delifast/core/models/order_model.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -27,6 +28,7 @@ import '../api/base_api_consumer.dart';
 import '../api/end_points.dart';
 import '../error/exceptions.dart';
 import '../error/failures.dart';
+import '../models/get_count_order.dart';
 import '../models/get_order_name.dart';
 import '../models/login_model.dart';
 import '../models/main_state_model.dart';
@@ -449,6 +451,60 @@ class ServiceApi {
     }
   }
 
+// get states
+  Future<Either<Failure, GetStatesModel>> getStates() async {
+    try {
+      String? sessionId = await Preferences.instance.getSessionId();
+      final response = await dio.get(
+        EndPoints.getStates + '?query={id,name}',
+        //+'&page_size=$pageSize&page=$page',
+        options: Options(
+          headers: {"Cookie": "frontend_lang=en_US;session_id=$sessionId"},
+        ),
+      );
+      return Right(GetStatesModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  //get  orderCount
+  Future<Either<Failure, GetCountOrder>> getOrderCount(
+      {required int id}) async {
+    try {
+      String? sessionId = await Preferences.instance.getSessionId();
+      final response = await dio.get(
+        EndPoints.getOrderCount +
+            '?filter=[["user_id", "=", 12],["state_id", "=",${id}]]&query={}&page_size=1',
+        //+'&page_size=$pageSize&page=$page',
+        options: Options(
+          headers: {"Cookie": "frontend_lang=en_US;session_id=$sessionId"},
+        ),
+      );
+      return Right(GetCountOrder.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  //get all orders
+  Future<Either<Failure, GetCountOrder>> getAllOrdersCount() async {
+    try {
+      String? sessionId = await Preferences.instance.getSessionId();
+      final response = await dio.get(
+        EndPoints.getOrderCount +
+            '?filter=[["user_id", "=", 12]]&query={}&page_size=1',
+        //+'&page_size=$pageSize&page=$page',
+        options: Options(
+          headers: {"Cookie": "frontend_lang=en_US;session_id=$sessionId"},
+        ),
+      );
+      return Right(GetCountOrder.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
   /// ADD SERVICE
   Future<Either<Failure, DefaultModel>> addService({
     required String categoryId,
@@ -652,13 +708,13 @@ class ServiceApi {
 //     }
 //   }
   Future<Either<Failure, MainOrderModel>> getOrders({String? state}) async {
+    print(EndPoints.ordersUrl +
+        (state != null
+            ? ('filter=[["user_id", "=", 12],["state_id", "=", "New"]]&query={id,name,sender_street,sender_mobile,receiver_street,receiver_mobile,total_charge_amount,notes,courier_lines,state_id}')
+            : ('filter=[["user_id", "=", 12]]&query={id,name,sender_street,sender_mobile,receiver_street,receiver_mobile,total_charge_amount,notes,courier_lines,state_id,category_id}')));
     try {
       String userId = await Preferences.instance.getUserId() ?? "1";
       // print("lllllllllll${userId}");
-      print('...............' +
-          (state != null
-              ? ('filter=[["user_id", "=", 12],["state_id", "=",${state}]]&query={id,name,sender_street,sender_mobile,receiver_street,receiver_mobile,total_charge_amount,notes,courier_lines,state_id,category_id,registration_date}')
-              : ('filter=[["user_id", "=", 12]]&query={id,name,sender_street,sender_mobile,receiver_street,receiver_mobile,total_charge_amount,notes,courier_lines,state_id,category_id,registration_date}')));
       String? sessionId = await Preferences.instance.getSessionId();
       final response = await dio.get(
         EndPoints.ordersUrl +
@@ -878,25 +934,6 @@ class ServiceApi {
         ),
       );
       return Right(GetUserDataModel.fromJson(response));
-    } on ServerException {
-      return Left(ServerFailure());
-    }
-  }
-
-  Future<Either<Failure, GetOrderNameModel>> getCategoryNameOfOrder(
-      String id) async {
-    try {
-      String userId = await Preferences.instance.getUserId() ?? "1";
-      print("lllllllllll${userId}");
-      String? sessionId = await Preferences.instance.getSessionId();
-      print(sessionId);
-      final response = await dio.get(
-        EndPoints.getOrderCategoryName + '$id?query={name}',
-        options: Options(
-          headers: {"Cookie": "frontend_lang=en_US;session_id=$sessionId"},
-        ),
-      );
-      return Right(GetOrderNameModel.fromJson(response));
     } on ServerException {
       return Left(ServerFailure());
     }

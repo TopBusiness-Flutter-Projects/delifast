@@ -1,3 +1,4 @@
+
 class MainOrderModel {
   dynamic count;
   dynamic prev;
@@ -16,27 +17,22 @@ class MainOrderModel {
   });
 
   factory MainOrderModel.fromJson(Map<String, dynamic> json) => MainOrderModel(
-        count: json["count"],
-        prev: json["prev"],
-        current: json["current"],
-        next: json["next"],
-        totalPages: json["total_pages"],
-        result: json["result"] == null
-            ? []
-            : List<OrderModel>.from(
-                json["result"]!.map((x) => OrderModel.fromJson(x))),
-      );
+    count: json["count"],
+    prev: json["prev"],
+    current: json["current"],
+    next: json["next"],
+    totalPages: json["total_pages"],
+    result: json["result"] == null ? [] : List<OrderModel>.from(json["result"]!.map((x) => OrderModel.fromJson(x))),
+  );
 
   Map<String, dynamic> toJson() => {
-        "count": count,
-        "prev": prev,
-        "current": current,
-        "next": next,
-        "total_pages": totalPages,
-        "result": result == null
-            ? []
-            : List<dynamic>.from(result!.map((x) => x.toJson())),
-      };
+    "count": count,
+    "prev": prev,
+    "current": current,
+    "next": next,
+    "total_pages": totalPages,
+    "result": result == null ? [] : List<dynamic>.from(result!.map((x) => x.toJson())),
+  };
 }
 
 class OrderModel {
@@ -50,7 +46,6 @@ class OrderModel {
   dynamic senderName;
   dynamic receiverName;
   dynamic notes;
-  dynamic currentNameOfCategory;
   List<dynamic>? courierLines;
   int? stateId;
   dynamic stateName;
@@ -69,18 +64,13 @@ class OrderModel {
   OrderModel({
     this.id,
     this.name,
-    this.stateName,
     this.senderStreet,
     this.senderMobile,
-    this.orderName,
     this.receiverStreet,
     this.receiverMobile,
     this.totalChargeAmount,
     this.notes,
-    this.registrationDate,
     this.courierLines,
-    this.senderName,
-    this.receiverName,
     this.stateId,
     this.categoryId,
     this.currentNameOfCategory,
