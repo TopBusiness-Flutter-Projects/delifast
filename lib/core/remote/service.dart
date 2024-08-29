@@ -45,7 +45,6 @@ class ServiceApi {
       final odoo = OdooClient(baseUrl ?? EndPoints.baseUrl);
       final odoResponse =
       await odoo.authenticate(database ?? EndPoints.db, "admin", "admin");
-
       final sessionId = odoResponse.id;
       print("getSessionId = $sessionId");
       await Preferences.instance.setSessionId(sessionId.toString());
