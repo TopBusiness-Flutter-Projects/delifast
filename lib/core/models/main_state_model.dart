@@ -23,7 +23,8 @@ class MainStateModel {
         totalPages: json["total_pages"],
         result: json["result"] == null
             ? []
-            : List<StateModel>.from(json["result"]!.map((x) => StateModel.fromJson(x))),
+            : List<StateModel>.from(
+                json["result"]!.map((x) => StateModel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {

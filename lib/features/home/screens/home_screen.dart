@@ -234,7 +234,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           onTap: () {
                                             context
                                                 .read<MainCubit>()
-                                                .onItemTapped(1);
+                                                .onItemTapped(1, context);
                                           },
                                           child: Row(
                                             children: [
@@ -320,7 +320,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     // context.read<MainCubit>().selectedIndex =1;
                                                     context
                                                         .read<MainCubit>()
-                                                        .onItemTapped(1);
+                                                        .onItemTapped(
+                                                            1, context);
                                                   },
                                                   child: Row(
                                                     children: [

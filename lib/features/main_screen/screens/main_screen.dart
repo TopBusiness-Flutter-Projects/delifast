@@ -16,8 +16,6 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MainCubit, MainState>(
@@ -29,9 +27,7 @@ class _MainScreenState extends State<MainScreen> {
               index: cubit.selectedIndex,
               children: [
                 HomeScreen(),
-                const OrderScreen(
-                  isInMainScreen: true
-                ),
+                const OrderScreen(isInMainScreen: true),
                 const DeliveredScreen(),
                 const NotificaionScreen(),
                 AccountScreen(),
@@ -42,9 +38,11 @@ class _MainScreenState extends State<MainScreen> {
               selectedItemColor: const Color(0xffCE0001),
               unselectedItemColor: Colors.grey,
               currentIndex: cubit.selectedIndex,
-              onTap: cubit.onItemTapped,
+              onTap: (index) {
+                cubit.onItemTapped(index, context);
+              },
               items: [
-                 BottomNavigationBarItem(
+                BottomNavigationBarItem(
                   icon: Icon(Icons.home),
                   label: 'Home'.tr(),
                 ),
@@ -52,7 +50,7 @@ class _MainScreenState extends State<MainScreen> {
                   icon: Icon(Icons.list_alt),
                   label: 'Orders',
                 ),
-           // //    ),
+                // //    ),
                 BottomNavigationBarItem(
                   icon: CircleAvatar(
                       backgroundColor: AppColors.primary,
@@ -60,11 +58,11 @@ class _MainScreenState extends State<MainScreen> {
                           color: AppColors.white)),
                   label: 'Delivered'.tr(),
                 ),
-                 BottomNavigationBarItem(
+                BottomNavigationBarItem(
                   icon: Icon(Icons.notifications),
                   label: 'Notifications'.tr(),
                 ),
-                 BottomNavigationBarItem(
+                BottomNavigationBarItem(
                   icon: Icon(Icons.person),
                   label: 'Account'.tr(),
                 ),

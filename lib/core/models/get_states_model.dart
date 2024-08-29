@@ -4,7 +4,7 @@ class GetStatesModel {
   final int? current;
   final int? next;
   final int? totalPages;
-  final List<Result>? result;
+  final List<StateModel>? result;
 
   GetStatesModel({
     this.count,
@@ -23,7 +23,7 @@ class GetStatesModel {
       next: json['next'] as int?,
       totalPages: json['total_pages'] as int?,
       result: (json['result'] as List<dynamic>?)
-          ?.map((item) => Result.fromJson(item as Map<String, dynamic>))
+          ?.map((item) => StateModel.fromJson(item as Map<String, dynamic>))
           .toList(),
     );
   }
@@ -40,19 +40,19 @@ class GetStatesModel {
   }
 }
 
-class Result {
+class StateModel {
    int? id;
    String? name;
   int ? count;
 
-  Result({
+  StateModel({
     this.id,
     this.name,
     this.count =0
   });
 
-  factory Result.fromJson(Map<String, dynamic> json) {
-    return Result(
+  factory StateModel.fromJson(Map<String, dynamic> json) {
+    return StateModel(
       id: json['id'] as int?,
       name: json['name'] as String?,
     );

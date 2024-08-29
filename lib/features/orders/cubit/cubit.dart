@@ -15,7 +15,10 @@ class OrdersCubit extends Cubit<OrdersState> {
 
   MainOrderModel? mainOrderModel;
   MainOrderModel? mainOrderModelFilter;
-  Future getOrders({String? state, required bool isFilter}) async {
+  Future getOrders(
+      {String? state,
+      required bool isFilter,
+      bool isMainFilter = false}) async {
     emit(OrdersLoading());
     final result = await api.getOrders(state: state);
     result.fold(
@@ -23,7 +26,7 @@ class OrdersCubit extends Cubit<OrdersState> {
         emit(OrdersError());
       },
       (r) {
-        if (isFilter == false) {
+        if (isFilter == false || isMainFilter == true) {
           mainOrderModel = r;
 
           for (int i = 0; i < r.result!.length; i++) {

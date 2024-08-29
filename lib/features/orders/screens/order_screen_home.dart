@@ -1,6 +1,7 @@
 import 'package:delifast/core/utils/app_export.dart';
 import 'package:delifast/features/orders/cubit/state.dart';
 import 'package:easy_localization/easy_localization.dart';
+import '../../../core/models/get_states_model.dart';
 import '../../../core/widgets/package_order.dart';
 import '../cubit/cubit.dart';
 
@@ -12,14 +13,16 @@ class OrderScreenHome extends StatefulWidget {
 }
 
 class _OrderScreenHomeState extends State<OrderScreenHome> {
-  String? selectedStatus;
-  DateTime? selectedDate;
+  // String? selectedStatus;
 
-  final List<String> statusOptions = [
-    'Pending',
-    'In Progress',
-    'Delivered',
-    'Cancelled'
+  DateTime? selectedDate;
+  StateModel? stateModel;
+
+  final List<StateModel> statusOptions = [
+    // 'Pending',
+    // 'In Progress',
+    // 'Delivered',
+    // 'Cancelled'
   ];
   @override
   void initState() {
@@ -27,6 +30,16 @@ class _OrderScreenHomeState extends State<OrderScreenHome> {
     context
         .read<OrdersCubit>()
         .getOrders(state: widget.stateId.toString(), isFilter: true);
+
+    for (int i = 0;
+        i < context.read<OrdersCubit>().getStatesModel!.result!.length;
+        i++) {
+      stateModel = context.read<OrdersCubit>().getStatesModel!.result![i];
+
+      statusOptions.add(context.read<OrdersCubit>().getStatesModel!.result![i]);
+      setState(() {});
+    }
+
     super.initState();
   }
 
@@ -123,24 +136,29 @@ class _OrderScreenHomeState extends State<OrderScreenHome> {
         border: Border.all(color: Colors.grey[300]!),
         borderRadius: BorderRadius.circular(50.sp),
       ),
-      child: DropdownButton<String>(
+      child: DropdownButton<StateModel>(
         isExpanded: true,
-        value: selectedStatus,
+        value: stateModel,
         hint: Text("status_filter".tr(),
             style: TextStyle(color: Colors.grey[600], fontSize: 14.sp)),
         underline: const SizedBox(),
         icon: Icon(Icons.arrow_drop_down, color: Colors.grey[600]),
-        onChanged: (String? newValue) {
+        onChanged: (StateModel? newValue) {
           setState(() {
-            selectedStatus = newValue;
+            stateModel = newValue;
+
+            context
+                .read<OrdersCubit>()
+                .getOrders(state: stateModel?.id.toString(), isFilter: true);
           });
         },
 
         ///j
-        items: statusOptions.map<DropdownMenuItem<String>>((String value) {
-          return DropdownMenuItem<String>(
+        items:
+            statusOptions.map<DropdownMenuItem<StateModel>>((StateModel value) {
+          return DropdownMenuItem<StateModel>(
             value: value,
-            child: Text(value),
+            child: Text(value.name ?? ''),
           );
         }).toList(),
       ),

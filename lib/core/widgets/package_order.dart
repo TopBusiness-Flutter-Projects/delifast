@@ -92,9 +92,7 @@ class _PackageTrackingCardState extends State<PackageTrackingCard> {
                                 fontSize: 18.sp, fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            widget.orderModel?.categoryId == false
-                                ? ''
-                                : widget.orderModel?.name.toString() ?? 'xx',
+                            widget.orderModel?.name.toString() ?? '',
                             style: TextStyle(color: Colors.grey),
                           ),
                         ],
@@ -106,7 +104,7 @@ class _PackageTrackingCardState extends State<PackageTrackingCard> {
                     icon: Icons.radio_button_checked_rounded,
                     color: Colors.grey,
                     text: "from".tr(),
-                    location: widget.orderModel?.senderMobile.toString() ?? '',
+                    location: widget.orderModel?.senderStreet.toString() ?? '',
                   ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -125,9 +123,10 @@ class _PackageTrackingCardState extends State<PackageTrackingCard> {
                               style: const TextStyle(color: Colors.grey)),
                           SizedBox(height: 4.h),
                           Text(
-                              widget.orderModel?.receiverMobile.toString() ??
+                              widget.orderModel?.receiverStreet.toString() ??
                                   '',
-                              style: TextStyle(fontWeight: FontWeight.bold)),
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold)),
                         ],
                       ),
                     ],
